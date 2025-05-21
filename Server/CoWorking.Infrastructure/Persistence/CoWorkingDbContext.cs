@@ -8,7 +8,7 @@ internal class CoWorkingDbContext(DbContextOptions<CoWorkingDbContext> options)
     : DbContext(options)
 {
     internal DbSet<Workspace> Workspaces { get; set; }
-    internal DbSet<Space> SpaceConfigurations { get; set; }
+    internal DbSet<Room> SpaceConfigurations { get; set; }
     internal DbSet<Booking> Bookings { get; set; }
     internal DbSet<Picture> Pictures { get; set; }
     internal DbSet<Icon> Icons { get; set; }
@@ -20,6 +20,7 @@ internal class CoWorkingDbContext(DbContextOptions<CoWorkingDbContext> options)
 
         // Entity configurations.
         modelBuilder.ApplyConfiguration(new WorkspaceIconConfiguration());
-        modelBuilder.ApplyConfiguration(new SpaceConfiguration());
+        modelBuilder.ApplyConfiguration(new RoomConfiguration());
+        modelBuilder.ApplyConfiguration(new PictureConfiguration());
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace CoWorking.Core.Entities;
 
-public class Space
+public class Room
 {
     public int Id { get; set; }
     public int Capacity { get; set; }
