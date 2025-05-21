@@ -10,9 +10,9 @@ internal class RoomConfiguration : IEntityTypeConfiguration<Room>
     {
         builder.HasKey(s => s.Id);
 
-        // Space + Workspace configuration.
+        // Room + Workspace configuration.
         builder.HasOne(s => s.Workspace)
-            .WithMany(w => w.RoomConfigurations)
+            .WithMany(w => w.Rooms)
             .HasForeignKey(s => s.WorkspaceId)
             .OnDelete(DeleteBehavior.Cascade);
     }

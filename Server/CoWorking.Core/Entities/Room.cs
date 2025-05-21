@@ -8,4 +8,5 @@ public class Room
 
     public int WorkspaceId { get; set; }
     public Workspace Workspace { get; set; } = default!;
+    public List<Booking> Bookings { get; set; } = new();
 }

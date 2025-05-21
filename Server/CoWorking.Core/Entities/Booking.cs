@@ -7,6 +7,6 @@ public class Booking
     public DateTime StartTime { get; set; }
     public DateTime EndTime { get; set; }
 
-    public int RoomConfigurationId { get; set; }
-    public Room RoomConfiguration { get; set; } = default!;
+    public int RoomId { get; set; }
+    public Room Room { get; set; } = default!;
 }
