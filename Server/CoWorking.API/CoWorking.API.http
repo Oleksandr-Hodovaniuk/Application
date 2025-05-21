@@ -1,0 +1,6 @@
+@CoWorking.API_HostAddress = http://localhost:5199
+
+GET {{CoWorking.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
