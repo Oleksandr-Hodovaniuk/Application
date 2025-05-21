@@ -1,6 +1,7 @@
 ﻿using CoWorking.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.Extensions.Configuration;
 namespace CoWorking.Infrastructure.Persistence.EntityConfigurations
 {
     internal class WorkspaceIconConfiguration : IEntityTypeConfiguration<WorkspaceIcon>
@@ -9,15 +10,17 @@ namespace CoWorking.Infrastructure.Persistence.EntityConfigurations
         {
             builder.HasKey(wi => new { wi.WorkspaceId, wi.IconId });
 
+            // WorkspaceIcon + Workspace configuration.
             builder.HasOne(wi => wi.Workspace)
                 .WithMany(w => w.WorkspaceIcons)
                 .HasForeignKey(wi => wi.WorkspaceId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            // WorkspaceIcon + Icon configuration.
             builder.HasOne(wi => wi.Icon)
                 .WithMany(i => i.WorkspaceIcons)
                 .HasForeignKey(wi => wi.IconId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

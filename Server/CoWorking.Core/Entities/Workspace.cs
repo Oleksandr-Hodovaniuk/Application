@@ -9,5 +9,5 @@ public class Workspace
 
     public List<WorkspaceIcon> WorkspaceIcons { get; set; } = new();
     public List<Picture> Pictures { get; set; } = new();
-    public List<RoomConfiguration> RoomConfigurations { get; set; } = new();
+    public List<Space> SpaceConfigurations { get; set; } = new();
 }
