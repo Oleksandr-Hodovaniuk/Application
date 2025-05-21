@@ -11,10 +11,3 @@ public class Workspace
     public List<Picture> Pictures { get; set; } = new();
     public List<RoomConfiguration> RoomConfigurations { get; set; } = new();
 }
-
-public enum WorkspaceType
-{
-    OpenSpace,
-    PrivateRoom,
-    MeetingRoom
-}
