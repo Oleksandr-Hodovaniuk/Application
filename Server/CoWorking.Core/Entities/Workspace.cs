@@ -1,0 +1,20 @@
+﻿namespace CoWorking.Core.Entities;
+
+public class Workspace
+{
+    public int Id { get; set; }
+    public WorkspaceType Type { get; set; }
+    public string Name { get; set; } = default!;
+    public string Description { get; set; } = default!;
+
+    public List<WorkspaceIcon> Icons { get; set; } = new();
+    public List<Picture> Pictures { get; set; } = new();
+    public List<RoomConfiguration> RoomConfigurations { get; set; } = new();
+}
+
+public enum WorkspaceType
+{
+    OpenSpace,
+    PrivateRoom,
+    MeetingRoom
+}
