@@ -7,7 +7,7 @@ public class Workspace
     public string Name { get; set; } = default!;
     public string Description { get; set; } = default!;
 
-    public List<WorkspaceIcon> Icons { get; set; } = new();
+    public List<WorkspaceIcon> WorkspaceIcons { get; set; } = new();
     public List<Picture> Pictures { get; set; } = new();
     public List<RoomConfiguration> RoomConfigurations { get; set; } = new();
 }

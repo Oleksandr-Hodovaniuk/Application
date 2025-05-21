@@ -1,3 +1,5 @@
+using CoWorking.Infrastructure.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +8,9 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Register Infrastructure services and configure the database context.
+builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
