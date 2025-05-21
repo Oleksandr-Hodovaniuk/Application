@@ -1,26 +1,25 @@
 ﻿using CoWorking.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.Extensions.Configuration;
-namespace CoWorking.Infrastructure.Persistence.EntityConfigurations
+
+namespace CoWorking.Infrastructure.Persistence.EntityConfigurations;
+
+internal class WorkspaceIconConfiguration : IEntityTypeConfiguration<WorkspaceIcon>
 {
-    internal class WorkspaceIconConfiguration : IEntityTypeConfiguration<WorkspaceIcon>
+    public void Configure(EntityTypeBuilder<WorkspaceIcon> builder)
     {
-        public void Configure(EntityTypeBuilder<WorkspaceIcon> builder)
-        {
-            builder.HasKey(wi => new { wi.WorkspaceId, wi.IconId });
+        builder.HasKey(wi => new { wi.WorkspaceId, wi.IconId });
 
-            // WorkspaceIcon + Workspace configuration.
-            builder.HasOne(wi => wi.Workspace)
-                .WithMany(w => w.WorkspaceIcons)
-                .HasForeignKey(wi => wi.WorkspaceId)
-                .OnDelete(DeleteBehavior.Cascade);
+        // WorkspaceIcon + Workspace configuration.
+        builder.HasOne(wi => wi.Workspace)
+            .WithMany(w => w.WorkspaceIcons)
+            .HasForeignKey(wi => wi.WorkspaceId)
+            .OnDelete(DeleteBehavior.Cascade);
 
-            // WorkspaceIcon + Icon configuration.
-            builder.HasOne(wi => wi.Icon)
-                .WithMany(i => i.WorkspaceIcons)
-                .HasForeignKey(wi => wi.IconId)
-                .OnDelete(DeleteBehavior.Restrict);
-        }
+        // WorkspaceIcon + Icon configuration.
+        builder.HasOne(wi => wi.Icon)
+            .WithMany(i => i.WorkspaceIcons)
+            .HasForeignKey(wi => wi.IconId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }
