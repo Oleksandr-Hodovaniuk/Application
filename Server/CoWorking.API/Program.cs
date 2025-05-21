@@ -1,3 +1,4 @@
+using CoWorking.Application.Interfaces;
 using CoWorking.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,14 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    using (var scope = app.Services.CreateScope())
+    {
+        CancellationToken token = app.Lifetime.ApplicationStopping;
+
+        var seeder = scope.ServiceProvider.GetRequiredService<ISeeder>();
+        await seeder.SeedAsync(token);
+    }
 }
 
 app.UseHttpsRedirection();

@@ -1,4 +1,6 @@
-﻿using CoWorking.Infrastructure.Persistence;
+﻿using CoWorking.Application.Interfaces;
+using CoWorking.Infrastructure.Persistence;
+using CoWorking.Infrastructure.Persistence.DataSeeders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,5 +14,9 @@ public static class ServiceCollectionExtensions
         // Database connection.
         var connectionString = configuration.GetConnectionString("CoWorkingDb");
         services.AddDbContext<CoWorkingDbContext>(options => options.UseSqlServer(connectionString));
+
+        // Registration of data seeder.
+        services.AddScoped<ISeeder, DefaultSeeder>();
+
     }
 }
