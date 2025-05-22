@@ -141,9 +141,9 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
     {
         return new List<Room>
         {
-            new Room { Capacity = 1, Quantity = 3, Bookings = GetBooking_2() },
+            new Room { Capacity = 1, Quantity = 7, Bookings = GetBooking_2() },
             new Room { Capacity = 2, Quantity = 5, Bookings = GetBooking_2() },
-            new Room { Capacity = 5, Quantity = 7, Bookings = GetBooking_2() },
+            new Room { Capacity = 5, Quantity = 3, Bookings = GetBooking_2() },
             new Room { Capacity = 10, Quantity = 1, Bookings = GetBooking_2() }
         };
     }
@@ -182,12 +182,6 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
                 GroupBookingId = Guid.NewGuid(),
                 StartTime = DateTime.Now,
                 EndTime = DateTime.Now.AddHours(3),
-            },
-            new Booking
-            {
-                GroupBookingId = Guid.NewGuid(),
-                StartTime = DateTime.Now.AddHours(5),
-                EndTime = DateTime.Now.AddHours(6),
             }
         };
     }

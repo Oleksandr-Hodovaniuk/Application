@@ -6,5 +6,5 @@ public class Icon
     public string Name { get; set; } = default!;
     public string Url { get; set; } = default!;
 
-    public List<WorkspaceIcon> WorkspaceIcons { get; set; } = default!;
+    public List<WorkspaceIcon> WorkspaceIcons { get; set; } = new();
 }

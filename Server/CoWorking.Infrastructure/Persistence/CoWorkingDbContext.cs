@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoWorking.Infrastructure.Persistence;
 
-public class CoWorkingDbContext(DbContextOptions<CoWorkingDbContext> options) 
+internal class CoWorkingDbContext(DbContextOptions<CoWorkingDbContext> options) 
     : DbContext(options)
 {
     internal DbSet<Icon> Icons { get; set; }
