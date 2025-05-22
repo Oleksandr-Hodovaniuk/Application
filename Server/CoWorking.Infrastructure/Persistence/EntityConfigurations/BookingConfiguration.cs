@@ -10,6 +10,12 @@ internal class BookingConfiguration : IEntityTypeConfiguration<Booking>
     {
         builder.HasKey(b => b.Id);
 
+        builder.Property(b => b.StartTime)
+            .HasColumnType("timestamp without time zone");
+
+        builder.Property(b => b.EndTime)
+            .HasColumnType("timestamp without time zone");
+
         // Booking + Room configuration.
         builder.HasOne(b => b.Room)
             .WithMany(r => r.Bookings)

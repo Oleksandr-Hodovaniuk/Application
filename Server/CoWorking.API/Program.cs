@@ -1,5 +1,7 @@
 using CoWorking.Application.Interfaces;
 using CoWorking.Infrastructure.Extensions;
+using CoWorking.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 

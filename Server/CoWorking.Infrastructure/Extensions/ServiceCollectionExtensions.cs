@@ -13,10 +13,10 @@ public static class ServiceCollectionExtensions
     {
         // Database connection.
         var connectionString = configuration.GetConnectionString("CoWorkingDb");
-        services.AddDbContext<CoWorkingDbContext>(options => options.UseSqlServer(connectionString));
+        services.AddDbContext<CoWorkingDbContext>(options =>
+            options.UseNpgsql(connectionString));
 
         // Registration of data seeder.
         services.AddScoped<ISeeder, DefaultSeeder>();
-
     }
 }
