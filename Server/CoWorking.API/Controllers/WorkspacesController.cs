@@ -32,4 +32,19 @@ public class WorkspacesController : ControllerBase
             return StatusCode(500, "Internal server error.");
         }
     }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetByIdAsync(int id)
+    {
+        try
+        {
+            var workspace = await _workspaceRepository.GetByIdAsync(id);
+         
+            return Ok();
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, "Internal server error.");
+        }
+    }
 }

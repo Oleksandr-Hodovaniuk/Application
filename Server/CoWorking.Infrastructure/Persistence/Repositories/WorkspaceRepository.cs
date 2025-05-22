@@ -16,4 +16,15 @@ internal class WorkspaceRepository(CoWorkingDbContext dbContext) : IWorkspaceRep
                 .ThenInclude(wi => wi.Icon)
             .ToListAsync();
     }
+
+    public async Task<Workspace?> GetByIdAsync(int id)
+    {
+        return await dbContext.Workspaces
+        .Include(w => w.Pictures)
+        .Include(w => w.Rooms)
+            .ThenInclude (wi => wi.Bookings)
+        .Include(w => w.WorkspaceIcons)
+            .ThenInclude(wi => wi.Icon)
+        .FirstOrDefaultAsync(w => w.Id == id);
+    }
 }
