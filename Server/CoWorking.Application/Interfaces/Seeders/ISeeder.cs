@@ -1,4 +1,4 @@
-﻿namespace CoWorking.Application.Interfaces;
+﻿namespace CoWorking.Application.Interfaces.Seeders;
 
 public interface ISeeder
 {

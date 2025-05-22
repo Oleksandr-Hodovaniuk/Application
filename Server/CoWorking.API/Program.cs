@@ -1,4 +1,4 @@
-using CoWorking.Application.Interfaces;
+using CoWorking.Application.Interfaces.Seeders;
 using CoWorking.Infrastructure.Extensions;
 using CoWorking.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;

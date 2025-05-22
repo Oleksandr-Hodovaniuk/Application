@@ -1,4 +1,4 @@
-﻿using CoWorking.Application.Interfaces;
+﻿using CoWorking.Application.Interfaces.Seeders;
 using CoWorking.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
