@@ -3,7 +3,8 @@
 public class Booking
 {
     public int Id { get; set; }
-    public Guid GroupBookingId { get; set; }
+    public string Name { get; set; } = default!;
+    public string Email { get; set; } = default!;
     public DateTime StartTime { get; set; }
     public DateTime EndTime { get; set; }
 

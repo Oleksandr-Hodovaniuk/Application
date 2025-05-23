@@ -161,13 +161,15 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
         {
             new Booking
             {
-                GroupBookingId = Guid.NewGuid(),
+                Name = "Ethan Morgan",
+                Email = "ethan.morgan@example.com",
                 StartTime = DateTime.Now,
                 EndTime = DateTime.Now.AddHours(5),
             },
             new Booking
             {
-                GroupBookingId = Guid.NewGuid(),
+                Name = "Sophia Collins",
+                Email = "sophia.collins@example.com",
                 StartTime = DateTime.Now.AddHours(5),
                 EndTime = DateTime.Now.AddHours(10),
             }
@@ -179,7 +181,8 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
         {
             new Booking
             {
-                GroupBookingId = Guid.NewGuid(),
+                Name = "Lucas Wright",
+                Email = "noah.mitchell@example.com",
                 StartTime = DateTime.Now,
                 EndTime = DateTime.Now.AddHours(3),
             }
@@ -191,13 +194,15 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
         {
             new Booking
             {
-                GroupBookingId = Guid.NewGuid(),
+                Name = "Noah Mitchell",
+                Email = "noah.mitchell@example.com",
                 StartTime = DateTime.Now,
                 EndTime = DateTime.Now.AddHours(5),
             },
             new Booking
             {
-                GroupBookingId = Guid.NewGuid(),
+                Name = "Isabella Reed",
+                Email = "isabella.reed@example.com",
                 StartTime = DateTime.Now.AddHours(8),
                 EndTime = DateTime.Now.AddHours(16),
             }
