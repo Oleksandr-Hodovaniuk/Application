@@ -15,4 +15,9 @@
     <PackageReference Include="MediatR" Version="12.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CommandsAndQueries\Commands\Bookings\" />
+    <Folder Include="CommandsAndQueries\Hendlers\Bookings\" />
+  </ItemGroup>
+
 </Project>

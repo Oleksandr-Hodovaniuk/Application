@@ -1,5 +1,5 @@
-﻿using CoWorking.Application.Mappings;
-using CoWorking.Application.Workspaces.Hadlers;
+﻿using CoWorking.Application.CommandsAndQueries.Hendlers.Workspaces;
+using CoWorking.Application.Mappings;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CoWorking.Application.Extensions;

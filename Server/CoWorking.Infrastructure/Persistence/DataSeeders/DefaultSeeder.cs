@@ -152,7 +152,7 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
         return new List<Room>
         {
             new Room { Capacity = 10, Quantity = 4, Bookings = GetBooking_3() },
-            new Room { Capacity = 20, Quantity = 1 }
+            new Room { Capacity = 20, Quantity = 1, Bookings = GetBooking_2() }
         };
     }
     private List<Booking> GetBooking_1()

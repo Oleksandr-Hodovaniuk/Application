@@ -10,6 +10,7 @@ internal class WorkspaceIconConfiguration : IEntityTypeConfiguration<WorkspaceIc
     {
         builder.HasKey(wi => new { wi.WorkspaceId, wi.IconId });
 
+
         // WorkspaceIcon + Workspace configuration.
         builder.HasOne(wi => wi.Workspace)
             .WithMany(w => w.WorkspaceIcons)

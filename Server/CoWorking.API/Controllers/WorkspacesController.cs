@@ -1,4 +1,4 @@
-﻿using CoWorking.Application.Workspaces.Queries;
+﻿using CoWorking.Application.CommandsAndQueries.Queries.Workspaces;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

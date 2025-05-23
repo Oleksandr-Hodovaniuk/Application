@@ -13,6 +13,7 @@ internal class BookingRepository(CoWorkingDbContext dbContext) : IBookingReposit
             .Include(b => b.Room)
                 .ThenInclude(r => r.Workspace)
                     .ThenInclude(w => w.Pictures)
+            .AsSplitQuery()
             .ToListAsync();
     }
 

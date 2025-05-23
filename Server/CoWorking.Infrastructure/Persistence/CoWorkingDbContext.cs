@@ -19,6 +19,7 @@ internal class CoWorkingDbContext(DbContextOptions<CoWorkingDbContext> options)
         base.OnModelCreating(modelBuilder);
 
         // Entity configurations.
+        modelBuilder.ApplyConfiguration(new WorkspaceConfiguration());
         modelBuilder.ApplyConfiguration(new WorkspaceIconConfiguration());
         modelBuilder.ApplyConfiguration(new RoomConfiguration());
         modelBuilder.ApplyConfiguration(new PictureConfiguration());
