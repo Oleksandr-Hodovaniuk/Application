@@ -15,6 +15,7 @@ public class GetAllWorkspacesHandler : IRequestHandler<GetAllWorkspacesQuery, IE
         _repository = repository;
         _mapper = mapper;
     }
+
     public async Task<IEnumerable<WorkspaceDTO>> Handle(GetAllWorkspacesQuery request, CancellationToken cancellationToken)
     {
         var workspaces = await _repository.GetAllAsync(cancellationToken);

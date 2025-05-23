@@ -14,14 +14,21 @@ internal class BookingRepository(CoWorkingDbContext dbContext) : IBookingReposit
                 .ThenInclude(r => r.Workspace)
                     .ThenInclude(w => w.Pictures)
             .AsSplitQuery()
-            .ToListAsync();
+            .ToListAsync(cancellationToken);
     }
 
-    public async Task DeleteAsync(int id)
+    public async Task DeleteAsync(int id, CancellationToken cancellationToken)
     {
-        var booking = await dbContext.Bookings.FindAsync(id);
+        var booking = await dbContext.Bookings
+            .FirstOrDefaultAsync(b => b.Id == id, cancellationToken);
 
         dbContext.Bookings.Remove(booking!);
-        await dbContext.SaveChangesAsync();
+        await dbContext.SaveChangesAsync(cancellationToken);
+    }
+
+    public async Task<bool> ExistsByIdAsync(int id, CancellationToken cancellationToken)
+    {
+        return await dbContext.Bookings
+        .AnyAsync(b => b.Id == id, cancellationToken);
     }
 }

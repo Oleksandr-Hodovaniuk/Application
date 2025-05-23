@@ -1,22 +1,19 @@
+using CoWorking.API.Extensions;
+using CoWorking.API.Middlewares;
 using CoWorking.Application.Extensions;
 using CoWorking.Application.Interfaces.Seeders;
 using CoWorking.Infrastructure.Extensions;
-using CoWorking.Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add Presentation services to the container.
+builder.Services.AddPresentation();
 
-builder.Services.AddControllers();
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-// Register Infrastructure services and configure the database context.
+// Register Infrastructure services and configure the database context to the container.
 builder.Services.AddInfrastructure(builder.Configuration);
 
-// Register Application services.
+// Register Application services to the container.
 builder.Services.AddApplication();
 
 var app = builder.Build();
@@ -35,6 +32,9 @@ if (app.Environment.IsDevelopment())
         await seeder.SeedAsync(token);
     }
 }
+
+// Add middleware for handling exceptions.
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 

@@ -17,20 +17,13 @@ public class WorkspacesController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken)
     {
-        try
-        {
-            var workspaces = await _mediator.Send(new GetAllWorkspacesQuery(), cancellationToken);
+        var workspaces = await _mediator.Send(new GetAllWorkspacesQuery(), cancellationToken);
 
-            if (!workspaces.Any())
-            {
-                return NoContent();
-            }
-
-            return Ok(workspaces);
-        }
-        catch (Exception)
+        if (!workspaces.Any())
         {
-            return StatusCode(500, "Internal server error.");
+            return NoContent();
         }
+
+        return Ok(workspaces);
     }
 }
