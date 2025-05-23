@@ -1,5 +1,8 @@
-﻿using CoWorking.Application.Interfaces.Repositories;
+﻿using AutoMapper;
+using CoWorking.Application.DTOs;
+using CoWorking.Application.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading;
 
 namespace CoWorking.API.Controllers;
 
@@ -8,17 +11,20 @@ namespace CoWorking.API.Controllers;
 public class BookingsController : ControllerBase
 {
     private readonly IBookingRepository _bookingsRepository;
-	public BookingsController(IBookingRepository bookingsRepository)
+	public readonly IMapper _mapper;
+
+    public BookingsController(IBookingRepository bookingsRepository, IMapper mapper)
 	{
 		_bookingsRepository = bookingsRepository;
+		_mapper = mapper;
 	}
 
 	[HttpGet]
-	public async Task<IActionResult> GetAllAsync()
+	public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken)
 	{
 		try
 		{
-			var bookings = await _bookingsRepository.GetAllAsync();
+			var bookings = await _bookingsRepository.GetAllAsync(cancellationToken);
 
 			if (!bookings.Any())
 			{

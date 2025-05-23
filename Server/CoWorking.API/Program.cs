@@ -1,3 +1,4 @@
+using CoWorking.Application.Extensions;
 using CoWorking.Application.Interfaces.Seeders;
 using CoWorking.Infrastructure.Extensions;
 using CoWorking.Infrastructure.Persistence;
@@ -14,6 +15,9 @@ builder.Services.AddSwaggerGen();
 
 // Register Infrastructure services and configure the database context.
 builder.Services.AddInfrastructure(builder.Configuration);
+
+// Register Application services.
+builder.Services.AddApplication();
 
 var app = builder.Build();
 

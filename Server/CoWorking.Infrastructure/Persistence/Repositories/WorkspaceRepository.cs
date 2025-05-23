@@ -6,7 +6,7 @@ namespace CoWorking.Infrastructure.Persistence.Repositories;
 
 internal class WorkspaceRepository(CoWorkingDbContext dbContext) : IWorkspaceRepository
 {
-    public async Task<IEnumerable<Workspace>> GetAllAsync()
+    public async Task<IEnumerable<Workspace>> GetAllAsync(CancellationToken cancellationToken)
     {
         return await dbContext.Workspaces
             .Include(w => w.Pictures)
@@ -14,6 +14,7 @@ internal class WorkspaceRepository(CoWorkingDbContext dbContext) : IWorkspaceRep
                 .ThenInclude(r => r.Bookings)
             .Include(w => w.WorkspaceIcons)
                 .ThenInclude(wi => wi.Icon)
-            .ToListAsync();
+            .AsSplitQuery()
+            .ToListAsync(cancellationToken);
     }
 }

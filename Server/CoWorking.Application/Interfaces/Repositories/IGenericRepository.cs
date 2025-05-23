@@ -1,6 +1,8 @@
-﻿namespace CoWorking.Application.Interfaces.Repositories;
+﻿using System.Threading;
+
+namespace CoWorking.Application.Interfaces.Repositories;
 
 public interface IGenericRepository<T> where T : class
 {
-    Task<IEnumerable<T>> GetAllAsync();
+    Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken);
 }

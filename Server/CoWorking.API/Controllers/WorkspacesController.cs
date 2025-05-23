@@ -1,4 +1,5 @@
-﻿using CoWorking.Application.Interfaces.Repositories;
+﻿using CoWorking.Application.Workspaces.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoWorking.API.Controllers;
@@ -7,25 +8,25 @@ namespace CoWorking.API.Controllers;
 [Route("api/workspaces")]
 public class WorkspacesController : ControllerBase
 {
-    private readonly IWorkspaceRepository _workspaceRepository;
-    public WorkspacesController(IWorkspaceRepository workspaceRepository)
+    private readonly IMediator _mediator;
+    public WorkspacesController(IMediator mediator)
     {
-        _workspaceRepository = workspaceRepository;
+        _mediator = mediator;
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllAsync()
+    public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken)
     {
         try
         {
-            var workspaces = await _workspaceRepository.GetAllAsync();
+            var workspaces = await _mediator.Send(new GetAllWorkspacesQuery(), cancellationToken);
 
             if (!workspaces.Any())
             {
                 return NoContent();
             }
 
-            return Ok();
+            return Ok(workspaces);
         }
         catch (Exception)
         {
