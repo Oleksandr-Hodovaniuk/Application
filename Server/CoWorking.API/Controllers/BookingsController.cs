@@ -32,4 +32,19 @@ public class BookingsController : ControllerBase
             return StatusCode(500, "Internal server error.");
         }
 	}
+
+	[HttpDelete("id")]
+	public async Task<IActionResult> DeleteAsync(int id)
+	{
+        try
+        {
+			await _bookingsRepository.DeleteAsync(id);
+
+            return NoContent();
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, "Internal server error.");
+        }
+    }
 }
