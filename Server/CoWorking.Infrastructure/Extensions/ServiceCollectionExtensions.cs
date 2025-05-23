@@ -23,5 +23,6 @@ public static class ServiceCollectionExtensions
 
         // Registration of repositories.
         services.AddScoped<IWorkspaceRepository, WorkspaceRepository>();
+        services.AddScoped<IBookingRepository, BookingRepository>();
     }
 }
