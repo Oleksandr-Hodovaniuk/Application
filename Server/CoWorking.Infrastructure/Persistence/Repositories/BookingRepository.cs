@@ -19,6 +19,7 @@ internal class BookingRepository(CoWorkingDbContext dbContext) : IBookingReposit
             .Include(b => b.Room)
                 .ThenInclude(r => r.Workspace)
                     .ThenInclude(w => w.Rooms)
+            .AsSplitQuery()
             .FirstOrDefaultAsync(b => b.Id == id, cancellationToken);
     }
 

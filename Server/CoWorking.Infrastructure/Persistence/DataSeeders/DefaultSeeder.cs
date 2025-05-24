@@ -1,5 +1,6 @@
 ﻿using CoWorking.Application.Interfaces.Seeders;
 using CoWorking.Core.Entities;
+using CoWorking.Core.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoWorking.Infrastructure.Persistence.DataSeeders;

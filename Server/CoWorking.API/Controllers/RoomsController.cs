@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using CoWorking.Application.CommandsAndQueries.Queries.Rooms;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoWorking.API.Controllers;
@@ -14,8 +15,10 @@ public class RoomsController : ControllerBase
 	}
 
     [HttpGet("type/{workspaceType}")]
-    public async Task<IActionResult> GetRoomsByWorkspaceType(string workspaceType)
+    public async Task<IActionResult> GetRoomsByWorkspaceType(string workspaceType, CancellationToken cancellationToken)
 	{
-		throw new NotImplementedException();
+		var rooms = await _mediator.Send(new GetRoomsByWorkspaceTypeQuery(workspaceType), cancellationToken);
+
+		return Ok(rooms);
 	}
 }

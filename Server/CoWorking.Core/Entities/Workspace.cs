@@ -1,4 +1,6 @@
-﻿namespace CoWorking.Core.Entities;
+﻿using CoWorking.Core.Enums;
+
+namespace CoWorking.Core.Entities;
 
 public class Workspace
 {
