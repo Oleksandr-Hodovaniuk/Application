@@ -7,6 +7,11 @@ namespace CoWorking.Infrastructure.Persistence.Repositories;
 
 internal class BookingRepository(CoWorkingDbContext dbContext) : IBookingRepository
 {
+    public async Task CreateAsync(Booking entity, CancellationToken cancellationToken)
+    {
+        await dbContext.AddAsync(entity, cancellationToken);
+        await dbContext.SaveChangesAsync(cancellationToken);
+    }
     public async Task<IEnumerable<Booking>> GetAllAsync(CancellationToken cancellationToken)
     {
         return await dbContext.Bookings

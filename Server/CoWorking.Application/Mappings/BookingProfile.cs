@@ -8,10 +8,12 @@ public class BookingProfile : Profile
 {
 	public BookingProfile()
 	{
-		CreateMap<Booking, BookingDTO>()
+        CreateMap<BookingCreateDTO, Booking>();
+
+        CreateMap<Booking, BookingDTO>()
 			.ForMember(dest => dest.WorkspaceName,opt => 
 				opt.MapFrom(src => src.Room.Workspace.Name))
 			.ForMember(dest => dest.Duration, opt =>
-				opt.MapFrom(src => src.EndTime - src.StartTime));
+				opt.MapFrom(src => src.EndTime - src.StartTime));		
 	}
 }

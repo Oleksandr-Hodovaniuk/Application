@@ -19,6 +19,13 @@ public class BookingsController : ControllerBase
         _mediator = mediator;
     }
 
+    [HttpPost]
+    public async Task<IActionResult> CreateAsync([FromBody] BookingCreateDTO dto, CancellationToken cancellationToken)
+    {
+        await _mediator.Send(new CreateBookingCommand(dto));
+
+        return Created();
+    }
     [HttpGet]
 	public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken)
 	{
