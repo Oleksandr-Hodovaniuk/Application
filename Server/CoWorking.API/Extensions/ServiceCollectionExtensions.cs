@@ -6,8 +6,9 @@ public static class ServiceCollectionExtensions
 {
     public static void AddPresentation(this IServiceCollection services)
     {
-        // Add controllers.
-        services.AddControllers();;
+        // Add controllers and support for JSON Patch.
+        services.AddControllers()
+            .AddNewtonsoftJson();
 
         // Add Swagger.
         services.AddSwaggerGen();

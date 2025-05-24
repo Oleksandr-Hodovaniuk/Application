@@ -12,6 +12,15 @@ internal class BookingRepository(CoWorkingDbContext dbContext) : IBookingReposit
         await dbContext.AddAsync(entity, cancellationToken);
         await dbContext.SaveChangesAsync(cancellationToken);
     }
+
+    public async Task<Booking?> GetByIdAsync(int id, CancellationToken cancellationToken)
+    {
+        return await dbContext.Bookings
+            .Include(b => b.Room)
+                .ThenInclude(r => r.Workspace)
+            .FirstOrDefaultAsync(b => b.Id == id, cancellationToken);
+    }
+
     public async Task<IEnumerable<Booking>> GetAllAsync(CancellationToken cancellationToken)
     {
         return await dbContext.Bookings
@@ -20,6 +29,11 @@ internal class BookingRepository(CoWorkingDbContext dbContext) : IBookingReposit
                     .ThenInclude(w => w.Pictures)
             .AsSplitQuery()
             .ToListAsync(cancellationToken);
+    }
+    public async Task UpdateAsync(Booking entity, CancellationToken cancellationToken)
+    {
+        dbContext.Bookings.Update(entity);
+        await dbContext.SaveChangesAsync(cancellationToken);
     }
 
     public async Task DeleteAsync(int id, CancellationToken cancellationToken)

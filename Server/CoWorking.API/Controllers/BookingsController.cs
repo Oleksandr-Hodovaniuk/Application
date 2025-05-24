@@ -4,6 +4,7 @@ using CoWorking.Application.CommandsAndQueries.Queries.Bookings;
 using CoWorking.Application.DTOs;
 using CoWorking.Application.Interfaces.Repositories;
 using MediatR;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading;
 
@@ -26,6 +27,15 @@ public class BookingsController : ControllerBase
 
         return Created();
     }
+
+    [HttpGet("id")]
+    public async Task<IActionResult> GetByIdAsync(int id, CancellationToken cancellationToken)
+    {
+        var booking = await _mediator.Send(new GetByIdBookingQuery(id), cancellationToken);
+
+        return Ok(booking);
+    }
+
     [HttpGet]
 	public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken)
 	{
@@ -37,6 +47,22 @@ public class BookingsController : ControllerBase
         }
        
         return Ok(bookings);
+    }
+
+    [HttpPatch("id")]
+    public async Task<IActionResult> PatchAsync(int id,
+        [FromBody] JsonPatchDocument<BookingPatchDTO> patchDoc,
+        CancellationToken cancellationToken)
+    {
+        if (patchDoc == null)
+        {
+            return BadRequest();
+        }
+
+       //await _mediator.Send(new PatchBookingCommand(id, patchDoc), cancellationToken);
+        
+
+        return Ok();
     }
 
 	[HttpDelete("id")]
