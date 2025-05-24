@@ -9,5 +9,4 @@ public interface IBookingRepository : IGenericRepository<Booking>
     Task<Booking?> GetByIdAsync(int id, CancellationToken cancellationToken);
     Task UpdateAsync(Booking entity, CancellationToken cancellationToken);
     Task DeleteAsync(int id, CancellationToken cancellationToken);
-    Task<bool> ExistsByIdAsync(int id, CancellationToken cancellationToken);
 }

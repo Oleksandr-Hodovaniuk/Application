@@ -45,10 +45,4 @@ internal class BookingRepository(CoWorkingDbContext dbContext) : IBookingReposit
         dbContext.Bookings.Remove(booking!);
         await dbContext.SaveChangesAsync(cancellationToken);
     }
-
-    public async Task<bool> ExistsByIdAsync(int id, CancellationToken cancellationToken)
-    {
-        return await dbContext.Bookings
-        .AnyAsync(b => b.Id == id, cancellationToken);
-    }
 }

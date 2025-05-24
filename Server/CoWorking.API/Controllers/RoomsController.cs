@@ -12,4 +12,10 @@ public class RoomsController : ControllerBase
 	{
 		_mediator = mediator;
 	}
+
+    [HttpGet("type/{workspaceType}")]
+    public async Task<IActionResult> GetRoomsByWorkspaceType(string workspaceType)
+	{
+		throw new NotImplementedException();
+	}
 }

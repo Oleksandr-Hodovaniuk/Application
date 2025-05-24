@@ -18,7 +18,9 @@ public class DeleteBookingHandler : IRequestHandler<DeleteBookingCommand>
 
     public async Task Handle(DeleteBookingCommand request, CancellationToken cancellationToken)
     {
-        if (!await _repository.ExistsByIdAsync(request.id, cancellationToken))
+        var booking = await _repository.GetByIdAsync(request.id, cancellationToken);
+
+        if (booking == null)
         {
             throw new NotFoundException($"Booking with id: {request.id} does not exist.");
         }
