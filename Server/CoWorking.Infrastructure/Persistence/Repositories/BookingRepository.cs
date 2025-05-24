@@ -18,6 +18,7 @@ internal class BookingRepository(CoWorkingDbContext dbContext) : IBookingReposit
         return await dbContext.Bookings
             .Include(b => b.Room)
                 .ThenInclude(r => r.Workspace)
+                    .ThenInclude(w => w.Rooms)
             .FirstOrDefaultAsync(b => b.Id == id, cancellationToken);
     }
 

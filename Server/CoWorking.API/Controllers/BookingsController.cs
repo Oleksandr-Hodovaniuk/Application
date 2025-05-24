@@ -59,10 +59,23 @@ public class BookingsController : ControllerBase
             return BadRequest();
         }
 
-       //await _mediator.Send(new PatchBookingCommand(id, patchDoc), cancellationToken);
-        
+        var bookingDto = await _mediator.Send(new GetByIdBookingQuery(id), cancellationToken);
 
-        return Ok();
+        if (bookingDto == null)
+        {
+            return NotFound();
+        }
+
+        patchDoc.ApplyTo(bookingDto, ModelState);
+
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        await _mediator.Send(new PatchBookingCommand(id, bookingDto), cancellationToken);
+        
+        return NoContent();
     }
 
 	[HttpDelete("id")]
