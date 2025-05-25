@@ -14,6 +14,6 @@ internal class PictureConfiguration : IEntityTypeConfiguration<Picture>
         builder.HasOne(p => p.Workspace)
             .WithMany(w => w.Pictures)
             .HasForeignKey(p => p.WorkspaceId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.SetNull);
     }
 }

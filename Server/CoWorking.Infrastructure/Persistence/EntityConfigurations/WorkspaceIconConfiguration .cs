@@ -21,6 +21,6 @@ internal class WorkspaceIconConfiguration : IEntityTypeConfiguration<WorkspaceIc
         builder.HasOne(wi => wi.Icon)
             .WithMany(i => i.WorkspaceIcons)
             .HasForeignKey(wi => wi.IconId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }
