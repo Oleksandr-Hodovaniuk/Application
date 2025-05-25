@@ -22,7 +22,7 @@ public class DeleteBookingHandler : IRequestHandler<DeleteBookingCommand>
 
         if (booking == null)
         {
-            throw new NotFoundException($"Booking with id: {request.id} does not exist.");
+            throw new NotFoundException("Booking with given id does not exist.");
         }
 
         await _repository.DeleteAsync(request.id, cancellationToken);

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CoWorking.Application.CommandsAndQueries.Commands.Bookings;
+using CoWorking.Application.Exceptions;
 using CoWorking.Application.Interfaces.Repositories;
 using CoWorking.Core.Entities;
 using MediatR;
@@ -18,8 +19,30 @@ public class CreateBookingHandler : IRequestHandler<CreateBookingCommand>
 
     public async Task Handle(CreateBookingCommand request, CancellationToken cancellationToken)
     {
-        var booking = _mapper.Map<Booking>(request.dto);
+        if (!await _repository.RoomExistsByIdAsync(request.dto.RoomId, cancellationToken))
+        {
+            throw new NotFoundException("Room with given id does not exist.");
+        }
 
-        await _repository.CreateAsync(booking, cancellationToken);
+        if (!await _repository.IsAvailableAsync(request.dto.RoomId, cancellationToken))
+        {
+            if (await _repository.IsOverlappingAsync(request.dto.RoomId,
+                request.dto.StartDateTime,
+                request.dto.EndDateTime,
+                cancellationToken))
+            {
+                throw new BusinessException("Selected time is not available.");
+            }
+
+            var booking1 = _mapper.Map<Booking>(request.dto);
+
+            await _repository.CreateAsync(booking1, cancellationToken);
+
+            return;
+        }
+
+        var booking2 = _mapper.Map<Booking>(request.dto);
+
+        await _repository.CreateAsync(booking2, cancellationToken);
     }
 }

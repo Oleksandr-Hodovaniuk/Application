@@ -14,7 +14,7 @@ public static class ServiceCollectionExtensions
         // Add Swagger.
         services.AddSwaggerGen();
 
-        // Add background service for cleaning up expired bookings.
-        services.AddHostedService<BookingCleanupService>();
+        // Add background service to delete expired bookings.
+        services.AddHostedService<BookingDeletionService>();
     }
 }

@@ -46,4 +46,31 @@ internal class BookingRepository(CoWorkingDbContext dbContext) : IBookingReposit
         dbContext.Bookings.Remove(booking!);
         await dbContext.SaveChangesAsync(cancellationToken);
     }
+
+    public async Task<bool> RoomExistsByIdAsync(int roomId, CancellationToken cancellationToken)
+    {
+        return await dbContext.Rooms.AnyAsync(r => r.Id == roomId, cancellationToken);
+    }
+
+    public async Task<bool> IsAvailableAsync(int roomId, CancellationToken cancellationToken)
+    {
+        var quantity = await dbContext.Rooms
+            .Where(r => r.Id == roomId)
+            .Select(r => r.Quantity)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        var bookings = await dbContext.Bookings
+            .Where(b => b.RoomId == roomId).CountAsync(cancellationToken);
+        
+        return quantity > bookings;
+    }
+
+    public async Task<bool> IsOverlappingAsync(int roomId, DateTime start, DateTime end, CancellationToken cancellationToken)
+    {
+        return await dbContext.Bookings
+            .AnyAsync(b => b.RoomId == roomId &&
+                b.StartDateTime < end &&
+                b.EndDateTime > start,
+                cancellationToken);
+    }
 }

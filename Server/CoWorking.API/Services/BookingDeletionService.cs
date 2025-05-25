@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoWorking.API.Services;
 
-internal class BookingCleanupService : BackgroundService
+internal class BookingDeletionService : BackgroundService
 {
     private readonly IServiceProvider _services;
-    public BookingCleanupService(IServiceProvider services)
+    public BookingDeletionService(IServiceProvider services)
     {
         _services = services;
     }
