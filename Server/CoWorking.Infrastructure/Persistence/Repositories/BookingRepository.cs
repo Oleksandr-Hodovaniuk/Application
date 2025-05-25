@@ -73,4 +73,14 @@ internal class BookingRepository(CoWorkingDbContext dbContext) : IBookingReposit
                 b.EndDateTime > start,
                 cancellationToken);
     }
+
+    public async Task<bool> IsOverlappingAsync(int roomId, int bookingId, DateTime start, DateTime end, CancellationToken cancellationToken)
+    {
+        return await dbContext.Bookings
+            .AnyAsync(b => b.Id != bookingId &&
+                b.RoomId == roomId &&
+                b.StartDateTime < end &&
+                b.EndDateTime > start,
+                cancellationToken);
+    }
 }

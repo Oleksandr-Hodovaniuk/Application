@@ -1,6 +1,6 @@
-﻿namespace CoWorking.Application.DTOs;
+﻿namespace CoWorking.Application.DTOs.Booking;
 
-public class BookingCreateDTO
+public class CreateBookingDTO
 {
     public string Name { get; set; } = default!;
     public string Email { get; set; } = default!;

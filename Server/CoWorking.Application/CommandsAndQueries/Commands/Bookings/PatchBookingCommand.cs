@@ -1,4 +1,4 @@
-﻿using CoWorking.Application.DTOs;
+﻿using CoWorking.Application.DTOs.Booking;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -9,4 +9,4 @@ using System.Threading.Tasks;
 
 namespace CoWorking.Application.CommandsAndQueries.Commands.Bookings;
 
-public record PatchBookingCommand(int id, BookingPatchDTO dto) : IRequest;
+public record PatchBookingCommand(int id, PatchBookingDTO dto) : IRequest;

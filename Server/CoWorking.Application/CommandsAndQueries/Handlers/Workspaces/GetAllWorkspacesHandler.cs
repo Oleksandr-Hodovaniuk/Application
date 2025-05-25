@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CoWorking.Application.CommandsAndQueries.Queries.Workspaces;
-using CoWorking.Application.DTOs;
+using CoWorking.Application.DTOs.Workspace;
 using CoWorking.Application.Interfaces.Repositories;
 using MediatR;
 

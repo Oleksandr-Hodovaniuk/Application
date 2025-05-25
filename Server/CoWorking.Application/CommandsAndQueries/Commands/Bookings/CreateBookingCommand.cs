@@ -1,7 +1,7 @@
-﻿using CoWorking.Application.DTOs;
+﻿using CoWorking.Application.DTOs.Booking;
 using MediatR;
 
 
 namespace CoWorking.Application.CommandsAndQueries.Commands.Bookings;
 
-public record CreateBookingCommand(BookingCreateDTO dto) : IRequest;
+public record CreateBookingCommand(CreateBookingDTO dto) : IRequest;

@@ -1,4 +1,4 @@
-﻿using CoWorking.Application.DTOs;
+﻿using CoWorking.Application.DTOs.Room;
 using MediatR;
 
 namespace CoWorking.Application.CommandsAndQueries.Queries.Rooms;

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CoWorking.Application.CommandsAndQueries.Queries.Bookings;
-using CoWorking.Application.DTOs;
+using CoWorking.Application.DTOs.Booking;
 using CoWorking.Application.Interfaces.Repositories;
 using MediatR;
 

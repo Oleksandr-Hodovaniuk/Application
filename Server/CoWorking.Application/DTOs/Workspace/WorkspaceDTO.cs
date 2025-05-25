@@ -1,4 +1,6 @@
-﻿namespace CoWorking.Application.DTOs;
+﻿using CoWorking.Application.DTOs.Room;
+
+namespace CoWorking.Application.DTOs.Workspace;
 
 public class WorkspaceDTO
 {

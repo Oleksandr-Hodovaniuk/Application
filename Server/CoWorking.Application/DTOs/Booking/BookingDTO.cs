@@ -1,6 +1,4 @@
-﻿using CoWorking.Core.Enums;
-
-namespace CoWorking.Application.DTOs;
+﻿namespace CoWorking.Application.DTOs.Booking;
 
 public class BookingDTO
 {

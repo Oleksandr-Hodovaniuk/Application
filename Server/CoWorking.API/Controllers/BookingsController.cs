@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using CoWorking.Application.CommandsAndQueries.Commands.Bookings;
 using CoWorking.Application.CommandsAndQueries.Queries.Bookings;
-using CoWorking.Application.DTOs;
+using CoWorking.Application.DTOs.Booking;
 using CoWorking.Application.Interfaces.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.JsonPatch;
@@ -21,7 +21,7 @@ public class BookingsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync([FromBody] BookingCreateDTO dto, CancellationToken cancellationToken)
+    public async Task<IActionResult> CreateAsync([FromBody] CreateBookingDTO dto, CancellationToken cancellationToken)
     {
         await _mediator.Send(new CreateBookingCommand(dto));
 
@@ -51,7 +51,7 @@ public class BookingsController : ControllerBase
 
     [HttpPatch("id")]
     public async Task<IActionResult> PatchAsync(int id,
-        [FromBody] JsonPatchDocument<BookingPatchDTO> patchDoc,
+        [FromBody] JsonPatchDocument<PatchBookingDTO> patchDoc,
         CancellationToken cancellationToken)
     {
         if (patchDoc == null)

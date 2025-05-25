@@ -1,4 +1,6 @@
-﻿namespace CoWorking.Application.DTOs;
+﻿using CoWorking.Application.DTOs.Booking;
+
+namespace CoWorking.Application.DTOs.Room;
 
 public class RoomDTO
 {

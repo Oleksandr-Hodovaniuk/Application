@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using CoWorking.Application.DTOs;
+using CoWorking.Application.DTOs.Workspace;
 using CoWorking.Core.Entities;
 
 namespace CoWorking.Application.Mappings;

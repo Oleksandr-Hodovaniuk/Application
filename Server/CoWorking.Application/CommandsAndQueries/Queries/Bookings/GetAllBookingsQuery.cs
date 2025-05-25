@@ -1,4 +1,4 @@
-﻿using CoWorking.Application.DTOs;
+﻿using CoWorking.Application.DTOs.Booking;
 using MediatR;
 
 namespace CoWorking.Application.CommandsAndQueries.Queries.Bookings;

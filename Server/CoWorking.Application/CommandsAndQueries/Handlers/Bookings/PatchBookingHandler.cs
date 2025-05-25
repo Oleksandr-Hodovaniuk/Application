@@ -2,6 +2,7 @@
 using CoWorking.Application.CommandsAndQueries.Commands.Bookings;
 using CoWorking.Application.Exceptions;
 using CoWorking.Application.Interfaces.Repositories;
+using CoWorking.Core.Entities;
 using MediatR;
 
 namespace CoWorking.Application.CommandsAndQueries.Handlers.Bookings;
@@ -19,14 +20,52 @@ public class PatchBookingHandler : IRequestHandler<PatchBookingCommand>
     public async Task Handle(PatchBookingCommand request, CancellationToken cancellationToken)
     {
         var booking = await _repository.GetByIdAsync(request.id, cancellationToken);
-
+        
         if (booking == null)
         {
-            throw new NotFoundException($"Booking with id: {request.id} doesn't exist.");
+            throw new NotFoundException($"Booking with given id doesn't exist.");
+        }
+
+        // Triggers only if the new room is different from the current one.
+        if (booking.RoomId != request.dto.SelectedRoomId)
+        {
+            if (!await _repository.RoomExistsByIdAsync(request.dto.SelectedRoomId!.Value, cancellationToken))
+            {
+                throw new NotFoundException("Room with given id doesn't exist.");
+            }
+
+            if (!await _repository.IsAvailableAsync(request.dto.SelectedRoomId!.Value, cancellationToken))
+            {
+                if (await _repository.IsOverlappingAsync(request.dto.SelectedRoomId!.Value,
+                    request.dto.StartDateTime!.Value,
+                    request.dto.EndDateTime!.Value,
+                    cancellationToken))
+                {
+                    throw new BusinessException("Selected time is not available.");
+                }
+
+                _mapper.Map(request.dto, booking);
+
+                await _repository.UpdateAsync(booking, cancellationToken);
+
+                return;
+            }
+        }
+
+        // Triggers only if the room is the same.
+        if (await _repository.IsOverlappingAsync(request.dto.SelectedRoomId!.Value,
+            booking.Id,
+            request.dto.StartDateTime!.Value,
+            request.dto.EndDateTime!.Value,
+            cancellationToken))
+        {
+            throw new BusinessException("Selected time is not available.");
         }
 
         _mapper.Map(request.dto, booking);
 
         await _repository.UpdateAsync(booking, cancellationToken);
+
+        return;
     }
 }
