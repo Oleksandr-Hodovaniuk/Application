@@ -1,4 +1,5 @@
 ﻿using CoWorking.API.Middlewares;
+using CoWorking.API.Services;
 
 namespace CoWorking.API.Extensions;
 
@@ -12,5 +13,8 @@ public static class ServiceCollectionExtensions
 
         // Add Swagger.
         services.AddSwaggerGen();
+
+        // Add background service for cleaning up expired bookings.
+        services.AddHostedService<BookingCleanupService>();
     }
 }
