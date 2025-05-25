@@ -9,7 +9,7 @@ public class BookingDTO
     public string Email { get; set; } = default!;
     public string WorkspaceName { get; set; } = default!;
     public int RoomCapacity { get; set; } = default!;
-    public DateTime StartTime { get; set; }
-    public DateTime EndTime { get; set; }
-    public TimeSpan Duration => EndTime - StartTime;
+    public DateTime StartDateTime { get; set; }
+    public DateTime EndDateTime { get; set; }
+    public TimeSpan Duration => EndDateTime - StartDateTime;
 }

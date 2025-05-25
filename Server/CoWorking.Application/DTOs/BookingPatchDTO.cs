@@ -5,8 +5,9 @@ public class BookingPatchDTO
     public string? Name { get; set; }
     public string? Email { get; set; }
     public string? WorkspaceType { get; set; }
-    public List<int>? RoomCapacities { get; set; }
-    public int? RoomId { get; set; }
-    public DateTime? StartTime { get; set; }
-    public DateTime? EndTime { get; set; }
+    public string? WorkspaceName { get; set; }
+    public List<RoomDTO>? Rooms { get; set; }
+    public int? SelectedRoomId { get; set; }
+    public DateTime? StartDateTime { get; set; }
+    public DateTime? EndDateTime { get; set; }
 }

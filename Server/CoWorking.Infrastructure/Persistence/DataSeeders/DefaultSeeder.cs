@@ -164,15 +164,15 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
             {
                 Name = "Ethan Morgan",
                 Email = "ethan.morgan@example.com",
-                StartTime = DateTime.Now,
-                EndTime = DateTime.Now.AddHours(5),
+                StartDateTime = DateTime.Now,
+                EndDateTime = DateTime.Now.AddHours(5),
             },
             new Booking
             {
                 Name = "Sophia Collins",
                 Email = "sophia.collins@example.com",
-                StartTime = DateTime.Now.AddHours(5),
-                EndTime = DateTime.Now.AddHours(10),
+                StartDateTime = DateTime.Now.AddHours(5),
+                EndDateTime = DateTime.Now.AddHours(10),
             }
         };
     }
@@ -184,8 +184,8 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
             {
                 Name = "Lucas Wright",
                 Email = "noah.mitchell@example.com",
-                StartTime = DateTime.Now,
-                EndTime = DateTime.Now.AddHours(3),
+                StartDateTime = DateTime.Now,
+                EndDateTime = DateTime.Now.AddHours(3),
             }
         };
     }
@@ -197,15 +197,15 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
             {
                 Name = "Noah Mitchell",
                 Email = "noah.mitchell@example.com",
-                StartTime = DateTime.Now,
-                EndTime = DateTime.Now.AddHours(5),
+                StartDateTime = DateTime.Now,
+                EndDateTime = DateTime.Now.AddHours(5),
             },
             new Booking
             {
                 Name = "Isabella Reed",
                 Email = "isabella.reed@example.com",
-                StartTime = DateTime.Now.AddHours(8),
-                EndTime = DateTime.Now.AddHours(16),
+                StartDateTime = DateTime.Now.AddHours(8),
+                EndDateTime = DateTime.Now.AddHours(16),
             }
         };
     }
