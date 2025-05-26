@@ -25,6 +25,7 @@ public class CreateBookingHandler : IRequestHandler<CreateBookingCommand>
             throw new NotFoundException("Room with given id doesn't exist.");
         }
 
+        // Triggers only if there is no available room with the given id.
         if (!await _repository.IsRoomAvailableAsync(request.dto.RoomId, cancellationToken))
         {
             if (await _repository.IsOverlappingAsync(request.dto.RoomId,
