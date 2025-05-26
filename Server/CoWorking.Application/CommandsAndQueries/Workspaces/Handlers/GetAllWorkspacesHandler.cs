@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using CoWorking.Application.CommandsAndQueries.Queries.Workspaces;
+using CoWorking.Application.CommandsAndQueries.Workspaces.Queries;
 using CoWorking.Application.DTOs.Workspace;
 using CoWorking.Application.Interfaces.Repositories;
 using MediatR;
 
-namespace CoWorking.Application.CommandsAndQueries.Hendlers.Workspaces;
+namespace CoWorking.Application.CommandsAndQueries.Workspaces.Handlers;
 
 public class GetAllWorkspacesHandler : IRequestHandler<GetAllWorkspacesQuery, IEnumerable<WorkspaceDTO>>
 {

@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using CoWorking.Application.CommandsAndQueries.Commands.Bookings;
+using CoWorking.Application.CommandsAndQueries.Bookings.Commands;
 using CoWorking.Application.Exceptions;
 using CoWorking.Application.Interfaces.Repositories;
 using MediatR;
 
-namespace CoWorking.Application.CommandsAndQueries.Handlers.Bookings;
+namespace CoWorking.Application.CommandsAndQueries.Bookings.Handlers;
 
 public class DeleteBookingHandler : IRequestHandler<DeleteBookingCommand>
 {

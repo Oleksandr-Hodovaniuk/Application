@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using CoWorking.Application.CommandsAndQueries.Queries.Bookings;
+using CoWorking.Application.CommandsAndQueries.Bookings.Queries;
 using CoWorking.Application.DTOs.Booking;
 using CoWorking.Application.Exceptions;
 using CoWorking.Application.Interfaces.Repositories;
 using MediatR;
 
-namespace CoWorking.Application.CommandsAndQueries.Handlers.Bookings;
+namespace CoWorking.Application.CommandsAndQueries.Bookings.Handlers;
 
 public class GetByIdBookingHandler : IRequestHandler<GetByIdBookingQuery, PatchBookingDTO>
 {

@@ -93,7 +93,7 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
                 Description = "Designed for productive meetings, workshops," +
                 " or client presentations. Equipped with screens, whiteboards," +
                 " and comfortable seating to keep your sessions running smoothly.",
-                Pictures = GetPictures_3(),
+                Pictures = GetPictures_3(),             
                 Rooms = GetRooms_3()
             }
         };

@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using CoWorking.Application.CommandsAndQueries.Commands.Bookings;
-using CoWorking.Application.CommandsAndQueries.Queries.Bookings;
+using CoWorking.Application.CommandsAndQueries.Bookings.Commands;
+using CoWorking.Application.CommandsAndQueries.Bookings.Queries;
 using CoWorking.Application.DTOs.Booking;
-using CoWorking.Application.Interfaces.Repositories;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading;
+
 
 namespace CoWorking.API.Controllers;
 
@@ -15,14 +15,27 @@ namespace CoWorking.API.Controllers;
 public class BookingsController : ControllerBase
 {
     private readonly IMediator _mediator;
-    public BookingsController(IMediator mediator)
+    private readonly IValidator<CreateBookingDTO> _createValidator;
+    private readonly IValidator<PatchBookingDTO> _patchValidator;
+    public BookingsController(IMediator mediator,
+        IValidator<CreateBookingDTO> createValidator,
+        IValidator<PatchBookingDTO> patchValidator)
     {
         _mediator = mediator;
+        _createValidator = createValidator;
+        _patchValidator = patchValidator;
     }
 
     [HttpPost]
     public async Task<IActionResult> CreateAsync([FromBody] CreateBookingDTO dto, CancellationToken cancellationToken)
     {
+        var validationResult = await _createValidator.ValidateAsync(dto);
+
+        if (!validationResult.IsValid)
+        {
+            return BadRequest(validationResult.Errors.Select(e => e.ErrorMessage));
+        }
+
         await _mediator.Send(new CreateBookingCommand(dto));
 
         return Created();

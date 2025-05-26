@@ -1,5 +1,7 @@
-﻿using CoWorking.Application.CommandsAndQueries.Hendlers.Workspaces;
+﻿using CoWorking.Application.CommandsAndQueries.Workspaces.Handlers;
 using CoWorking.Application.Mappings;
+using CoWorking.Application.Validators;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CoWorking.Application.Extensions;
@@ -15,5 +17,8 @@ public static class ServiceCollectionExtensions
         services.AddMediatR(config => {
             config.RegisterServicesFromAssembly(typeof(GetAllWorkspacesHandler).Assembly);
         });
+
+        // Registration of validators.
+        services.AddValidatorsFromAssemblyContaining<CreateBookingDTOValidator>();
     }
 }
