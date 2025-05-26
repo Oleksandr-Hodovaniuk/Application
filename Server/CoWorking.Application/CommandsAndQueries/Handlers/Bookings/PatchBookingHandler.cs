@@ -29,14 +29,17 @@ public class PatchBookingHandler : IRequestHandler<PatchBookingCommand>
         // Triggers only if the new room is different from the current one.
         if (booking.RoomId != request.dto.SelectedRoomId)
         {
+            // Triggers only if the room with the given id doesn't exist.
             if (!await _repository.RoomExistsByIdAsync(request.dto.SelectedRoomId!.Value, cancellationToken))
             {
                 throw new NotFoundException("Room with given id doesn't exist.");
             }
 
-            if (!await _repository.IsAvailableAsync(request.dto.SelectedRoomId!.Value, cancellationToken))
+            // Triggers only if there is no available room with the given id.
+            if (!await _repository.IsRoomAvailableAsync(request.dto.SelectedRoomId!.Value, cancellationToken))
             {
-                if (await _repository.IsOverlappingAsync(request.dto.SelectedRoomId!.Value,
+                // Triggers only if the given booking time overlaps.
+                if (await _repository.IsOverlappingAsync(request.dto.SelectedRoomId!.Value,                   
                     request.dto.StartDateTime!.Value,
                     request.dto.EndDateTime!.Value,
                     cancellationToken))
@@ -50,6 +53,12 @@ public class PatchBookingHandler : IRequestHandler<PatchBookingCommand>
 
                 return;
             }
+
+            _mapper.Map(request.dto, booking);
+
+            await _repository.UpdateAsync(booking, cancellationToken);
+
+            return;
         }
 
         // Triggers only if the room is the same.

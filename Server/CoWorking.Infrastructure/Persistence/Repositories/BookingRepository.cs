@@ -52,7 +52,7 @@ internal class BookingRepository(CoWorkingDbContext dbContext) : IBookingReposit
         return await dbContext.Rooms.AnyAsync(r => r.Id == roomId, cancellationToken);
     }
 
-    public async Task<bool> IsAvailableAsync(int roomId, CancellationToken cancellationToken)
+    public async Task<bool> IsRoomAvailableAsync(int roomId, CancellationToken cancellationToken)
     {
         var quantity = await dbContext.Rooms
             .Where(r => r.Id == roomId)
