@@ -17,5 +17,7 @@ public class WorkspaceProfile : Profile
                 opt.MapFrom(src => src.Pictures.Select(p => p.Url)))
             .ForMember(dest => dest.Rooms,opt =>
                 opt.MapFrom(src => src.Rooms));
+
+        CreateMap<Workspace, DropDownWorkspaceDTO>();
     }
 }

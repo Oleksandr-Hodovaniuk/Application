@@ -17,16 +17,12 @@ public class BookingProfile : Profile
 				opt.MapFrom(src => src.Room.Capacity))
 			.ForMember(dest => dest.Duration, opt =>
 				opt.MapFrom(src => src.EndDateTime - src.StartDateTime));
-
+		
 		CreateMap<Booking, PatchBookingDTO>()
-			.ForMember(dest => dest.WorkspaceType, opt =>
-                opt.MapFrom(src => src.Room.Workspace.Type))
-			.ForMember(dest => dest.WorkspaceName, opt =>
-			opt.MapFrom(src => src.Room.Workspace.Name))
+			.ForMember(dest => dest.SelectedWorkspaceId, opt =>
+                opt.MapFrom(src => src.Room.Workspace.Id))
 			.ForMember(dest => dest.SelectedRoomId, opt =>
-				opt.MapFrom(src => src.RoomId))
-			.ForMember(dest => dest.Rooms, opt =>
-				opt.MapFrom(src => src.Room.Workspace.Rooms));
+				opt.MapFrom(src => src.RoomId));
 
 		CreateMap<PatchBookingDTO, Booking>()
 			.ForMember(dest => dest.RoomId, opt =>

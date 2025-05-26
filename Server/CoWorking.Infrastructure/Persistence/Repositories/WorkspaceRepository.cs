@@ -1,4 +1,5 @@
-﻿using CoWorking.Application.Interfaces.Repositories;
+﻿using CoWorking.Application.DTOs.Workspace;
+using CoWorking.Application.Interfaces.Repositories;
 using CoWorking.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,14 @@ internal class WorkspaceRepository(CoWorkingDbContext dbContext) : IWorkspaceRep
                 .ThenInclude(r => r.Bookings)
             .Include(w => w.WorkspaceIcons)
                 .ThenInclude(wi => wi.Icon)
+            .AsSplitQuery()
+            .ToListAsync(cancellationToken);
+    }
+
+    public async Task<IEnumerable<Workspace>> GetWorkspacesInfoAsync(CancellationToken cancellationToken)
+    {
+        return await dbContext.Workspaces
+            .Include(w => w.Rooms)
             .AsSplitQuery()
             .ToListAsync(cancellationToken);
     }

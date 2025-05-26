@@ -21,47 +21,47 @@ public class PatchBookingDTOValidator : AbstractValidator<PatchBookingDTO>
             .NotEmpty().WithMessage("Room id is required.")
             .GreaterThan(0).WithMessage("Room id must be greater than 0");
 
-        RuleFor(x => x.WorkspaceType)
-            .NotEmpty().WithMessage("Workspace is required.")
-            .Length(2,60).WithMessage("Workspace must be between 2 and 60 characters.");
+        //RuleFor(x => x.WorkspaceType)
+        //    .NotEmpty().WithMessage("Workspace is required.")
+        //    .Length(2,60).WithMessage("Workspace must be between 2 and 60 characters.");
 
-        RuleFor(x => x)
-            .Custom((dto, context) =>
-            {
-                var result = dto.WorkspaceType switch
-                {
-                    "OpenSpace" => 1,
-                    "PrivateRoom" => 1,
-                    "MeetingRoom" => 1,
-                    _ => 0
-                };
+        //RuleFor(x => x)
+        //    .Custom((dto, context) =>
+        //    {
+        //        var result = dto.WorkspaceType switch
+        //        {
+        //            "OpenSpace" => 1,
+        //            "PrivateRoom" => 1,
+        //            "MeetingRoom" => 1,
+        //            _ => 0
+        //        };
 
-                if (result == 0)
-                {
-                    context.AddFailure("WorkspaceType", "Incorrect workspace type.");
-                }
-            });
+        //        if (result == 0)
+        //        {
+        //            context.AddFailure("WorkspaceType", "Incorrect workspace type.");
+        //        }
+        //    });
 
-        RuleFor(x => x.WorkspaceName)
-            .NotEmpty().WithMessage("Workspace name is required.")
-            .Length(2, 60).WithMessage("Workspace name must be between 2 and 60 characters.");
+        //RuleFor(x => x.WorkspaceName)
+        //    .NotEmpty().WithMessage("Workspace name is required.")
+        //    .Length(2, 60).WithMessage("Workspace name must be between 2 and 60 characters.");
 
-        RuleFor(x => x)
-            .Custom((dto, context) =>
-            {
-                var result = dto.WorkspaceName switch
-                {
-                    "Open Space" => 1,
-                    "Private Rooms" => 1,
-                    "Meeting Rooms" => 1,
-                    _ => 0
-                };
+        //RuleFor(x => x)
+        //    .Custom((dto, context) =>
+        //    {
+        //        var result = dto.WorkspaceName switch
+        //        {
+        //            "Open Space" => 1,
+        //            "Private Rooms" => 1,
+        //            "Meeting Rooms" => 1,
+        //            _ => 0
+        //        };
 
-                if (result == 0)
-                {
-                    context.AddFailure("WorkspaceName", "Incorrect workspace name.");
-                }
-            });
+        //        if (result == 0)
+        //        {
+        //            context.AddFailure("WorkspaceName", "Incorrect workspace name.");
+        //        }
+        //    });
 
         RuleFor(x => x.StartDateTime)
             .NotEmpty().WithMessage("Start date and time is required.")
@@ -74,27 +74,27 @@ public class PatchBookingDTOValidator : AbstractValidator<PatchBookingDTO>
             .GreaterThan(x => x.StartDateTime).WithMessage("End date and time must be greater than start date and time.");
 
         // Validation for maximum booking duration.
-        RuleFor(x => x)
-            .Custom((dto, context) =>
-            {
-                if (dto.StartDateTime.HasValue && dto.EndDateTime.HasValue)
-                {
-                    var duration = dto.EndDateTime.Value - dto.StartDateTime.Value;
+        //RuleFor(x => x)
+        //    .Custom((dto, context) =>
+        //    {
+        //        if (dto.StartDateTime.HasValue && dto.EndDateTime.HasValue)
+        //        {
+        //            var duration = dto.EndDateTime.Value - dto.StartDateTime.Value;
 
-                    var maxDuration = dto.WorkspaceType switch
-                    {
-                        "OpenSpace" => 30,
-                        "PrivateRoom" => 30,
-                        "MeetingRoom" => 1,
-                        _ => 1
-                    };
+        //            var maxDuration = dto.WorkspaceType switch
+        //            {
+        //                "OpenSpace" => 30,
+        //                "PrivateRoom" => 30,
+        //                "MeetingRoom" => 1,
+        //                _ => 1
+        //            };
 
-                    if (duration.TotalDays > maxDuration)
-                    {
-                        context.AddFailure("EndDateTime",
-                            $"Maximum booking duration for {dto.WorkspaceType} is {maxDuration} days.");
-                    }
-                }
-            });
+        //            if (duration.TotalDays > maxDuration)
+        //            {
+        //                context.AddFailure("EndDateTime",
+        //                    $"Maximum booking duration for {dto.WorkspaceType} is {maxDuration} days.");
+        //            }
+        //        }
+        //    });
     }
 }

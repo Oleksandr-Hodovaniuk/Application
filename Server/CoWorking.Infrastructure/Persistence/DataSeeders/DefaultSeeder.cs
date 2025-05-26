@@ -74,6 +74,7 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
                 " freelancers or small teams who enjoy a collaborative" +
                 " atmosphere. Choose any available desk and get to" +
                 " work with flexibility and ease.",
+                MaxBookingDuration = 30,
                 Pictures = GetPictures_1(),
                 Rooms = GetRooms_1()
             },
@@ -84,6 +85,7 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
                 " or small team huddles. These fully enclosed rooms" +
                 " offer privacy and come in a variety of sizes to fit" +
                 " your needs.",
+                MaxBookingDuration = 30,
                 Pictures = GetPictures_2(),
                 Rooms = GetRooms_2()
             },
@@ -93,6 +95,7 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
                 Description = "Designed for productive meetings, workshops," +
                 " or client presentations. Equipped with screens, whiteboards," +
                 " and comfortable seating to keep your sessions running smoothly.",
+                MaxBookingDuration = 1,
                 Pictures = GetPictures_3(),             
                 Rooms = GetRooms_3()
             }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CoWorking.Application.CommandsAndQueries.Bookings.Queries;
 using CoWorking.Application.DTOs.Booking;
+using CoWorking.Application.DTOs.Workspace;
 using CoWorking.Application.Exceptions;
 using CoWorking.Application.Interfaces.Repositories;
 using MediatR;
@@ -26,6 +27,14 @@ public class GetByIdBookingHandler : IRequestHandler<GetByIdBookingQuery, PatchB
             throw new NotFoundException($"Booking with given id doesn't exist.");
         }
 
-        return _mapper.Map<PatchBookingDTO>(booking);
+        var workspaces = await _repository.GetWorkspacesInfoAsync(cancellationToken);
+
+        var workspacesDto = _mapper.Map<List<DropDownWorkspaceDTO>>(workspaces);
+
+        var bookingDto = _mapper.Map<PatchBookingDTO>(booking);
+
+        bookingDto.Workspaces = workspacesDto;
+
+        return bookingDto;
     }
 }

@@ -47,6 +47,14 @@ internal class BookingRepository(CoWorkingDbContext dbContext) : IBookingReposit
         await dbContext.SaveChangesAsync(cancellationToken);
     }
 
+    public async Task<IEnumerable<Workspace>> GetWorkspacesInfoAsync(CancellationToken cancellationToken)
+    {
+        return await dbContext.Workspaces
+            .Include(w => w.Rooms)
+            .AsSplitQuery()
+            .ToListAsync(cancellationToken);
+    }
+
     public async Task<bool> RoomExistsByIdAsync(int roomId, CancellationToken cancellationToken)
     {
         return await dbContext.Rooms.AnyAsync(r => r.Id == roomId, cancellationToken);
