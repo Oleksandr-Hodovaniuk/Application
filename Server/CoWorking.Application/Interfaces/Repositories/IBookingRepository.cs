@@ -25,14 +25,20 @@ public interface IBookingRepository : IGenericRepository<Booking>
     /// Checks whether the room with the given ID exists.
     /// </summary>
     Task<bool> RoomExistsByIdAsync(int roomId, CancellationToken cancellationToken);
+
+
+
+    Task<bool> RoomAvailableAsync(int roomId, DateTime start, DateTime end, CancellationToken cancellationToken);
     /// <summary>
     /// Checks whether any booking for the specified room overlaps with the given time range.
     /// </summary>
-    Task<bool> IsOverlappingAsync(int roomId, DateTime start, DateTime end, CancellationToken cancellationToken);
+    Task<bool> IsBookingOverlappingAsync(string email, DateTime start, DateTime end, CancellationToken cancellationToken);
+
+    Task<bool> IsBookingOverlappingAsync(int roomId, DateTime start, DateTime end, CancellationToken cancellationToken);
     /// <summary>
     /// Checks whether any booking for the specified room, excluding the given booking ID, overlaps with the given time range.
     /// </summary>
-    Task<bool> IsOverlappingAsync(int roomId, int bookingId, DateTime start, DateTime end, CancellationToken cancellationToken);
+    Task<bool> IsBookingOverlappingAsync(int roomId, int bookingId, DateTime start, DateTime end, CancellationToken cancellationToken);
     /// <summary>
     /// Deletes all expired bookings.
     /// </summary>

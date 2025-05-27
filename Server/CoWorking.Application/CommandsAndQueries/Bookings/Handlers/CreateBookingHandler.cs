@@ -24,10 +24,18 @@ public class CreateBookingHandler : IRequestHandler<CreateBookingCommand>
             throw new NotFoundException("Room with given id doesn't exist.");
         }
 
-        if (await _repository.IsOverlappingAsync(request.dto.RoomId,
-                 request.dto.StartDateTime,
-                 request.dto.EndDateTime,
-                 cancellationToken))
+        if (await _repository.IsBookingOverlappingAsync(request.dto.Email,
+            request.dto.StartDateTime,
+            request.dto.EndDateTime,
+            cancellationToken))
+        {
+            throw new BusinessException($"{request.dto.Email} already have a booking that overlaps with this time.");
+        }
+
+        if (!await _repository.RoomAvailableAsync(request.dto.RoomId,
+            request.dto.StartDateTime,
+            request.dto.EndDateTime,
+            cancellationToken))
         {
             throw new BusinessException("Unfortunately, there are no available rooms at this time.");
         }

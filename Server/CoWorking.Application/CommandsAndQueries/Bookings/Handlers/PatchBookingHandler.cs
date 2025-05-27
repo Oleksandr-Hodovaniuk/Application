@@ -37,14 +37,14 @@ public class PatchBookingHandler : IRequestHandler<PatchBookingCommand>
                 throw new NotFoundException("Room with given id doesn't exist.");
             }
 
-            if (await _repository.IsOverlappingAsync(newRoomId, newStart, newEnd, cancellationToken))
+            if (await _repository.IsBookingOverlappingAsync(newRoomId, booking.Id, newStart, newEnd, cancellationToken))
             {
                 throw new BusinessException("Unfortunately, there are no available rooms at this time.");
             }
         }
         else
         {
-            if (await _repository.IsOverlappingAsync(newRoomId, booking.Id, newStart, newEnd, cancellationToken))
+            if (await _repository.IsBookingOverlappingAsync(newRoomId, booking.Id, newStart, newEnd, cancellationToken))
             {
                 throw new BusinessException("Unfortunately, there are no available rooms at this time.");
             }

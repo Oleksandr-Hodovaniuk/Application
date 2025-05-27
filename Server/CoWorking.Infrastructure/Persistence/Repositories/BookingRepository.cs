@@ -60,7 +60,37 @@ internal class BookingRepository(CoWorkingDbContext dbContext) : IBookingReposit
         return await dbContext.Rooms.AnyAsync(r => r.Id == roomId, cancellationToken);
     }
 
-    public async Task<bool> IsOverlappingAsync(int roomId, DateTime start, DateTime end, CancellationToken cancellationToken)
+    public async Task<bool> RoomAvailableAsync(int roomId, DateTime start, DateTime end, CancellationToken cancellationToken)
+    {
+        var quantity = await dbContext.Rooms
+            .Where(r => r.Id == roomId)
+            .Select(r => r.Quantity)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (quantity == 0)
+        {
+            return false;
+        }
+
+        var overlappingCount = await dbContext.Bookings
+            .Where(b => b.RoomId == roomId &&
+                b.StartDateTime < end &&
+                b.EndDateTime > start)
+            .CountAsync(cancellationToken);
+
+        return quantity > overlappingCount;
+    }
+
+    public async Task<bool> IsBookingOverlappingAsync(string email, DateTime start, DateTime end, CancellationToken cancellationToken)
+    {
+        return await dbContext.Bookings
+                .AnyAsync(b => b.Email == email &&
+                b.StartDateTime < end &&
+                b.EndDateTime > start,
+                cancellationToken);
+    }
+
+    public async Task<bool> IsBookingOverlappingAsync(int roomId, DateTime start, DateTime end, CancellationToken cancellationToken)
     {
         return await dbContext.Bookings
                 .AnyAsync(b => b.RoomId == roomId &&
@@ -69,7 +99,7 @@ internal class BookingRepository(CoWorkingDbContext dbContext) : IBookingReposit
                 cancellationToken);
     }
 
-    public async Task<bool> IsOverlappingAsync(int roomId, int bookingId, DateTime start, DateTime end, CancellationToken cancellationToken)
+    public async Task<bool> IsBookingOverlappingAsync(int roomId, int bookingId, DateTime start, DateTime end, CancellationToken cancellationToken)
     {
         return await dbContext.Bookings
                 .AnyAsync(b => b.Id != bookingId &&
