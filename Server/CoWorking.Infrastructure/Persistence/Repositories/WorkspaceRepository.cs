@@ -26,4 +26,12 @@ internal class WorkspaceRepository(CoWorkingDbContext dbContext) : IWorkspaceRep
             .AsSplitQuery()
             .ToListAsync(cancellationToken);
     }
+
+    public async Task<int?> GetWorkspaceMaxDurationAsync(int roomId, CancellationToken cancellationToken)
+    {
+       return await dbContext.Workspaces.
+            Where(w => w.Rooms.Any(r => r.Id == roomId))
+            .Select(w => w.MaxBookingDuration)
+            .FirstOrDefaultAsync(cancellationToken);
+    }
 }

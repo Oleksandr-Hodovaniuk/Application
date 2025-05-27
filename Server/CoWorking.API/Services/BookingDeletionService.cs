@@ -1,4 +1,4 @@
-﻿using CoWorking.Infrastructure.Persistence;
+﻿using CoWorking.Application.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoWorking.API.Services;
@@ -17,16 +17,9 @@ internal class BookingDeletionService : BackgroundService
         {
             using (var scope = _services.CreateScope())
             {
-                var dbContext = scope.ServiceProvider.GetRequiredService<CoWorkingDbContext>();
+                var repository = scope.ServiceProvider.GetRequiredService<IBookingRepository>();
 
-                var now = DateTime.Now;
-
-                var expiredBookings = await dbContext.Bookings
-                    .Where(b => b.EndDateTime <= now)
-                    .ToListAsync(cancellationToken);
-
-                dbContext.Bookings.RemoveRange(expiredBookings);
-                await dbContext.SaveChangesAsync(cancellationToken);
+                await repository.DeleteExpiredBookingsAsync(cancellationToken);     
             }    
 
             await Task.Delay(TimeSpan.FromMinutes(1), cancellationToken);

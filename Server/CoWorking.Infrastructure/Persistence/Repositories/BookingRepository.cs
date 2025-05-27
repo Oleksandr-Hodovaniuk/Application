@@ -60,23 +60,10 @@ internal class BookingRepository(CoWorkingDbContext dbContext) : IBookingReposit
         return await dbContext.Rooms.AnyAsync(r => r.Id == roomId, cancellationToken);
     }
 
-    public async Task<bool> IsRoomAvailableAsync(int roomId, CancellationToken cancellationToken)
-    {
-        var quantity = await dbContext.Rooms
-            .Where(r => r.Id == roomId)
-            .Select(r => r.Quantity)
-            .FirstOrDefaultAsync(cancellationToken);
-
-        var bookings = await dbContext.Bookings
-            .Where(b => b.RoomId == roomId).CountAsync(cancellationToken);
-        
-        return quantity > bookings;
-    }
-
     public async Task<bool> IsOverlappingAsync(int roomId, DateTime start, DateTime end, CancellationToken cancellationToken)
     {
         return await dbContext.Bookings
-            .AnyAsync(b => b.RoomId == roomId &&
+                .AnyAsync(b => b.RoomId == roomId &&
                 b.StartDateTime < end &&
                 b.EndDateTime > start,
                 cancellationToken);
@@ -85,10 +72,25 @@ internal class BookingRepository(CoWorkingDbContext dbContext) : IBookingReposit
     public async Task<bool> IsOverlappingAsync(int roomId, int bookingId, DateTime start, DateTime end, CancellationToken cancellationToken)
     {
         return await dbContext.Bookings
-            .AnyAsync(b => b.Id != bookingId &&
+                .AnyAsync(b => b.Id != bookingId &&
                 b.RoomId == roomId &&
                 b.StartDateTime < end &&
                 b.EndDateTime > start,
                 cancellationToken);
+    }
+
+    public async Task DeleteExpiredBookingsAsync(CancellationToken cancellationToken)
+    {
+        var now = DateTime.Now;
+
+        var bookings =  await dbContext.Bookings
+                        .Where(b => b.EndDateTime <= now)
+                        .ToListAsync(cancellationToken);
+
+        if (bookings.Any())
+        {
+            dbContext.Bookings.RemoveRange(bookings);
+            await dbContext.SaveChangesAsync(cancellationToken);
+        }
     }
 }

@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoWorking.Infrastructure.Persistence;
 
-public class CoWorkingDbContext(DbContextOptions<CoWorkingDbContext> options) 
+internal class CoWorkingDbContext(DbContextOptions<CoWorkingDbContext> options) 
     : DbContext(options)
 {
     internal DbSet<Icon> Icons { get; set; }
     internal DbSet<Workspace> Workspaces { get; set; }
     internal DbSet<WorkspaceIcon> WorkspaceIcons { get; set; }
     internal DbSet<Room> Rooms { get; set; }
-    public DbSet<Booking> Bookings { get; set; }
+    internal DbSet<Booking> Bookings { get; set; }
     internal DbSet<Picture> Pictures { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)

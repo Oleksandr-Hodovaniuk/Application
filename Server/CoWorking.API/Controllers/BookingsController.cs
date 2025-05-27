@@ -29,7 +29,7 @@ public class BookingsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateAsync([FromBody] CreateBookingDTO dto, CancellationToken cancellationToken)
     {
-        var validationResult = await _createValidator.ValidateAsync(dto);
+        var validationResult = await _createValidator.ValidateAsync(dto, cancellationToken);
 
         if (!validationResult.IsValid)
         {
@@ -84,6 +84,13 @@ public class BookingsController : ControllerBase
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
+        }
+
+        var validationResult = await _patchValidator.ValidateAsync(bookingDto, cancellationToken);
+
+        if (!validationResult.IsValid)
+        {
+            return BadRequest(validationResult.Errors.Select(e => e.ErrorMessage));
         }
 
         await _mediator.Send(new PatchBookingCommand(id, bookingDto), cancellationToken);

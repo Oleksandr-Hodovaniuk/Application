@@ -34,7 +34,7 @@ public interface IBookingRepository : IGenericRepository<Booking>
     /// </summary>
     Task<bool> IsOverlappingAsync(int roomId, int bookingId, DateTime start, DateTime end, CancellationToken cancellationToken);
     /// <summary>
-    /// Checks whether the room with the given ID is currently available for booking.
+    /// Deletes all expired bookings.
     /// </summary>
-    Task<bool> IsRoomAvailableAsync(int roomId, CancellationToken cancellationToken);
+    Task DeleteExpiredBookingsAsync(CancellationToken cancellationToken);
 }

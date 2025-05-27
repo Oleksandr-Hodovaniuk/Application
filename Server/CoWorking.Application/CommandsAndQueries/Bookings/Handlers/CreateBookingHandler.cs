@@ -26,24 +26,16 @@ public class CreateBookingHandler : IRequestHandler<CreateBookingCommand>
         }
 
         // Triggers only if there is no available room with the given id.
-        if (!await _repository.IsRoomAvailableAsync(request.dto.RoomId, cancellationToken))
+        if (await _repository.IsOverlappingAsync(request.dto.RoomId,
+                 request.dto.StartDateTime,
+                 request.dto.EndDateTime,
+                 cancellationToken))
         {
-            if (await _repository.IsOverlappingAsync(request.dto.RoomId,
-                request.dto.StartDateTime,
-                request.dto.EndDateTime,
-                cancellationToken))
-            {
-                throw new BusinessException("Selected time is not available.");
-            }
-
-            var booking1 = _mapper.Map<Booking>(request.dto);
-
-            await _repository.CreateAsync(booking1, cancellationToken);
-            return;
+            throw new BusinessException("Selected time is not available.");
         }
 
-        var booking2 = _mapper.Map<Booking>(request.dto);
+        var booking = _mapper.Map<Booking>(request.dto);
 
-        await _repository.CreateAsync(booking2, cancellationToken);
+        await _repository.CreateAsync(booking, cancellationToken);
     }
 }
