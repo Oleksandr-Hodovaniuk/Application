@@ -31,7 +31,7 @@ public class CreateBookingHandler : IRequestHandler<CreateBookingCommand>
                  request.dto.EndDateTime,
                  cancellationToken))
         {
-            throw new BusinessException("Selected time is not available.");
+            throw new BusinessException("Unfortunately, there are no available rooms at this time.");
         }
 
         var booking = _mapper.Map<Booking>(request.dto);

@@ -42,14 +42,14 @@ public class PatchBookingHandler : IRequestHandler<PatchBookingCommand>
             // Triggers only if the given booking time overlaps.
             if (await _repository.IsOverlappingAsync(newRoomId, newStart, newEnd, cancellationToken))
             {
-                throw new BusinessException("Selected time is not available.");
+                throw new BusinessException("Unfortunately, there are no available rooms at this time.");
             }
         }
         else
         {
             if (await _repository.IsOverlappingAsync(newRoomId, booking.Id, newStart, newEnd, cancellationToken))
             {
-                throw new BusinessException("Selected time is not available.");
+                throw new BusinessException("Unfortunately, there are no available rooms at this time.");
             }
         }
 

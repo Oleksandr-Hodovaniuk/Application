@@ -24,6 +24,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 
+    // Data seeding.
     using (var scope = app.Services.CreateScope())
     {
         CancellationToken token = app.Lifetime.ApplicationStopping;
