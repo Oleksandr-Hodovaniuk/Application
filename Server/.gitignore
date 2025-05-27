@@ -6,9 +6,6 @@
 #Migrations folder
 Migrations/
 
-#Request tests file
-StudentRegistrationSystem.API.http
-
 # User-specific files
 *.rsuser
 *.suo
