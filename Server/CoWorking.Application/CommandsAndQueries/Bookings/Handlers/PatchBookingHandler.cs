@@ -30,16 +30,13 @@ public class PatchBookingHandler : IRequestHandler<PatchBookingCommand>
         var newStart = request.dto.StartDateTime ?? booking.StartDateTime;
         var newEnd = request.dto.EndDateTime ?? booking.EndDateTime;
 
-        // Triggers only if the new room is different from the current one.
         if (booking.RoomId != newRoomId)
         {
-            // Triggers only if the room with the given id doesn't exist.
             if (!await _repository.RoomExistsByIdAsync(newRoomId, cancellationToken))
             {
                 throw new NotFoundException("Room with given id doesn't exist.");
             }
 
-            // Triggers only if the given booking time overlaps.
             if (await _repository.IsOverlappingAsync(newRoomId, newStart, newEnd, cancellationToken))
             {
                 throw new BusinessException("Unfortunately, there are no available rooms at this time.");

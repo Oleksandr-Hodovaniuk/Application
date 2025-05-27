@@ -19,13 +19,11 @@ public class CreateBookingHandler : IRequestHandler<CreateBookingCommand>
 
     public async Task Handle(CreateBookingCommand request, CancellationToken cancellationToken)
     {
-        // Triggers only if the room with the given id doesn't exist.
         if (!await _repository.RoomExistsByIdAsync(request.dto.RoomId, cancellationToken))
         {
             throw new NotFoundException("Room with given id doesn't exist.");
         }
 
-        // Triggers only if there is no available room with the given id.
         if (await _repository.IsOverlappingAsync(request.dto.RoomId,
                  request.dto.StartDateTime,
                  request.dto.EndDateTime,
