@@ -23,31 +23,26 @@ public class PatchBookingHandler : IRequestHandler<PatchBookingCommand>
         
         if (booking == null)
         {
-            throw new NotFoundException($"Booking with given id doesn't exist.");
+            throw new NotFoundException("Booking with given id doesn't exist.");
         }
 
         var newRoomId = request.dto.SelectedRoomId ?? booking.RoomId;
+        var newEmail = request.dto.Email ?? booking.Email;
         var newStart = request.dto.StartDateTime ?? booking.StartDateTime;
         var newEnd = request.dto.EndDateTime ?? booking.EndDateTime;
 
-        if (booking.RoomId != newRoomId)
+        if (await _repository.IsBookingOverlappingAsync(newEmail, booking.Id, newStart, newEnd, cancellationToken))
         {
-            if (!await _repository.RoomExistsByIdAsync(newRoomId, cancellationToken))
-            {
-                throw new NotFoundException("Room with given id doesn't exist.");
-            }
-
-            if (await _repository.IsBookingOverlappingAsync(newRoomId, booking.Id, newStart, newEnd, cancellationToken))
-            {
-                throw new BusinessException("Unfortunately, there are no available rooms at this time.");
-            }
+            throw new BusinessException($"{newEmail} already have a booking that overlaps with this time.");
         }
-        else
+
+        if (!await _repository.RoomAvailableAsync(newRoomId,
+            booking.Id,
+            newStart,
+            newEnd,
+            cancellationToken))
         {
-            if (await _repository.IsBookingOverlappingAsync(newRoomId, booking.Id, newStart, newEnd, cancellationToken))
-            {
-                throw new BusinessException("Unfortunately, there are no available rooms at this time.");
-            }
+            throw new BusinessException("Unfortunately, there are no available rooms at this time.");
         }
 
         _mapper.Map(request.dto, booking);
