@@ -9,7 +9,8 @@ public class RoomProfile : Profile
     public RoomProfile()
     {
         CreateMap<Room, RoomDTO>()
-            .ForMember(dest => dest.Bookings, opt => opt.MapFrom(src => src.Bookings));
+            .ForMember(dest => dest.Bookings, opt =>
+                opt.MapFrom(src => src.Bookings));
 
         CreateMap<Room, RoomCharacteristicsDTO>();
     }
