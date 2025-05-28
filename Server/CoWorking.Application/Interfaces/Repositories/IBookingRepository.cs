@@ -1,4 +1,6 @@
-﻿using CoWorking.Core.Entities;
+﻿using CoWorking.Application.DTOs.Booking;
+using CoWorking.Application.DTOs.Room;
+using CoWorking.Core.Entities;
 using System.Threading;
 
 namespace CoWorking.Application.Interfaces.Repositories;
@@ -28,7 +30,7 @@ public interface IBookingRepository : IGenericRepository<Booking>
     /// <summary>
     /// Determines whether a room is available for booking within a specified time range (for create).
     /// </summary>
-    Task<bool> RoomAvailableAsync(int roomId, DateTime start, DateTime end, CancellationToken cancellationToken);
+    Task<bool> RoomAvailableAsync(RoomAvailableDTO dto, CancellationToken cancellationToken);
     /// <summary>
     /// Determines whether a room is available for booking within a specified time range,
     /// excluding the specified existing booking (for patch).
@@ -37,7 +39,7 @@ public interface IBookingRepository : IGenericRepository<Booking>
     /// <summary>
     /// Determines whether any booking for the specified email overlaps with the given time range (for craete).
     /// </summary>
-    Task<bool> IsBookingOverlappingAsync(string email, DateTime start, DateTime end, CancellationToken cancellationToken);
+    Task<bool> IsBookingOverlappingAsync(BookingOverlappingDTO dto, CancellationToken cancellationToken);
     /// <summary>
     /// Determines whether any booking for the specified email, excluding the given booking ID,
     /// overlaps with the given time range (for patch).

@@ -1,4 +1,6 @@
-﻿using CoWorking.Application.Interfaces.Repositories;
+﻿using CoWorking.Application.DTOs.Booking;
+using CoWorking.Application.DTOs.Room;
+using CoWorking.Application.Interfaces.Repositories;
 using CoWorking.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
@@ -60,10 +62,10 @@ internal class BookingRepository(CoWorkingDbContext dbContext) : IBookingReposit
         return await dbContext.Rooms.AnyAsync(r => r.Id == roomId, cancellationToken);
     }
 
-    public async Task<bool> RoomAvailableAsync(int roomId, DateTime start, DateTime end, CancellationToken cancellationToken)
+    public async Task<bool> RoomAvailableAsync(RoomAvailableDTO dto, CancellationToken cancellationToken)
     {
         var quantity = await dbContext.Rooms
-            .Where(r => r.Id == roomId)
+            .Where(r => r.Id == dto.RoomId)
             .Select(r => r.Quantity)
             .FirstOrDefaultAsync(cancellationToken);
 
@@ -73,9 +75,9 @@ internal class BookingRepository(CoWorkingDbContext dbContext) : IBookingReposit
         }
 
         var overlappingCount = await dbContext.Bookings
-            .Where(b => b.RoomId == roomId &&
-                b.StartDateTime < end &&
-                b.EndDateTime > start)
+            .Where(b => b.RoomId == dto.RoomId &&
+                b.StartDateTime < dto.EndDateTime &&
+                b.EndDateTime > dto.StartDateTime)
             .CountAsync(cancellationToken);
 
         return quantity > overlappingCount;
@@ -101,12 +103,12 @@ internal class BookingRepository(CoWorkingDbContext dbContext) : IBookingReposit
         return quantity > overlappingCount;
     }
 
-    public async Task<bool> IsBookingOverlappingAsync(string email, DateTime start, DateTime end, CancellationToken cancellationToken)
+    public async Task<bool> IsBookingOverlappingAsync(BookingOverlappingDTO dto, CancellationToken cancellationToken)
     {
         return await dbContext.Bookings
-                .AnyAsync(b => b.Email == email &&
-                b.StartDateTime < end &&
-                b.EndDateTime > start,
+                .AnyAsync(b => b.Email == dto.Email &&
+                b.StartDateTime < dto.EndDateTime &&
+                b.EndDateTime > dto.StartDateTime,
                 cancellationToken);
     }
 
