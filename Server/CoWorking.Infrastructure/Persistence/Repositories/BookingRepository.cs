@@ -62,7 +62,7 @@ internal class BookingRepository(CoWorkingDbContext dbContext) : IBookingReposit
         return await dbContext.Rooms.AnyAsync(r => r.Id == roomId, cancellationToken);
     }
 
-    public async Task<bool> RoomAvailableAsync(RoomAvailableDTO dto, CancellationToken cancellationToken)
+    public async Task<bool> RoomAvailableAsync(RoomAvailableCreateDTO dto, CancellationToken cancellationToken)
     {
         var quantity = await dbContext.Rooms
             .Where(r => r.Id == dto.RoomId)
@@ -83,10 +83,10 @@ internal class BookingRepository(CoWorkingDbContext dbContext) : IBookingReposit
         return quantity > overlappingCount;
     }
 
-    public async Task<bool> RoomAvailableAsync(int roomId, int bookingId, DateTime start, DateTime end, CancellationToken cancellationToken)
+    public async Task<bool> RoomAvailableAsync(RoomAvailabePatchDTO dto, CancellationToken cancellationToken)
     {
         var quantity = await dbContext.Rooms
-            .Where(r => r.Id == roomId)
+            .Where(r => r.Id == dto.RoomId)
             .Select(r => r.Quantity)
             .FirstOrDefaultAsync(cancellationToken);
 
@@ -94,16 +94,16 @@ internal class BookingRepository(CoWorkingDbContext dbContext) : IBookingReposit
             return false;
 
         var overlappingCount = await dbContext.Bookings
-            .Where(b => b.RoomId == roomId &&
-                        b.Id != bookingId &&
-                        b.StartDateTime < end &&
-                        b.EndDateTime > start)
+            .Where(b => b.RoomId == dto.RoomId &&
+                        b.Id != dto.BookingId &&
+                        b.StartDateTime < dto.EndDateTime &&
+                        b.EndDateTime > dto.StartDateTime)
             .CountAsync(cancellationToken);
 
         return quantity > overlappingCount;
     }
 
-    public async Task<bool> IsBookingOverlappingAsync(BookingOverlappingDTO dto, CancellationToken cancellationToken)
+    public async Task<bool> IsBookingOverlappingAsync(BookingOverlappingCreateDTO dto, CancellationToken cancellationToken)
     {
         return await dbContext.Bookings
                 .AnyAsync(b => b.Email == dto.Email &&
@@ -112,13 +112,13 @@ internal class BookingRepository(CoWorkingDbContext dbContext) : IBookingReposit
                 cancellationToken);
     }
 
-    public async Task<bool> IsBookingOverlappingAsync(string email, int bookingId, DateTime start, DateTime end, CancellationToken cancellationToken)
+    public async Task<bool> IsBookingOverlappingAsync(BookingOverlappingPatchDTO dto, CancellationToken cancellationToken)
     {
         return await dbContext.Bookings
-                .AnyAsync(b => b.Id != bookingId &&
-                b.Email == email &&
-                b.StartDateTime < end &&
-                b.EndDateTime > start,
+                .AnyAsync(b => b.Id != dto.BookingId &&
+                b.Email == dto.Email &&
+                b.StartDateTime < dto.EndDateTime &&
+                b.EndDateTime > dto.StartDateTime,
                 cancellationToken);
     }
 

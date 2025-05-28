@@ -30,21 +30,21 @@ public interface IBookingRepository : IGenericRepository<Booking>
     /// <summary>
     /// Determines whether a room is available for booking within a specified time range (for create).
     /// </summary>
-    Task<bool> RoomAvailableAsync(RoomAvailableDTO dto, CancellationToken cancellationToken);
+    Task<bool> RoomAvailableAsync(RoomAvailableCreateDTO dto, CancellationToken cancellationToken);
     /// <summary>
     /// Determines whether a room is available for booking within a specified time range,
     /// excluding the specified existing booking (for patch).
     /// </summary>
-    Task<bool> RoomAvailableAsync(int roomId, int bookingId, DateTime start, DateTime end, CancellationToken cancellationToken);
+    Task<bool> RoomAvailableAsync(RoomAvailabePatchDTO dto, CancellationToken cancellationToken);
     /// <summary>
     /// Determines whether any booking for the specified email overlaps with the given time range (for craete).
     /// </summary>
-    Task<bool> IsBookingOverlappingAsync(BookingOverlappingDTO dto, CancellationToken cancellationToken);
+    Task<bool> IsBookingOverlappingAsync(BookingOverlappingCreateDTO dto, CancellationToken cancellationToken);
     /// <summary>
     /// Determines whether any booking for the specified email, excluding the given booking ID,
     /// overlaps with the given time range (for patch).
     /// </summary>
-    Task<bool> IsBookingOverlappingAsync(string email, int bookingId, DateTime start, DateTime end, CancellationToken cancellationToken);
+    Task<bool> IsBookingOverlappingAsync(BookingOverlappingPatchDTO dto, CancellationToken cancellationToken);
     /// <summary>
     /// Deletes all expired bookings.
     /// </summary>

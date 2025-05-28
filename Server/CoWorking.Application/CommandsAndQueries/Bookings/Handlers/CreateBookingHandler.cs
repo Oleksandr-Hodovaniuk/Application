@@ -25,7 +25,7 @@ public class CreateBookingHandler : IRequestHandler<CreateBookingCommand>
             ? true
             : throw new NotFoundException("Room with given id doesn't exist.");
 
-        var overlapDto = new BookingOverlappingDTO
+        var overlapDto = new BookingOverlappingCreateDTO
         {
             Email = request.dto.Email,
             StartDateTime = request.dto.StartDateTime,
@@ -36,7 +36,7 @@ public class CreateBookingHandler : IRequestHandler<CreateBookingCommand>
             ? throw new BusinessException($"{request.dto.Email} already have a booking that overlaps with this time.")
             : false;
 
-        var availableDto = new RoomAvailableDTO
+        var availableDto = new RoomAvailableCreateDTO
         {
             RoomId = request.dto.RoomId,
             StartDateTime = request.dto.StartDateTime,
