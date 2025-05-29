@@ -24,12 +24,12 @@ public class CreateBookingDTOValidator : AbstractValidator<CreateBookingDTO>
 
         RuleFor(x => x.StartDateTime)
             .NotEmpty().WithMessage("Start date and time is required.")
-            .Must(date => date.Kind != DateTimeKind.Utc).WithMessage("UTC time is not allowed.")
+            .Must(date => date.Kind == DateTimeKind.Local).WithMessage("Time must be in local time format.")
             .GreaterThan(DateTime.Now).WithMessage("Start date and time must be greater than current date and time.");
 
         RuleFor(x => x.EndDateTime)
             .NotEmpty().WithMessage("End date and time is required.")
-            .Must(date => date.Kind != DateTimeKind.Utc).WithMessage("UTC time is not allowed.")
+            .Must(date => date.Kind == DateTimeKind.Local).WithMessage("Time must be in local time format.")
             .GreaterThan(x => x.StartDateTime).WithMessage("End date and time must be greater than start date and time.");
 
         RuleFor(x => x)
