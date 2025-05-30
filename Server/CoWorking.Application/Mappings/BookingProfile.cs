@@ -11,6 +11,10 @@ public class BookingProfile : Profile
         CreateMap<CreateBookingDTO, Booking>();
 
         CreateMap<Booking, BookingDTO>()
+			.ForMember(dest => dest.WorkspacePicture, opt =>
+				opt.MapFrom(src => src.Room.Workspace.Pictures.FirstOrDefault() != null
+				? src.Room.Workspace.Pictures.FirstOrDefault()!.Name
+				: null))
 			.ForMember(dest => dest.WorkspaceName,opt => 
 				opt.MapFrom(src => src.Room.Workspace.Name))
 			.ForMember(dest => dest.RoomCapacity, opt =>

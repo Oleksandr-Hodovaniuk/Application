@@ -105,33 +105,33 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
     {
         return new List<Picture>
         {
-            new Picture { Url = "qew" },
-            new Picture { Url = "asdwq" },
-            new Picture { Url = "hytrh" },
-            new Picture { Url = "zxcwe" },
-            new Picture { Url = "wpkgl" }
+            new Picture { Name = "qew" },
+            new Picture { Name = "asdwq" },
+            new Picture { Name = "hytrh" },
+            new Picture { Name = "zxcwe" },
+            new Picture { Name = "wpkgl" }
         };
     }
     private List<Picture> GetPictures_2()
     {
         return new List<Picture>
         {
-            new Picture { Url = "qwef" },
-            new Picture { Url = "rtr" },
-            new Picture { Url = "rtyrt" },
-            new Picture { Url = "iuli" },
-            new Picture { Url = "qwecf" }
+            new Picture { Name = "qwef" },
+            new Picture { Name = "rtr" },
+            new Picture { Name = "rtyrt" },
+            new Picture { Name = "iuli" },
+            new Picture { Name = "qwecf" }
         };
     }
     private List<Picture> GetPictures_3()
     {
         return new List<Picture>
         {
-            new Picture { Url = "oui" },
-            new Picture { Url = "tujhnv" },
-            new Picture { Url = "qweygh" },
-            new Picture { Url = "lmh" },
-            new Picture { Url = "hotk" }
+            new Picture { Name = "oui" },
+            new Picture { Name = "tujhnv" },
+            new Picture { Name = "qweygh" },
+            new Picture { Name = "lmh" },
+            new Picture { Name = "hotk" }
         };
     }
     private List<Room> GetRooms_1()
