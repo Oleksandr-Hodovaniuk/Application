@@ -41,6 +41,9 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
+// Enable CORS.
+app.UseCors("AllowAngularApp");
+
 app.UseAuthorization();
 
 app.MapControllers();
