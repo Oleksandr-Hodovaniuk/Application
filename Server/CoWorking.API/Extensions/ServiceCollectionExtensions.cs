@@ -16,5 +16,17 @@ public static class ServiceCollectionExtensions
 
         // Add background service to delete expired bookings.
         services.AddHostedService<BookingDeletionService>();
+
+        // Configure CORS to allow requests from the Angular frontend
+        services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAngularApp",
+                policy =>
+                {
+                    policy.WithOrigins("http://localhost:4200")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                });
+        });
     }
 }
