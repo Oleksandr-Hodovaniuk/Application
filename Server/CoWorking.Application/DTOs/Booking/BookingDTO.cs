@@ -10,5 +10,4 @@ public class BookingDTO
     public int RoomCapacity { get; set; } = default!;
     public DateTime StartDateTime { get; set; }
     public DateTime EndDateTime { get; set; }
-    public TimeSpan Duration => EndDateTime - StartDateTime;
 }
