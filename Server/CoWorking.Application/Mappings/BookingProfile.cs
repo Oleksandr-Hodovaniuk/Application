@@ -10,17 +10,15 @@ public class BookingProfile : Profile
 	{
         CreateMap<CreateBookingDTO, Booking>();
 
-        CreateMap<Booking, BookingDTO>()
+		CreateMap<Booking, BookingDTO>()
 			.ForMember(dest => dest.WorkspacePicture, opt =>
 				opt.MapFrom(src => src.Room.Workspace.Pictures.FirstOrDefault() != null
 				? src.Room.Workspace.Pictures.FirstOrDefault()!.Name
 				: null))
-			.ForMember(dest => dest.WorkspaceName,opt => 
+			.ForMember(dest => dest.WorkspaceName, opt =>
 				opt.MapFrom(src => src.Room.Workspace.Name))
 			.ForMember(dest => dest.RoomCapacity, opt =>
-				opt.MapFrom(src => src.Room.Capacity))
-			.ForMember(dest => dest.Duration, opt =>
-				opt.MapFrom(src => src.EndDateTime - src.StartDateTime));
+				opt.MapFrom(src => src.Room.Capacity));
 		
 		CreateMap<Booking, PatchBookingDTO>()
 			.ForMember(dest => dest.SelectedWorkspaceId, opt =>
