@@ -1,28 +1,28 @@
-<div class="flex flex-wrap justify-center -mx-2 mt-5">
-  <!-- Заголовок -->
-  <div class="w-full px-6 mb-6">
-    <h1 class="font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl w-full px-2 flex justify-center">
+<div class="flex flex-wrap justify-center -mx-2 mt-2">
+  <!-- Title -->
+  <div class="w-full px-6 mb-2">
+    <h1 class="font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl w-full px-2 flex justify-center ">
       Available workspaces
     </h1>
   </div>
 
-  <!-- Картки -->
+  <!-- Workspaces -->
   <div
     *ngFor="let space of workspaces; let i = index"
     class="w-full px-2 mb-10 flex justify-center"
     >
-    <div class="flex flex-col sm:flex-row w-full max-w-[1400px] bg-white rounded-md shadow-xl/30 overflow-hidden">
+    <div class="flex flex-col sm:flex-row w-full max-w-[1300px] bg-white rounded-md shadow-xl/30 overflow-hidden">
       
-      <!-- Ліва колонка: зображення -->
+      <!-- Left column: picture -->
       <div class="flex flex-col items-center sm:w-[340px] ml-2">
-        <!-- Головне зображення -->
+        <!-- Main picture -->
         <img
           [src]="'https://localhost:7102/Pictures/' + space.pictures[selectedPictureIndices[i]]"
           alt="Зображення простору"
           class="w-full h-auto max-w-[340px] max-h-[227px] object-cover sm:h-[227px] sm:w-[340px] rounded-xl mt-2"
         />
 
-        <!-- МАЛІ КАРТИНКИ -->
+        <!-- Small pictures -->
         <div class="flex gap-2 mt-1 mb-2">
           <img
             *ngFor="let pic of space.pictures.slice(0, 4); let picIndex = index"
@@ -36,23 +36,23 @@
       </div>
       
 
-      <!-- Контейнер тексту + кнопка -->
+      <!-- Workspace name + book now button -->
       <div class="flex justify-between gap-1 flex-wrap p-4 sm:p-6">
         
-        <!-- Ліва колонка: Назва, опис, характеристики -->
+        <!-- Left column: name, description, charactericits -->
         <div class="flex-1 min-w-[200px]">
-          <!-- Назва -->
+          <!-- Name -->
           <h2 class="font-semibold text-base sm:text-lg md:text-xl lg:text-2xl mb-2">
             {{ space.name }}
           </h2>
 
-          <!-- Опис -->
+          <!-- Description -->
           <p class="text-sm sm:text-base md:text-lg text-gray-600 mb-2">
             {{ space.description }}
           </p>
         </div>   
 
-        <!-- Права колонка: кнопка -->
+        <!-- Right column: book now button -->
         <div class="flex items-start ">
           <button
             class="bg-indigo-600 text-white px-4 py-2 text-sm sm:text-base rounded-xl hover:bg-blue-500 transition cursor-pointer whitespace-nowrap"
@@ -61,7 +61,7 @@
           </button>
         </div>
         
-        <!-- Нижній блок -->
+        <!-- Lower block -->
         <div class="flex flex-col gap-y-6">
           <div class="flex flex-row flex-wrap items-start gap-x-12 gap-y-6 sm:gap-x-20 md:gap-x-24">
             
@@ -78,8 +78,9 @@
               </div>
             </div>
 
-            <!-- Динамічний блок: або Availability (OpenSpace), або Capacity (інше) -->
+            <!-- Dynamic block: Availability (OpenSpace), or Capacity (other) -->
             <ng-container *ngIf="space.type === 'OpenSpace'; else capacityBlock">
+
               <!-- Availability for OpenSpace -->
               <div class="flex flex-col items-start">
                 <span class="text-black mb-2 font-medium">Availability</span>
@@ -98,7 +99,7 @@
               </div>
             </ng-container>
 
-            <!-- Capacity для не-OpenSpace -->
+            <!-- Capacity for not-OpenSpace -->
             <ng-template #capacityBlock>
               <div class="flex flex-col items-start">
                 <span class="text-black mb-2 font-medium">Capacity options</span>
@@ -120,7 +121,7 @@
 
           </div>
 
-          <!-- Availability для не-OpenSpace — окремо нижче -->
+          <!-- Availability for not-OpenSpace -->
           <div *ngIf="space.type !== 'OpenSpace'" class="flex flex-col items-start">
             <span class="text-black mb-2 font-medium">Availability</span>
             <div class="flex flex-col gap-2">
@@ -142,7 +143,7 @@
                 This workspace is already booked by
                 <strong>{{ booking.email }}</strong> 
                 <strong>
-                  <!-- Умова: якщо тип простору OpenSpace - "1 desk", інакше "X people" -->
+                  <!-- If: workspace type = OpenSpace - "1 desk", otherway " room — for ... people" -->
                   {{ space.type === 'OpenSpace' ? ' — 1 desk' : ' room — for ' + room.capacity + ' people' }}
                 </strong> 
                 from 
