@@ -25,6 +25,8 @@
     </a>
     <a
       routerLink="/my-bookings"
+      routerLinkActive="underline !text-blue-600"
+      [routerLinkActiveOptions]="{ exact: true }"
       class="text-xl text-gray-700 font-bold hover:underline hover:text-blue-600 transition-colors cursor-pointer"
     >
       My bookings
