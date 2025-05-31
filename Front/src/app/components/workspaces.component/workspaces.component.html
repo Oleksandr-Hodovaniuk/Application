@@ -1,12 +1,9 @@
-<div class="flex flex-wrap justify-center -mx-2 mt-2">
-  <!-- Title -->
-  <div class="w-full px-6 mb-2">
-    <h1 class="font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl w-full px-2 flex justify-center ">
-      Available workspaces
-    </h1>
-  </div>
 
-  <!-- Workspaces -->
+ <!-- Title -->
+<h2 class="text-2xl sm:text-3xl font-semibold text-gray-800 text-center mb-6">Available workspaces</h2>
+
+<!-- Workspaces -->
+<div class="flex flex-wrap justify-center -mx-2 mt-2">
   <div
     *ngFor="let space of workspaces; let i = index"
     class="w-full px-2 mb-10 flex justify-center"
