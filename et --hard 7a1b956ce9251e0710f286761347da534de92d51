@@ -1,0 +1,598 @@
+[33mcommit 628b5d02150192e9a0d1f49002f5e11287464b36[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature/header[m[33m, [m[1;31morigin/feature/header[m[33m)[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Sat May 31 22:07:07 2025 +0300
+
+    Create Header
+
+[33mcommit 258c5f6d2cbe19294a7eccb207c157e74dbb044a[m[33m ([m[1;31morigin/dev[m[33m)[m
+Merge: 9f62d46 7a1b956
+Author: Oleksandr Hodovaniuk <52534507+Oleksandr-Hodovaniuk@users.noreply.github.com>
+Date:   Sat May 31 21:04:37 2025 +0300
+
+    Refactor date and time format #17 from Oleksandr-Hodovaniuk/feature/workspaces
+    
+    Refactor date and time format
+
+[33mcommit 7a1b956ce9251e0710f286761347da534de92d51[m[33m ([m[1;31morigin/feature/workspaces[m[33m, [m[1;32mfeature/workspaces[m[33m)[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Sat May 31 21:04:02 2025 +0300
+
+    Refactor date and time format
+
+[33mcommit 9f62d46000d3d7a4b700e8bf4f5f4cd247d79eaf[m
+Merge: 9b4f39b 9750290
+Author: Oleksandr Hodovaniuk <52534507+Oleksandr-Hodovaniuk@users.noreply.github.com>
+Date:   Sat May 31 21:00:29 2025 +0300
+
+    Change text #16 from Oleksandr-Hodovaniuk/feature/workspaces
+    
+    Change text
+
+[33mcommit 975029057268591231bbdbe86399d4d805e2c75e[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Sat May 31 20:59:57 2025 +0300
+
+    Change text
+
+[33mcommit 9b4f39b692ad5974241abe21d56fd5f59f75fa2f[m
+Merge: 72a52e9 932471c
+Author: Oleksandr Hodovaniuk <52534507+Oleksandr-Hodovaniuk@users.noreply.github.com>
+Date:   Sat May 31 20:57:48 2025 +0300
+
+    Refactor workspaces #15 from Oleksandr-Hodovaniuk/feature/workspaces
+    
+    Refactor workspaces
+
+[33mcommit 932471cd7a2dc2068fbb4a22af7460b0cf2ceb80[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Sat May 31 20:55:40 2025 +0300
+
+    Refactor workspaces bookings
+
+[33mcommit 15f3686517011ba03947d5e0c265099c6456e3d0[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Sat May 31 20:43:49 2025 +0300
+
+    Refactor title
+
+[33mcommit 72a52e948b25603169c04f6d81bd65936120260b[m
+Merge: ac17314 654de01
+Author: Oleksandr Hodovaniuk <52534507+Oleksandr-Hodovaniuk@users.noreply.github.com>
+Date:   Sat May 31 20:40:36 2025 +0300
+
+    Configure routes #14 from Oleksandr-Hodovaniuk/feature/workspaces
+    
+    Configure routes
+
+[33mcommit 654de014f5983708a1ab4d75ca3a6a51e0af5110[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Sat May 31 20:40:07 2025 +0300
+
+    Configure routes
+
+[33mcommit ac1731496c38e38ddeecddf08daf3a15cb093ac2[m
+Merge: 632814a 26cb38a
+Author: Oleksandr Hodovaniuk <52534507+Oleksandr-Hodovaniuk@users.noreply.github.com>
+Date:   Sat May 31 20:33:48 2025 +0300
+
+    Create Wokspaces html prompt #13 from Oleksandr-Hodovaniuk/feature/workspaces
+    
+    Create Wokspaces html prompt
+
+[33mcommit 26cb38a38ca86b7e9775725f95734ec9783e1ea8[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Sat May 31 20:33:15 2025 +0300
+
+    Create Wokspaces html prompt
+
+[33mcommit 632814a0f0ab53eabcb5fc7a9374096a11b349ee[m
+Merge: 196f243 4dea41b
+Author: Oleksandr Hodovaniuk <52534507+Oleksandr-Hodovaniuk@users.noreply.github.com>
+Date:   Sat May 31 11:17:42 2025 +0300
+
+    Refactor DefaultSeeder #12 from Oleksandr-Hodovaniuk/feature/workspaces
+    
+    Refactor DefaultSeeder
+
+[33mcommit 4dea41b5580f5a78acdf2331d15a0fbf3c26ea56[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Sat May 31 11:17:17 2025 +0300
+
+    Refactor DefaultSeeder
+
+[33mcommit 196f24382253ad4c735630a3c7e5a15588f6dc14[m
+Merge: 3da919f 655e2d7
+Author: Oleksandr Hodovaniuk <52534507+Oleksandr-Hodovaniuk@users.noreply.github.com>
+Date:   Fri May 30 22:33:06 2025 +0300
+
+    Configure CORS #11 from Oleksandr-Hodovaniuk/feature/workspaces
+    
+    Configure CORS
+
+[33mcommit 655e2d796c130b084a25abc433757acce2b060d6[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Fri May 30 22:32:20 2025 +0300
+
+    Configure CORS
+
+[33mcommit 3da919f2c90141baebeb28ae580a4c3f85213067[m
+Merge: d5ed0a6 4e51b69
+Author: Oleksandr Hodovaniuk <52534507+Oleksandr-Hodovaniuk@users.noreply.github.com>
+Date:   Fri May 30 22:25:54 2025 +0300
+
+    Create models, worksapces component and service #10 from Oleksandr-Hodovaniuk/feature/workspaces
+    
+    Create models, worksapces component and service
+
+[33mcommit 4e51b69089ea87ec070f63eaf7abaaac0195023f[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Fri May 30 22:24:43 2025 +0300
+
+    Refactir BookingProfile
+
+[33mcommit d5ed0a663ed21a9e96641e405203d02b58de8c7c[m[33m ([m[1;32mdev[m[33m)[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Fri May 30 20:36:36 2025 +0300
+
+    Create Angular project
+
+[33mcommit 560576945108f095d7c32020d37d2a8da8093565[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Fri May 30 19:15:45 2025 +0300
+
+    Refactor BookingDTO
+
+[33mcommit 117b3dd22b9fca91f2f77a73e6ef95720cd7743a[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Fri May 30 12:55:51 2025 +0300
+
+    Add pictures
+
+[33mcommit 55ce7baa819c5f2314a584280971f125a4bea77c[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Fri May 30 12:13:09 2025 +0300
+
+    Add UseStaticFiles()
+
+[33mcommit 6942eef6679e2890dd7ac4eb6c822728e59433cb[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Fri May 30 12:08:58 2025 +0300
+
+    refactor: room Dto, room mapper
+
+[33mcommit 732891ca6a879502c8e6f468f1d178a804528240[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Fri May 30 12:02:49 2025 +0300
+
+    Add icons
+
+[33mcommit be09e32cf49a25ea8268e30bd41aa14b098b4e5e[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Fri May 30 11:46:07 2025 +0300
+
+    refactor: icon entity
+
+[33mcommit 1223b2eb88abd53440028775a61ffd9292814dbd[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Fri May 30 11:24:41 2025 +0300
+
+    refactor: picture entity, DTOs, and AutoMapper mappings
+
+[33mcommit 0344b9487ade06666aa2c16f63c6e0d4a78b96ff[m
+Merge: ebe1d79 9d1d115
+Author: Oleksandr Hodovaniuk <52534507+Oleksandr-Hodovaniuk@users.noreply.github.com>
+Date:   Thu May 29 23:48:13 2025 +0300
+
+    Create booking button #9 from Oleksandr-Hodovaniuk/feature/booking-button
+    
+    Create booking button
+
+[33mcommit 9d1d115f5e130120ac845626e08496359c5c045f[m[33m ([m[1;31morigin/feature/booking-button[m[33m)[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Thu May 29 23:45:51 2025 +0300
+
+    Create booking button
+
+[33mcommit ebe1d791a70820456061e2179b84c020cfe33a98[m
+Merge: 0719678 3529b82
+Author: Oleksandr Hodovaniuk <52534507+Oleksandr-Hodovaniuk@users.noreply.github.com>
+Date:   Thu May 29 22:16:41 2025 +0300
+
+    Install tailwind and create header #8 from Oleksandr-Hodovaniuk/feature/header
+    
+    Install tailwind and create header
+
+[33mcommit 3529b82c37f4fb43626fbddf788cb706c8e2cd9d[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Thu May 29 22:15:24 2025 +0300
+
+    Install tailwind and create header
+
+[33mcommit 07196783fdc2b55ed5bcef22b02ef7708e787a31[m
+Merge: 1cc8cbd c4f0662
+Author: Oleksandr Hodovaniuk <52534507+Oleksandr-Hodovaniuk@users.noreply.github.com>
+Date:   Thu May 29 15:15:39 2025 +0300
+
+    Merge pull request #7 from Oleksandr-Hodovaniuk/feature/angular
+    
+    Create default Angular project
+
+[33mcommit c4f0662e7cb8ba2e36fc204af0575fee26caf677[m[33m ([m[1;31morigin/feature/angular[m[33m)[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Thu May 29 15:12:19 2025 +0300
+
+    Create default Angular project
+
+[33mcommit 1cc8cbdd5b967b6bf782af1dbd81c0dd3b935903[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Thu May 29 14:10:21 2025 +0300
+
+    Change rule for start and end date validation
+
+[33mcommit ed989912cf6482f93336f8e55eb2e2b72fe94797[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Thu May 29 14:09:18 2025 +0300
+
+    Change rule for start and end date validation
+
+[33mcommit 17396845d5f5ff1f34b544c09e908515c72f03ec[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Wed May 28 22:16:37 2025 +0300
+
+    Code optimization
+
+[33mcommit 8851827273ad6abb79228770a5b7ba07cb394724[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Wed May 28 22:01:47 2025 +0300
+
+    Code optimization
+
+[33mcommit e1e302773e27bfcbd2e10d32432309bab6dc406a[m
+Merge: 0229a8c 462eb84
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Wed May 28 18:06:05 2025 +0300
+
+    Merge branch 'dev' of https://github.com/Oleksandr-Hodovaniuk/Application into dev
+
+[33mcommit 0229a8c7f54fd3bdb1242ff3a7cb2f55ecffd8a3[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Wed May 28 18:05:40 2025 +0300
+
+    Code optimization
+
+[33mcommit 462eb841d8d760cdfc5a2f18399836b7d0d4ad75[m
+Merge: 45ff966 7ceca35
+Author: Oleksandr Hodovaniuk <52534507+Oleksandr-Hodovaniuk@users.noreply.github.com>
+Date:   Wed May 28 14:55:52 2025 +0300
+
+    Merge pull request #6 from Oleksandr-Hodovaniuk/master
+    
+    Master
+
+[33mcommit 7ceca35702fdef2e55fa360b3128705febd957e0[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m
+Merge: 72b2d7e 45ff966
+Author: Oleksandr Hodovaniuk <52534507+Oleksandr-Hodovaniuk@users.noreply.github.com>
+Date:   Wed May 28 14:53:43 2025 +0300
+
+    Merge pull request #5 from Oleksandr-Hodovaniuk/dev
+    
+    Update
+
+[33mcommit 45ff96686fda370d7def8b1e0d791f46a7d2d31d[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Wed May 28 14:53:13 2025 +0300
+
+    Update
+
+[33mcommit 72b2d7efc9e180308d0414dff1c69ca4af0cc42a[m
+Merge: cd5417e a1e1bf3
+Author: Oleksandr Hodovaniuk <52534507+Oleksandr-Hodovaniuk@users.noreply.github.com>
+Date:   Wed May 28 13:37:13 2025 +0300
+
+    Merge pull request #4 from Oleksandr-Hodovaniuk/dev
+    
+    Update
+
+[33mcommit a1e1bf3c4ca09836b7eb122e6819fe499edf703c[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Wed May 28 13:36:41 2025 +0300
+
+    Update
+
+[33mcommit cd5417ea636b13a1df931eb11a1ad55b39e0353a[m
+Merge: 6838b37 9eec2a3
+Author: Oleksandr Hodovaniuk <52534507+Oleksandr-Hodovaniuk@users.noreply.github.com>
+Date:   Wed May 28 13:33:16 2025 +0300
+
+    Merge pull request #3 from Oleksandr-Hodovaniuk/dev
+    
+    Merge pull request #2 from Oleksandr-Hodovaniuk/master
+
+[33mcommit 9eec2a36fb16fb95ac2aa13ee4a92b50592c9925[m
+Merge: 216457e 6838b37
+Author: Oleksandr Hodovaniuk <52534507+Oleksandr-Hodovaniuk@users.noreply.github.com>
+Date:   Wed May 28 13:32:49 2025 +0300
+
+    Merge pull request #2 from Oleksandr-Hodovaniuk/master
+    
+    Master
+
+[33mcommit 6838b370fdacf0cbdaf759f9a32b7503af469623[m
+Merge: 216457e adaf8d4
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Wed May 28 13:30:53 2025 +0300
+
+    Merge branch 'master' of https://github.com/Oleksandr-Hodovaniuk/Application
+
+[33mcommit 216457e59b20ed16f6eddb682fc4d7640b3e07a8[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Tue May 27 23:07:17 2025 +0300
+
+    Update
+
+[33mcommit 0b7adf37e4206809bd32cfa4d8f041db74c6a1f7[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Tue May 27 23:06:11 2025 +0300
+
+    Update
+
+[33mcommit 97380c16388e8871bd42d803b38f3e82a3a7effe[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Tue May 27 21:27:13 2025 +0300
+
+    Update
+
+[33mcommit a7395c42e8404fe7cb45b71da013f01bbc35d557[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Tue May 27 20:40:29 2025 +0300
+
+    Update
+
+[33mcommit adc8d9de20182cc4c95aade4ddd8860b5593be15[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Tue May 27 18:48:05 2025 +0300
+
+    Update
+
+[33mcommit 1a06c835a445cc6a61e8d5a282d195c17365a6c8[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Tue May 27 18:46:05 2025 +0300
+
+    Update
+
+[33mcommit 659da25eb6a12da4550743b59f13043bb59c0653[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Tue May 27 13:41:23 2025 +0300
+
+    Update
+
+[33mcommit f6e996247d2da62750404676bbdad63e7042baad[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Tue May 27 11:21:02 2025 +0300
+
+    Update
+
+[33mcommit 698df05eb284fe5981191642a4e98fbe9c6d6975[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Tue May 27 00:06:37 2025 +0300
+
+    Update
+
+[33mcommit c5ff9291facbb40f4b1b1efedf8e1066213e8b51[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Mon May 26 19:07:26 2025 +0300
+
+    Update
+
+[33mcommit 280c434a8dc54ceb8799aad84726bff4d17c062d[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Mon May 26 13:59:48 2025 +0300
+
+    Update
+
+[33mcommit 6b32db63140350cae2ca521464a7f09923867ff1[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Mon May 26 13:30:18 2025 +0300
+
+    Update
+
+[33mcommit f950132efdfb5cc67472380f898f40d966163003[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Mon May 26 13:29:47 2025 +0300
+
+    Update
+
+[33mcommit e843bfcca398be3bf5a0b5a56172dcde8beb8a93[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Sun May 25 23:47:21 2025 +0300
+
+    Update
+
+[33mcommit 21c24a6ee4ce29591f23a289c55c9cc536672249[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Sun May 25 20:40:25 2025 +0300
+
+    Update
+
+[33mcommit 3eb0d614e1e07b143a987d06c45eb800c19ecf64[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Sun May 25 17:00:07 2025 +0300
+
+    Create CleanupBookingService
+
+[33mcommit 8a4a84608b56862413fa3adb5901be461a4b40b1[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Sun May 25 15:42:26 2025 +0300
+
+    Update
+
+[33mcommit fa296a47319c55f11f9e732898599262db07415e[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Sun May 25 10:46:08 2025 +0300
+
+    Update
+
+[33mcommit 0c9c6e386ad7ce7f028bbff3cb453546592185cf[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Sat May 24 17:41:42 2025 +0300
+
+    Create GetRoomsByWorkspaces method
+
+[33mcommit e267fed67326a2c2dccd2dd4aeafb5571bc0fbf4[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Sat May 24 15:48:37 2025 +0300
+
+    Update
+
+[33mcommit 5bcb68669c665f84b4be87254ecdbb8bd467f91d[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Sat May 24 15:35:36 2025 +0300
+
+    Add RoomsController
+
+[33mcommit 8e79e8e9f2e040d9d1b084ac63882fd26f154fe6[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Sat May 24 15:33:03 2025 +0300
+
+    Create PatchAsync method for booking
+
+[33mcommit 98675bae476dd397bbf80a7f663c0d989af5b52c[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Sat May 24 12:55:34 2025 +0300
+
+    Create GetByIdAsync method for Booking
+
+[33mcommit 23d0d2a0c02c10f7b21e349dfe3659ea559ed0bf[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Sat May 24 11:31:47 2025 +0300
+
+    Add CreateAsync method for Booking
+
+[33mcommit 469ab2caec0c9e27dbf2f725fb9da587e170d50a[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Sat May 24 00:41:50 2025 +0300
+
+    Update
+
+[33mcommit 3de1a1f19355605a58596e0124a8565e0404af8f[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Fri May 23 22:19:41 2025 +0300
+
+    Configurations
+
+[33mcommit 2b77c6b7ad34cc6f9222f462b16e4716009fd3bf[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Fri May 23 15:29:43 2025 +0300
+
+    Create AutoMappers and Add CQRS pathern
+
+[33mcommit a206dce763acca3a592cc05f68220290e6a61ba5[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Fri May 23 11:54:55 2025 +0300
+
+    Create Delete Booking method
+
+[33mcommit daa4fa4e6ac0165ede9dd6009789a930e955dda0[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Fri May 23 11:38:57 2025 +0300
+
+    Create GettAll Bookings method
+
+[33mcommit f404e1819aa9928df69f8c2c864ae2d5a631d941[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Fri May 23 11:14:20 2025 +0300
+
+    Update
+
+[33mcommit 42f469a2f5c2da567e34dad64dbc6020b45a446e[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Thu May 22 20:53:40 2025 +0300
+
+    Create GetByIdAsync Workspace method
+
+[33mcommit 318a1853ae555ad755e9fbdc05bcfadae0220dbe[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Thu May 22 20:31:01 2025 +0300
+
+    Create GetAllAsync Workspaces method
+
+[33mcommit 8cf3693c6af7ce812d96789d7d073ffc27891c4e[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Thu May 22 16:44:09 2025 +0300
+
+    Update
+
+[33mcommit 95ae40b03f0c56d02b7704d4fca89a33d460b2d3[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Thu May 22 15:56:58 2025 +0300
+
+    Add Postgres connection
+
+[33mcommit 6eb0883ef41f58498f51e0bc36ee3132cef60aeb[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Thu May 22 00:48:19 2025 +0300
+
+    Create data seeder
+
+[33mcommit d8dbb38e504b905029abd02f62c7162f5c05a8d7[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Wed May 21 20:48:02 2025 +0300
+
+    Create Booking configuration
+
+[33mcommit e291c4349d7f46f8250e41ddec3bd3c0ac12f61b[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Wed May 21 20:16:12 2025 +0300
+
+    Create Picture configuration
+
+[33mcommit 293585dd0608913c797c49afc21c0fa9f10a3b87[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Wed May 21 20:03:49 2025 +0300
+
+    Create Space configuration
+
+[33mcommit e7ad0c310f452656c2a48105f54229f2342a71da[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Wed May 21 19:44:27 2025 +0300
+
+    Update
+
+[33mcommit 0128da86920b99a94be79d11722f1546149ee99d[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Wed May 21 18:05:37 2025 +0300
+
+    Create DbContext
+
+[33mcommit 9255a12badc00737dabf81c2658e1092a1044615[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Wed May 21 16:27:10 2025 +0300
+
+    Update
+
+[33mcommit 95c565f4446cfffd596751c38552a223e4a56ee1[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Wed May 21 16:23:53 2025 +0300
+
+    Create entities
+
+[33mcommit adaf8d4cc7fcfd8b43662c80a2a7ee6bdcc1252f[m
+Merge: f7e70c8 339dff5
+Author: Oleksandr Hodovaniuk <52534507+Oleksandr-Hodovaniuk@users.noreply.github.com>
+Date:   Wed May 21 11:45:46 2025 +0300
+
+    Merge pull request #1 from Oleksandr-Hodovaniuk/dev
+    
+    Add Clean Architecture layers
+
+[33mcommit 339dff540e37b934218b840c75aba256d1cc6fa0[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Wed May 21 11:45:07 2025 +0300
+
+    Add Clean Architecture layers
+
+[33mcommit f7e70c89ac7493362c589b57ff3e213a7f7aa956[m
+Author: Oleksandr Hodovaniuk <s.godovanuk@gmail.com>
+Date:   Wed May 21 11:39:51 2025 +0300
+
+    Ininital commit
