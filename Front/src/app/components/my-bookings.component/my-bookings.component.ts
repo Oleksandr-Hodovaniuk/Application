@@ -30,4 +30,15 @@ export class MyBookingsComponent {
       }
     });
   }
-}
+
+  deleteBooking(id: number) {
+  this.bookingService.deleteBooking(id).subscribe({
+    next: () => {
+      this.bookings = this.bookings.filter(b => b.id !== id);
+    },
+    error: (err) => {
+      console.error('Error deleting booking:', err);
+    }
+    });
+  }
+} 

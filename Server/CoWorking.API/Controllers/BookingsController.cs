@@ -98,8 +98,8 @@ public class BookingsController : ControllerBase
         return NoContent();
     }
 
-	[HttpDelete("id")]
-	public async Task<IActionResult> DeleteAsync(int id, CancellationToken cancellationToken)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAsync(int id, CancellationToken cancellationToken)
 	{
         await _mediator.Send(new DeleteBookingCommand(id), cancellationToken);
 
