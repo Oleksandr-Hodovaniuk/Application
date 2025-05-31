@@ -1,0 +1,29 @@
+<header class="flex flex-wrap items-center justify-between px-4 py-2 shadow-xl/30 bg-white">
+  <!-- Logo -->
+  <div class="flex items-center gap-2 mb-2 sm:mb-0">
+    <img
+      src="https://localhost:7102/Icons/logo.png"
+      class="h-12 w-auto object-contain"
+      alt="Logo"
+    />
+    <span class="text-lg sm:text-xl font-semibold text-gray-800"></span>
+  </div>
+
+  <!-- Buttons -->
+  <nav class="flex flex-wrap items-center gap-2 sm:gap-4">
+  <a
+    routerLink="/workspaces"
+    routerLinkActive="underline !text-blue-600"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="text-xl text-gray-700 font-bold hover:underline hover:text-blue-600 transition-colors cursor-pointer"
+  >
+    Workspaces
+  </a>
+  <a
+    routerLink="/my-bookings"
+    class="text-xl text-gray-700 font-bold hover:underline hover:text-blue-600 transition-colors cursor-pointer"
+  >
+    My bookings
+  </a>
+</nav>
+</header>
