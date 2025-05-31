@@ -14,9 +14,16 @@ export class WorkspacesComponent {
 
   constructor(private workspaceService: WorkspaceService){}
 
+  selectedPictureIndices: number[] = [];
+
   ngOnInit(): void {
     this.workspaceService.getAllWorkspaces().subscribe(workspaces => {
       this.workspaces = workspaces;
+      this.selectedPictureIndices = this.workspaces.map(() => 0);
     });
+  }
+
+  selectPicture(workspaceIndex: number, pictureIndex: number): void {
+  this.selectedPictureIndices[workspaceIndex] = pictureIndex;
   }
 }

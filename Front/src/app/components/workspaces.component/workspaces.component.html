@@ -1,0 +1,160 @@
+<div class="flex flex-wrap justify-center -mx-2 mt-5">
+  <!-- Заголовок -->
+  <div class="w-full px-6 mb-6">
+    <h1 class="font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+      Available workspaces
+    </h1>
+  </div>
+
+  <!-- Картки -->
+  <div
+    *ngFor="let space of workspaces; let i = index"
+    class="w-full px-2 mb-10 flex justify-center"
+    >
+    <div class="flex flex-col sm:flex-row w-full max-w-[1000px] bg-white rounded-md shadow-xl/30 overflow-hidden">
+      
+      <!-- Ліва колонка: зображення -->
+      <div class="flex flex-col items-center sm:w-[340px] ml-2">
+        <!-- Головне зображення -->
+        <img
+          [src]="'https://localhost:7102/Pictures/' + space.pictures[selectedPictureIndices[i]]"
+          alt="Зображення простору"
+          class="w-full h-auto max-w-[340px] max-h-[227px] object-cover sm:h-[227px] sm:w-[340px] rounded-xl mt-2"
+        />
+
+        <!-- МАЛІ КАРТИНКИ -->
+        <div class="flex gap-2 mt-1 mb-2">
+          <img
+            *ngFor="let pic of space.pictures.slice(0, 4); let picIndex = index"
+            [src]="'https://localhost:7102/Pictures/' + pic"
+            alt="Прев'ю"
+            class="w-[79px] h-[64px] object-cover rounded-md cursor-pointer"
+            [class.filter-grayscale]="selectedPictureIndices[i] !== picIndex"
+            (click)="selectPicture(i, picIndex)"
+          />
+        </div>
+      </div>
+      
+
+      <!-- Контейнер тексту + кнопка -->
+      <div class="flex justify-between gap-1 flex-wrap p-4 sm:p-6">
+        
+        <!-- Ліва колонка: Назва, опис, характеристики -->
+        <div class="flex-1 min-w-[200px]">
+          <!-- Назва -->
+          <h2 class="font-semibold text-base sm:text-lg md:text-xl lg:text-2xl mb-2">
+            {{ space.name }}
+          </h2>
+
+          <!-- Опис -->
+          <p class="text-sm sm:text-base md:text-lg text-gray-600 mb-2">
+            {{ space.description }}
+          </p>
+        </div>   
+
+        <!-- Права колонка: кнопка -->
+        <div class="flex items-start ">
+          <button
+            class="bg-indigo-600 text-white px-4 py-2 text-sm sm:text-base rounded-xl hover:bg-blue-500 transition cursor-pointer whitespace-nowrap"
+          >
+            Book now
+          </button>
+        </div>
+        
+        <!-- Нижній блок -->
+        <div class="flex flex-col gap-y-6">
+          <div class="flex flex-row flex-wrap items-start gap-x-12 gap-y-6 sm:gap-x-20 md:gap-x-24">
+            
+            <!-- Amenities -->
+            <div class="flex flex-col items-start mr-20">
+              <span class="text-black mb-2 font-medium">Amenities</span>
+              <div class="flex flex-row gap-3 flex-wrap">
+                <img
+                  *ngFor="let icon of space.icons"
+                  [src]="'https://localhost:7102/Icons/' + icon"
+                  alt="{{ icon }}"
+                  class="w-6 h-6 object-contain"
+                />
+              </div>
+            </div>
+
+            <!-- Динамічний блок: або Availability (OpenSpace), або Capacity (інше) -->
+            <ng-container *ngIf="space.type === 'OpenSpace'; else capacityBlock">
+              <!-- Availability for OpenSpace -->
+              <div class="flex flex-col items-start">
+                <span class="text-black mb-2 font-medium">Availability</span>
+                <div class="flex flex-row gap-2 flex-wrap">
+                  <img
+                    [src]="'https://localhost:7102/Icons/armchair.svg'"
+                    class="w-6 h-6 object-contain"
+                  />
+                  <span
+                    *ngFor="let room of space.rooms"
+                    class="bg-gray-200 px-2 py-1 rounded-md text-sm font-semibold text-black"
+                  >
+                    {{ room.availability }} desks
+                  </span>
+                </div>
+              </div>
+            </ng-container>
+
+            <!-- Capacity для не-OpenSpace -->
+            <ng-template #capacityBlock>
+              <div class="flex flex-col items-start">
+                <span class="text-black mb-2 font-medium">Capacity options</span>
+                <div class="flex flex-row gap-2 flex-wrap">
+                  <img
+                    [src]="'https://localhost:7102/Icons/user.svg'"
+                    class="w-6 h-6 object-contain"
+                  />
+                  <span
+                    *ngFor="let room of space.rooms"
+                    class="bg-gray-200 px-2 py-1 rounded-md text-sm font-semibold text-black"
+                  >
+                    {{ room.capacity }}
+                  </span>
+                  <span>people</span>
+                </div>
+              </div>
+            </ng-template>
+
+          </div>
+
+          <!-- Availability для не-OpenSpace — окремо нижче -->
+          <div *ngIf="space.type !== 'OpenSpace'" class="flex flex-col items-start">
+            <span class="text-black mb-2 font-medium">Availability</span>
+            <div class="flex flex-col gap-2">
+              <div *ngFor="let room of space.rooms" class="text-sm">
+                <span class="text-black font-medium">{{ room.availability }} rooms</span>
+                <span class="text-gray-600"> for {{ room.capacity }} people</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Bookings -->
+          <ng-container *ngFor="let room of space.rooms">
+            <div *ngFor="let booking of room.bookings" class="flex items-center gap-2 mb-1 bg-gray-100 rounded-md">
+              <img
+                [src]="'https://localhost:7102/Icons/done.svg'"
+                class="w-5 h-5 object-contain"
+              />
+              <span class="text-sm leading-5">
+                This workspace is already booked by 
+                <strong>{{ booking.email }}</strong> 
+                <strong>
+                  <!-- Умова: якщо тип простору OpenSpace - "1 desk", інакше "X people" -->
+                  {{ space.type === 'OpenSpace' ? ' — 1 desk' : ' room — for ' + room.capacity + ' people' }}
+                </strong> 
+                from 
+                <strong>{{ booking.startDateTime | date: 'MMM-d-y' }}</strong> to
+                <strong>{{ booking.endDateTime | date: 'MMM-d-y' }}</strong>
+              </span>
+            </div>
+          </ng-container>
+
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
