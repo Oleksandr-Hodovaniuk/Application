@@ -5,14 +5,14 @@
   <ul class="space-y-6">
     <li *ngFor="let booking of bookings" class="flex flex-col sm:flex-row sm:items-start sm:justify-between p-4 rounded-lg shadow-lg bg-white">
 
-      <!-- Зображення -->
+      <!-- Picture -->
       <img
         [src]="'https://localhost:7102/Pictures/' + booking.workspacePicture"
         alt="Зображення простору"
         class="w-full sm:w-[240px] h-auto max-h-[192px] object-cover rounded-xl mb-4 sm:mb-0"
       />
 
-      <!-- Центр -->
+      <!-- Centre -->
       <div class="flex flex-col flex-grow sm:ml-6">
 
         <!-- Email -->
@@ -20,7 +20,7 @@
           {{ booking.email }}
         </div>
 
-        <!-- Назва та capacity -->
+        <!-- Workspace naem and capacity -->
         <div class="font-semibold text-lg sm:text-xl md:text-2xl mb-2">
           <span>{{ booking.workspaceName }}</span>
           <span class="ml-1">
@@ -33,20 +33,20 @@
           </span>
         </div>
 
-        <!-- Дата -->
+        <!-- Date -->
         <div class="flex items-center gap-2 text-gray-600 text-sm mt-1">
           <img src="https://localhost:7102/Icons/calendar.svg" alt="Дата" class="w-5 h-5 object-contain" />
           <span class="text-black font-medium">{{ booking.startDateTime | date:'MMM.d.y' }} — {{ booking.endDateTime | date:'MMM.d.y' }}</span>
         </div>
 
-        <!-- Час -->
+        <!-- Time -->
         <div class="flex items-center gap-2 text-gray-500 text-sm mt-1">
           <img src="https://localhost:7102/Icons/clock.svg" alt="Час" class="w-5 h-5 object-contain" />
           <span class="text-black font-medium">from {{ booking.startDateTime | date:'H:mm' }} — {{ booking.endDateTime | date:'H:mm' }}</span>
         </div>
       </div>
 
-      <!-- Іконки -->
+      <!-- Icons -->
       <div class="flex gap-3 mt-4 sm:mt-0 sm:ml-4">
         <button title="Edit" 
           class="hover:text-blue-600 transition-colors cursor-pointer">
