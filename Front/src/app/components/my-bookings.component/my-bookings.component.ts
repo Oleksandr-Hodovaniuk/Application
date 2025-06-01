@@ -50,7 +50,7 @@ export class MyBookingsComponent {
     this.showConfirmModal = true;
   }
 
-  // Коли підтверджено
+  // When confirm.
   confirmDelete() {
     if (this.selectedBookingId !== null) {
       this.bookingService.deleteBooking(this.selectedBookingId).subscribe({
@@ -67,7 +67,7 @@ export class MyBookingsComponent {
     }
   }
 
-  // Коли скасовано
+  // When cancel.
   cancelDelete() {
     this.selectedBookingId = null;
     this.showConfirmModal = false;

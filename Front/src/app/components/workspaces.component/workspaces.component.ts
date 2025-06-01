@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { WorkspaceModel } from '../../models/workspace.model';
 import { WorkspaceService } from '../../services/workspace.service';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-workspaces.component',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './workspaces.component.html',
   styleUrl: './workspaces.component.css'
 })
