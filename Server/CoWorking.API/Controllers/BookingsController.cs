@@ -41,7 +41,7 @@ public class BookingsController : ControllerBase
         return Created();
     }
 
-    [HttpGet("id")]
+    [HttpGet("{id}")]
     public async Task<IActionResult> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
         var booking = await _mediator.Send(new GetByIdBookingQuery(id), cancellationToken);
@@ -62,7 +62,7 @@ public class BookingsController : ControllerBase
         return Ok(bookings);
     }
 
-    [HttpPatch("id")]
+    [HttpPatch("{id}")]
     public async Task<IActionResult> PatchAsync(int id,
         [FromBody] JsonPatchDocument<PatchBookingDTO> patchDoc,
         CancellationToken cancellationToken)
