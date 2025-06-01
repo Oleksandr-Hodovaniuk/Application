@@ -13,6 +13,9 @@ import { RouterLink } from '@angular/router';
 export class MyBookingsComponent {
   bookings: MyBookingModel[] = [];
 
+  showConfirmModal: boolean = false;
+  selectedBookingId: number | null = null;
+
   constructor(private bookingService: BookingService){}
 
   ngOnInit() {
@@ -40,5 +43,33 @@ export class MyBookingsComponent {
       console.error('Error deleting booking:', err);
     }
     });
+  }
+
+  onDeleteClick(id: number) {
+    this.selectedBookingId = id;
+    this.showConfirmModal = true;
+  }
+
+  // Коли підтверджено
+  confirmDelete() {
+    if (this.selectedBookingId !== null) {
+      this.bookingService.deleteBooking(this.selectedBookingId).subscribe({
+        next: () => {
+          this.bookings = this.bookings.filter(b => b.id !== this.selectedBookingId);
+          this.showConfirmModal = false;
+          this.selectedBookingId = null;
+        },
+        error: (err) => {
+          console.error('Error deleting booking:', err);
+          this.showConfirmModal = false;
+        }
+      });
+    }
+  }
+
+  // Коли скасовано
+  cancelDelete() {
+    this.selectedBookingId = null;
+    this.showConfirmModal = false;
   }
 } 

@@ -53,7 +53,7 @@
           <img src="https://localhost:7102/Icons/edit.svg" alt="Edit" class="w-6 h-6 object-contain" />
         </button>
         <button title="Delete" 
-          (click)="deleteBooking(booking.id)"
+          (click)="onDeleteClick(booking.id)"
           class="hover:text-red-600 transition-colors cursor-pointer">
           <img src="https://localhost:7102/Icons/trash.svg" alt="Delete" class="w-6 h-6 object-contain" />
         </button>
@@ -87,3 +87,62 @@
     </div>
   </div>
 </ng-template>
+
+<!-- Confirm Delete Modal -->
+<div
+  *ngIf="showConfirmModal"
+  class="fixed inset-0 z-50 flex items-center justify-center px-4 sm:px-6"
+>
+  <!-- Backdrop -->
+  <div
+    class="absolute inset-0 bg-black/50 backdrop-blur-sm"
+    (click)="cancelDelete()"
+  ></div>
+
+  <!-- Modal Content -->
+  <div
+    class="relative z-10 bg-white p-3 sm:p-4 rounded-xl shadow-xl w-full max-w-xs sm:max-w-md text-center"
+  >
+    <!-- Top Icons Row -->
+    <div class="flex justify-between items-start mb-6">
+      <!-- Left Icon -->
+      <img
+        src="https://localhost:7102/Icons/big-trash.svg"
+        alt="Trash Icon"
+        class="w-10 h-10 object-contain"
+      />
+
+      <!-- Right Close Icon -->
+      <img
+        src="https://localhost:7102/Icons/x.svg"
+        alt="Close"
+        (click)="cancelDelete()"
+        class="w-8 h-8 object-contain opacity-70 cursor-pointer hover:opacity-100 transition"
+      />
+    </div>
+
+    <!-- Centered Text -->
+    <h3 class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">
+      Cancel your booking?
+    </h3>
+    <p class="mb-5 sm:mb-6 text-gray-600 text-sm sm:text-base">
+      This action cannot be undone
+    </p>
+
+    <!-- Full-width Buttons -->
+    <div class="flex flex-row gap-3">
+      <button
+        (click)="confirmDelete()"
+        class="w-full px-5 py-2 text-sm sm:text-base bg-red-800 text-white rounded-md hover:bg-red-500 transition cursor-pointer"
+      >
+        Delete
+      </button>
+      <button
+        (click)="cancelDelete()"
+        class="w-full px-5 py-2 text-sm sm:text-base bg-indigo-600 text-white rounded-md hover:bg-blue-600 transition cursor-pointer"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
