@@ -1,0 +1,36 @@
+<form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="name">Name:</label>
+    <input id="name" type="text" formControlName="name" />
+  </div>
+
+  <div>
+    <label for="email">Email:</label>
+    <input id="email" type="email" formControlName="email" />
+    <div *ngIf="bookingForm.get('email')?.invalid && bookingForm.get('email')?.touched" style="color:red;">
+      Please enter a valid email.
+    </div>
+  </div>
+
+  <div>
+    <label for="selectedWorkspaceId">Workspace ID:</label>
+    <input id="selectedWorkspaceId" type="number" formControlName="selectedWorkspaceId" />
+  </div>
+
+  <div>
+    <label for="selectedRoomId">Room ID:</label>
+    <input id="selectedRoomId" type="number" formControlName="selectedRoomId" />
+  </div>
+
+  <div>
+    <label for="startDateTime">Start Date and Time:</label>
+    <input id="startDateTime" type="datetime-local" formControlName="startDateTime" />
+  </div>
+
+  <div>
+    <label for="endDateTime">End Date and Time:</label>
+    <input id="endDateTime" type="datetime-local" formControlName="endDateTime" />
+  </div>
+
+  <button type="submit" [disabled]="bookingForm.invalid">Update Booking</button>
+</form>
