@@ -1,0 +1,189 @@
+<h1 class="text-3xl font-bold text-center text-gray-900 mb-6">
+  Book your workspace
+</h1>
+
+<form [formGroup]="bookingForm" (ngSubmit)="onSubmit()" class="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl/30 p-4 sm:p-6 md:p-8">
+  <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6">Reservation details</h2>
+
+  <div class="flex flex-col md:flex-row gap-6">
+    
+    <!-- Left column -->
+    <div class="md:w-1/2 space-y-4">
+      <!-- Name -->
+      <input formControlName="name" type="text" placeholder="Your name"
+             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer" />
+
+      <!-- Email -->
+      <input formControlName="email" type="email" placeholder="Email"
+             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer" />
+
+      <!-- Workspace Type -->
+      <select formControlName="workspaceType"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer">
+        <option value="" disabled>Select workspace type</option>
+        <option *ngFor="let workspace of workspaces" [value]="workspace.id">
+          {{ workspace.name }}
+        </option>
+      </select>
+
+      <!-- Room Selection -->
+      <div *ngFor="let room of roomsForSelectedWorkspace" class="flex items-center gap-2">
+        <input type="radio" [value]="room.id" formControlName="roomId"
+               class="accent-indigo-600 cursor-pointer" />
+        <span class="font-medium text-gray-800">
+          {{ getRoomLabel(room.capacity) }}
+        </span>
+      </div>
+    </div>
+
+    <!-- Right column: Date & Time -->
+    <div class="md:w-1/2 space-y-4">
+      <!-- Start Date -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+        <div class="flex gap-2">
+          <select formControlName="startDay"
+                  class="flex-1 px-2 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer ont-semibold text-gray-800">
+            <option value="" disabled selected>Day</option>
+            <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+          </select>
+          <select formControlName="startMonth"
+                  class="flex-1 px-2 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer">
+            <option value="" disabled selected>Month</option>
+            <option *ngFor="let month of months" [value]="month.value">{{ month.name }}</option>
+          </select>
+          <select formControlName="startYear"
+                  class="flex-1 px-2 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer">
+            <option value="" disabled selected>Year</option>
+            <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Start Time -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Start Time</label>
+        <div class="flex gap-2">
+          <select formControlName="startHour"
+                  class="flex-1 px-2 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer">
+            <option value="" disabled selected>Hour</option>
+            <option *ngFor="let h of hours" [value]="h">{{ h }}</option>
+          </select>
+          <select formControlName="startMinute"
+                  class="flex-1 px-2 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer">
+            <option value="" disabled selected>Minute</option>
+            <option *ngFor="let m of minutes" [value]="m">{{ m }}</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- End Date -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+        <div class="flex gap-2">
+          <select formControlName="endDay"
+                  class="flex-1 px-2 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer">
+            <option value="" disabled selected>Day</option>
+            <option *ngFor="let day of endDays" [value]="day">{{ day }}</option>
+          </select>
+          <select formControlName="endMonth"
+                  class="flex-1 px-2 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer">
+            <option value="" disabled selected>Month</option>
+            <option *ngFor="let month of months" [value]="month.value">{{ month.name }}</option>
+          </select>
+          <select formControlName="endYear"
+                  class="flex-1 px-2 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer">
+            <option value="" disabled selected>Year</option>
+            <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- End Time -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">End Time</label>
+        <div class="flex gap-2">
+          <select formControlName="endHour"
+                  class="flex-1 px-2 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer">
+            <option value="" disabled selected>Hour</option>
+            <option *ngFor="let h of hours" [value]="h">{{ h }}</option>
+          </select>
+          <select formControlName="endMinute"
+                  class="flex-1 px-2 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer">
+            <option value="" disabled selected>Minute</option>
+            <option *ngFor="let m of minutes" [value]="m">{{ m }}</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Validation -->
+        <div *ngIf="validationErrors.length" class="mt-4 p-3 bg-red-50 border border-red-200 rounded">
+            <ul class="list-disc list-inside text-red-700">
+            <li *ngFor="let err of validationErrors">{{ err }}</li>
+            </ul>
+        </div>
+
+      <!-- Submit Button -->
+      <button type="submit"
+        [disabled]="bookingForm.invalid"
+        class="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition disabled:opacity-50 cursor-pointer">
+        Submit
+      </button>
+    </div>
+    
+  </div>
+</form>
+
+
+<!-- Success Booking Modal -->
+<div
+  *ngIf="showSuccessModal"
+  class="fixed inset-0 z-50 flex items-center justify-center px-4 sm:px-6"
+>
+  <!-- Backdrop -->
+  <div
+    class="absolute inset-0 bg-black/50 backdrop-blur-sm"
+    (click)="closeSuccessModal()"
+  ></div>
+
+  <!-- Modal Content -->
+  <div
+    class="relative z-10 bg-white p-3 sm:p-4 rounded-xl shadow-xl w-full max-w-xs sm:max-w-md text-center"
+  >
+    <!-- Top Icons Row -->
+    <div class="flex justify-between items-start mb-6">
+      <!-- Left Icon -->
+      <img
+        src="https://localhost:7102/Icons/big-done.svg"
+        alt="Success Icon"
+        class="w-15 h-15 object-contain"
+      />
+
+      <!-- Right Close Icon -->
+      <img
+        src="https://localhost:7102/Icons/x.svg"
+        alt="Close"
+        (click)="closeSuccessModal()"
+        class="w-8 h-8 object-contain opacity-70 cursor-pointer hover:opacity-100 transition"
+      />
+    </div>
+
+    <!-- Success Message -->
+    <h3 class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">
+      Booking Confirmed!
+    </h3>
+    <p class="mb-5 sm:mb-6 text-gray-600 text-sm sm:text-base">
+      {{ successMessage }}
+    </p>
+
+    <!-- Close Button -->
+    <div class="flex justify-center">
+      <button
+        (click)="goToMyBookings()"
+        class="px-5 py-2 text-sm sm:text-base bg-indigo-600 text-white rounded-md hover:bg-blue-600 transition cursor-pointer"
+      >
+        My bookings
+      </button>
+    </div>
+  </div>
+</div>

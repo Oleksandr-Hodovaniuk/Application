@@ -1,6 +1,6 @@
 
  <!-- Title -->
-<h2 class="text-2xl sm:text-3xl font-semibold text-gray-800 text-center mb-6">Available workspaces</h2>
+<h2 class="text-3xl font-bold text-center text-gray-900 mb-6">Available workspaces</h2>
 
 <!-- Workspaces -->
 <div class="flex flex-wrap justify-center -mx-2 mt-2">
@@ -15,7 +15,6 @@
         <!-- Main picture -->
         <img
           [src]="'https://localhost:7102/Pictures/' + space.pictures[selectedPictureIndices[i]]"
-          alt="Зображення простору"
           class="w-full h-auto max-w-[340px] max-h-[227px] object-cover sm:h-[227px] sm:w-[340px] rounded-xl mt-2"
         />
 
@@ -24,7 +23,6 @@
           <img
             *ngFor="let pic of space.pictures.slice(0, 4); let picIndex = index"
             [src]="'https://localhost:7102/Pictures/' + pic"
-            alt="Прев'ю"
             class="w-[79px] h-[64px] object-cover rounded-md cursor-pointer"
             [class.filter-grayscale]="selectedPictureIndices[i] !== picIndex"
             (click)="selectPicture(i, picIndex)"
@@ -52,6 +50,7 @@
         <!-- Right column: book now button -->
         <div class="flex items-start ">
           <button
+            routerLink="/create-booking"
             class="bg-indigo-600 text-white px-4 py-2 text-sm sm:text-base rounded-md hover:bg-blue-500 transition cursor-pointer whitespace-nowrap"
           >
             Book now
