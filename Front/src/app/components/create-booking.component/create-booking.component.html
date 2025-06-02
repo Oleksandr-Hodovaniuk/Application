@@ -30,7 +30,7 @@
       <div *ngFor="let room of roomsForSelectedWorkspace" class="flex items-center gap-2">
         <input type="radio" [value]="room.id" formControlName="roomId"
                class="accent-indigo-600 cursor-pointer" />
-        <span class="font-medium text-gray-800">
+        <span class="font-medium text-gray-800 cursor-pointer">
           {{ getRoomLabel(room.capacity) }}
         </span>
       </div>
@@ -154,14 +154,14 @@
     <div class="flex justify-between items-start mb-6">
       <!-- Left Icon -->
       <img
-        src="https://localhost:7102/Icons/big-done.svg"
+        src="http://localhost:5199/Icons/big-done.svg"
         alt="Success Icon"
         class="w-15 h-15 object-contain"
       />
 
       <!-- Right Close Icon -->
       <img
-        src="https://localhost:7102/Icons/x.svg"
+        src="http://localhost:5199/Icons/x.svg"
         alt="Close"
         (click)="closeSuccessModal()"
         class="w-8 h-8 object-contain opacity-70 cursor-pointer hover:opacity-100 transition"

@@ -10,7 +10,7 @@ import { PatchBookingModel } from '../models/patch-booking.model';
   providedIn: 'root',
 })
 export class BookingService {
-   private baseUrl = 'https://localhost:7102/api/bookings';
+   private baseUrl = 'http://localhost:5199/api/bookings';
 
   constructor(private http: HttpClient) {}
 
@@ -27,11 +27,11 @@ export class BookingService {
   }
   
   getWorkspaceOptions(): Observable<WorkspaceDropDown[]> {
-    return this.http.get<WorkspaceDropDown[]>('https://localhost:7102/api/workspaces/dropdown');
+    return this.http.get<WorkspaceDropDown[]>('http://localhost:5199/api/workspaces/dropdown');
   }
   
   getBookingById(id: number): Observable<PatchBookingModel> {
-    return this.http.get<PatchBookingModel>(`https://localhost:7102/api/bookings/${id}`);
+    return this.http.get<PatchBookingModel>(`http://localhost:5199/api/bookings/${id}`);
   }
   
  patchBooking(id: number, data: Partial<PatchBookingModel>) {

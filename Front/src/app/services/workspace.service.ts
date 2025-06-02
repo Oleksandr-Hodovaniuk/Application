@@ -7,7 +7,7 @@ import { WorkspaceModel } from '../models/workspace.model';
   providedIn: 'root'
 })
 export class WorkspaceService {
-  private apiUrl = 'https://localhost:7102/api/workspaces';
+  private apiUrl = 'http://localhost:5199/api/workspaces';
 
   constructor(private http: HttpClient) {}
 

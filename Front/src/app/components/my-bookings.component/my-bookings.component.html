@@ -7,7 +7,7 @@
 
       <!-- Picture -->
       <img
-        [src]="'https://localhost:7102/Pictures/' + booking.workspacePicture"
+        [src]="'http://localhost:5199/Pictures/' + booking.workspacePicture"
         alt="Зображення простору"
         class="w-full sm:w-[240px] h-auto max-h-[192px] object-cover rounded-xl mb-4 sm:mb-0"
       />
@@ -35,13 +35,13 @@
 
         <!-- Date -->
         <div class="flex items-center gap-2 text-gray-600 text-sm mt-1">
-          <img src="https://localhost:7102/Icons/calendar.svg" alt="Дата" class="w-5 h-5 object-contain" />
+          <img src="http://localhost:5199/Icons/calendar.svg" alt="Дата" class="w-5 h-5 object-contain" />
           <span class="text-black font-medium">{{ booking.startDateTime | date:'MMM.d.y' }} — {{ booking.endDateTime | date:'MMM.d.y' }}</span>
         </div>
 
         <!-- Time -->
         <div class="flex items-center gap-2 text-gray-500 text-sm mt-1">
-          <img src="https://localhost:7102/Icons/clock.svg" alt="Час" class="w-5 h-5 object-contain" />
+          <img src="http://localhost:5199/Icons/clock.svg" alt="Час" class="w-5 h-5 object-contain" />
           <span class="text-black font-medium">from {{ booking.startDateTime | date:'H:mm' }} — {{ booking.endDateTime | date:'H:mm' }}</span>
         </div>
       </div>
@@ -51,12 +51,12 @@
         <button title="Edit" 
           [routerLink]="['/patch-booking', booking.id]"
           class="hover:text-blue-600 transition-colors cursor-pointer">
-          <img src="https://localhost:7102/Icons/edit.svg" alt="Edit" class="w-6 h-6 object-contain" />
+          <img src="http://localhost:5199/Icons/edit.svg" alt="Edit" class="w-6 h-6 object-contain" />
         </button>
         <button title="Delete" 
           (click)="onDeleteClick(booking.id)"
           class="hover:text-red-600 transition-colors cursor-pointer">
-          <img src="https://localhost:7102/Icons/trash.svg" alt="Delete" class="w-6 h-6 object-contain" />
+          <img src="http://localhost:5199/Icons/trash.svg" alt="Delete" class="w-6 h-6 object-contain" />
         </button>
       </div>
 
@@ -69,7 +69,7 @@
   <div class="flex items-center justify-center min-h-[70vh] px-4">
     <div class="max-w-md w-full text-center bg-white rounded-lg shadow-xl/30 p-6 sm:p-8 ">
       <img
-        src="https://localhost:7102/Icons/dandruff.png"
+        src="http://localhost:5199/Icons/dandruff.png"
         alt="No bookings"
         class="mx-auto mb-6 w-28 h-28 object-contain opacity-70"
       />
@@ -108,14 +108,14 @@
     <div class="flex justify-between items-start mb-6">
       <!-- Left Icon -->
       <img
-        src="https://localhost:7102/Icons/big-trash.svg"
+        src="http://localhost:5199/Icons/big-trash.svg"
         alt="Trash Icon"
         class="w-15 h-15 object-contain"
       />
 
       <!-- Right Close Icon -->
       <img
-        src="https://localhost:7102/Icons/x.svg"
+        src="http://localhost:5199/Icons/x.svg"
         alt="Close"
         (click)="cancelDelete()"
         class="w-8 h-8 object-contain opacity-70 cursor-pointer hover:opacity-100 transition"

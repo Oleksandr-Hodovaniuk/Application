@@ -146,7 +146,7 @@ export class PatchBookingComponent implements OnInit {
     const formValue = this.bookingForm.value;
     const patchBody = this.generatePatchOperations(formValue);
 
-    this.http.patch(`https://localhost:7102/api/bookings/${this.bookingId}`, patchBody, {
+    this.http.patch(`http://localhost:5199/api/bookings/${this.bookingId}`, patchBody, {
       headers: { 'Content-Type': 'application/json-patch+json' }
     }).subscribe({
       next: () => {

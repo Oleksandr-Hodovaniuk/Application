@@ -14,7 +14,7 @@
       <div class="flex flex-col items-center sm:w-[340px] ml-2">
         <!-- Main picture -->
         <img
-          [src]="'https://localhost:7102/Pictures/' + space.pictures[selectedPictureIndices[i]]"
+          [src]="'http://localhost:5199/Pictures/' + space.pictures[selectedPictureIndices[i]]"
           class="w-full h-auto max-w-[340px] max-h-[227px] object-cover sm:h-[227px] sm:w-[340px] rounded-xl mt-2"
         />
 
@@ -22,7 +22,7 @@
         <div class="flex gap-2 mt-1 mb-2">
           <img
             *ngFor="let pic of space.pictures.slice(0, 4); let picIndex = index"
-            [src]="'https://localhost:7102/Pictures/' + pic"
+            [src]="'http://localhost:5199/Pictures/' + pic"
             class="w-[79px] h-[64px] object-cover rounded-md cursor-pointer"
             [class.filter-grayscale]="selectedPictureIndices[i] !== picIndex"
             (click)="selectPicture(i, picIndex)"
@@ -67,7 +67,7 @@
               <div class="flex flex-row gap-3 flex-wrap">
                 <img
                   *ngFor="let icon of space.icons"
-                  [src]="'https://localhost:7102/Icons/' + icon"
+                  [src]="'http://localhost:5199/Icons/' + icon"
                   alt="{{ icon }}"
                   class="w-6 h-6 object-contain"
                 />
@@ -82,7 +82,7 @@
                 <span class="text-black mb-2 font-medium">Availability</span>
                 <div class="flex flex-row gap-2 flex-wrap">
                   <img
-                    [src]="'https://localhost:7102/Icons/armchair.svg'"
+                    [src]="'http://localhost:5199/Icons/armchair.svg'"
                     class="w-6 h-6 object-contain"
                   />
                   <span
@@ -101,7 +101,7 @@
                 <span class="text-black mb-2 font-medium">Capacity options</span>
                 <div class="flex flex-row gap-2 flex-wrap">
                   <img
-                    [src]="'https://localhost:7102/Icons/user.svg'"
+                    [src]="'http://localhost:5199/Icons/user.svg'"
                     class="w-6 h-6 object-contain"
                   />
                   <span
@@ -132,7 +132,7 @@
           <ng-container *ngFor="let room of space.rooms">
             <div *ngFor="let booking of room.bookings" class="flex items-center gap-2 mb-1 bg-gray-100 rounded-md max-w-[900px] px-2 py-1">
               <img
-                [src]="'https://localhost:7102/Icons/done.svg'"
+                [src]="'http://localhost:5199/Icons/done.svg'"
                 class="w-5 h-5 object-contain flex-shrink-0"
               />
               <span class="text-sm leading-5 break-words">
