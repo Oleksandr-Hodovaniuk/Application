@@ -51,6 +51,7 @@ export class CreateBookingComponent implements OnInit {
     private bookingService: BookingService,
     private router: Router
   ) {
+    // Initialize form with default empty fields.
     this.bookingForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -81,6 +82,7 @@ export class CreateBookingComponent implements OnInit {
     this.bookingForm.get('endMonth')?.valueChanges.subscribe(() => this.updateDaysForMonthYear('end'));
     this.bookingForm.get('endYear')?.valueChanges.subscribe(() => this.updateDaysForMonthYear('end'));
 
+    // Fetch available workspaces (OpenSpace or Room)
     this.bookingService.getWorkspaceOptions().subscribe({
       next: (data) => {
         this.workspaces = data;
@@ -90,6 +92,7 @@ export class CreateBookingComponent implements OnInit {
       }
     });
 
+    // When workspace type changes, update available room/desk options
     this.bookingForm.get('workspaceType')?.valueChanges.subscribe((selectedWorkspaceId) => {
       const selectedWorkspace = this.workspaces.find(ws => ws.id === +selectedWorkspaceId);
       this.availableRooms = selectedWorkspace?.rooms || [];
@@ -171,8 +174,8 @@ export class CreateBookingComponent implements OnInit {
   getRoomLabel(capacity: number): string {
     const type = this.selectedWorkspace?.type;
     return type?.toLowerCase() === 'openspace'
-      ? `${capacity} ${capacity === 1 ? 'desk' : 'desks'}`
-      : `Room for ${capacity} ${capacity === 1 ? 'person' : 'people'}`;
+    ? `${capacity} ${capacity === 1 ? 'desk' : 'desks'}`
+    : `Room for ${capacity} ${capacity === 1 ? 'person' : 'people'}`;
   }
 
   get roomsForSelectedWorkspace(): RoomInfo[] {
@@ -180,7 +183,7 @@ export class CreateBookingComponent implements OnInit {
     const selectedWorkspace = this.workspaces.find(ws => ws.id === +selectedId);
     return selectedWorkspace ? selectedWorkspace.rooms : [];
   }
-
+    // Send booking form data to the server
     onSubmit() {
     if (this.bookingForm.invalid) return;
 
@@ -222,6 +225,7 @@ export class CreateBookingComponent implements OnInit {
     const startDateTime = formatLocalDateTime(startDate);
     const endDateTime = formatLocalDateTime(endDate);
 
+    // Build the booking object
     const booking: CreateBookingModel = {
       name: form.name,
       email: form.email,
@@ -230,6 +234,7 @@ export class CreateBookingComponent implements OnInit {
       endDateTime
     };
 
+    // Send the booking to the backend
     this.bookingService.createBooking(booking).subscribe({
       next: () => {
         const selectedRoom = this.availableRooms.find(r => r.id === +form.roomId);
