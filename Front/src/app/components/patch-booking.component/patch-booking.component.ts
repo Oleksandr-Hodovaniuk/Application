@@ -35,8 +35,10 @@ export class PatchBookingComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+     // Retrieve booking ID from the route parameters
     this.bookingId = Number(this.route.snapshot.paramMap.get('id'));
 
+     // Initialize the form group with default values and validators
     this.bookingForm = this.fb.group({
       name: [''],
       email: ['', [Validators.email]],
@@ -46,10 +48,12 @@ export class PatchBookingComponent implements OnInit {
       endDateTime: ['', Validators.required]
     });
 
+    // Load workspace dropdown options
     this.bookingService.getWorkspaceOptions().subscribe({
       next: (data) => {
         this.workspaces = data;
 
+         // After workspaces are loaded, get booking details to prefill the form
         this.bookingService.getBookingById(this.bookingId).subscribe({
           next: (booking: PatchBookingModel) => {
             this.bookingForm.patchValue({
@@ -69,6 +73,7 @@ export class PatchBookingComponent implements OnInit {
       error: (err) => console.error('Error loading workspaces', err)
     });
 
+    // When workspace changes, update available rooms
     this.bookingForm.get('selectedWorkspaceId')?.valueChanges.subscribe(workspaceId => {
       this.onWorkspaceChange(workspaceId);
     });
@@ -78,7 +83,7 @@ export class PatchBookingComponent implements OnInit {
     if (!dateStr) return '';
     const date = new Date(dateStr);
     if (isNaN(date.getTime())) return '';
-    return date.toISOString().slice(0, 16); // 'YYYY-MM-DDTHH:mm'
+    return date.toISOString().slice(0, 16);
   }
 
   formatLocalDateTime(date: Date): string {
@@ -102,9 +107,14 @@ export class PatchBookingComponent implements OnInit {
 
     const selected = this.workspaces.find(w => w.id === id);
     this.rooms = selected?.rooms ?? [];
-    this.bookingForm.get('selectedRoomId')?.setValue(null);
+
+    const currentRoomId = this.bookingForm.get('selectedRoomId')?.value;
+    if (!currentRoomId) {
+      this.bookingForm.get('selectedRoomId')?.setValue(null);
+    }
   }
 
+  // Returns label for each room based on workspace type and capacity
   getRoomLabel(room: RoomInfo): string {
     if (this.selectedWorkspaceType === 'OpenSpace') {
       return '1 desk';
@@ -117,6 +127,7 @@ export class PatchBookingComponent implements OnInit {
     }
   }
 
+  // Generates JSON Patch operations from the form values
   generatePatchOperations(formValue: any): any[] {
     const patchOps: any[] = [];
 
@@ -140,6 +151,7 @@ export class PatchBookingComponent implements OnInit {
     return patchOps;
   }
 
+  // Handles form submission and sends PATCH request
   onSubmit(): void {
     if (this.bookingForm.invalid) return;
 
@@ -193,6 +205,7 @@ export class PatchBookingComponent implements OnInit {
     this.showPatchSuccessModal = true;
   }
 
+  // Navigates to "My Bookings" page after update
   goToMyBookingsAfterPatch() {
     this.showPatchSuccessModal = false;
     this.router.navigate(['/my-bookings']);
