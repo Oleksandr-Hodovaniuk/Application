@@ -9,7 +9,7 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
 {
     public async Task SeedAsync(CancellationToken cancellationToken)
     {
-        if(!await dbContext.Workspaces.AnyAsync(cancellationToken))
+        if (!await dbContext.Workspaces.AnyAsync(cancellationToken))
         {
             var icons = GetIcons();
             await dbContext.Icons.AddRangeAsync(icons, cancellationToken);
@@ -96,7 +96,7 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
                 " or client presentations. Equipped with screens, whiteboards," +
                 " and comfortable seating to keep your sessions running smoothly.",
                 MaxBookingDuration = 1,
-                Pictures = GetPictures_3(),             
+                Pictures = GetPictures_3(),
                 Rooms = GetRooms_3()
             }
         };
@@ -135,7 +135,7 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
     {
         return new List<Room>
         {
-            new Room { Capacity = 1, Quantity = 24, Bookings = GetBooking_1() }
+            new Room { Capacity = 1, Quantity = 24, Bookings = GetBooking_1()}
         };
     }
     private List<Room> GetRooms_2()
@@ -143,17 +143,17 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
         return new List<Room>
         {
             new Room { Capacity = 1, Quantity = 7, Bookings = GetBooking_2() },
-            new Room { Capacity = 2, Quantity = 5, Bookings = GetBooking_2() },
-            new Room { Capacity = 5, Quantity = 3, Bookings = GetBooking_2() },
-            new Room { Capacity = 10, Quantity = 1, Bookings = GetBooking_2() }
+            new Room { Capacity = 2, Quantity = 5, Bookings = GetBooking_3() },
+            new Room { Capacity = 5, Quantity = 3, Bookings = GetBooking_4() },
+            new Room { Capacity = 10, Quantity = 1, Bookings = GetBooking_5() }
         };
     }
     private List<Room> GetRooms_3()
     {
         return new List<Room>
         {
-            new Room { Capacity = 10, Quantity = 4, Bookings = GetBooking_3() },
-            new Room { Capacity = 20, Quantity = 1, Bookings = GetBooking_2() }
+            new Room { Capacity = 10, Quantity = 4, Bookings = GetBooking_6() },
+            new Room { Capacity = 20, Quantity = 1, Bookings = GetBooking_7() }
         };
     }
     private List<Booking> GetBooking_1()
@@ -164,15 +164,8 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
             {
                 Name = "Ethan Morgan",
                 Email = "ethan.morgan@example.com",
-                StartDateTime = DateTime.Now,
-                EndDateTime = DateTime.Now.AddHours(5),
-            },
-            new Booking
-            {
-                Name = "Sophia Collins",
-                Email = "sophia.collins@example.com",
-                StartDateTime = DateTime.Now.AddHours(5),
-                EndDateTime = DateTime.Now.AddHours(10),
+                StartDateTime = DateTime.Now.AddHours(24),
+                EndDateTime = DateTime.Now.AddHours(48),
             }
         };
     }
@@ -182,10 +175,10 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
         {
             new Booking
             {
-                Name = "Lucas Wright",
-                Email = "noah.mitchell@example.com",
-                StartDateTime = DateTime.Now,
-                EndDateTime = DateTime.Now.AddHours(3),
+                Name = "Sophia Collins",
+                Email = "sophia.collins@example.com",
+                StartDateTime = DateTime.Now.AddHours(5),
+                EndDateTime = DateTime.Now.AddHours(10),
             }
         };
     }
@@ -195,18 +188,65 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
         {
             new Booking
             {
+                Name = "Lucas Wright",
+                Email = "noah.mitchell@example.com",
+                StartDateTime = DateTime.Now.AddHours(1),
+                EndDateTime = DateTime.Now.AddHours(3),
+            }
+        };
+    }
+    private List<Booking> GetBooking_4()
+    {
+        return new List<Booking>
+        {
+            new Booking
+            {
                 Name = "Noah Mitchell",
                 Email = "noah.mitchell@example.com",
-                StartDateTime = DateTime.Now,
+                StartDateTime = DateTime.Now.AddHours(3),
                 EndDateTime = DateTime.Now.AddHours(5),
-            },
+            }
+        };
+    }
+    private List<Booking> GetBooking_5()
+    {
+        return new List<Booking>
+        {
             new Booking
             {
                 Name = "Isabella Reed",
                 Email = "isabella.reed@example.com",
-                StartDateTime = DateTime.Now.AddHours(8),
-                EndDateTime = DateTime.Now.AddHours(16),
+                StartDateTime = DateTime.Now.AddHours(16),
+                EndDateTime = DateTime.Now.AddHours(72),
+            }
+        };
+    }
+    private List<Booking> GetBooking_6()
+    {
+        return new List<Booking>
+        {
+            new Booking
+            {
+                Name = "Emily Carter",
+                Email = "emily.reed@example.com",
+                StartDateTime = DateTime.Now.AddHours(2),
+                EndDateTime = DateTime.Now.AddHours(4),
+            }
+        };
+    }
+    private List<Booking> GetBooking_7()
+    {
+        return new List<Booking>
+        {
+            new Booking
+            {
+                Name = "James Bennett",
+                Email = "james.reed@example.com",
+                StartDateTime = DateTime.Now.AddHours(1),
+                EndDateTime = DateTime.Now.AddHours(2),
             }
         };
     }
 }
+
+
