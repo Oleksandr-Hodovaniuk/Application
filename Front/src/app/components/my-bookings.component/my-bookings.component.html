@@ -49,6 +49,7 @@
       <!-- Icons -->
       <div class="flex gap-3 mt-4 sm:mt-0 sm:ml-4">
         <button title="Edit" 
+          [routerLink]="['/patch-booking', booking.id]"
           class="hover:text-blue-600 transition-colors cursor-pointer">
           <img src="https://localhost:7102/Icons/edit.svg" alt="Edit" class="w-6 h-6 object-contain" />
         </button>

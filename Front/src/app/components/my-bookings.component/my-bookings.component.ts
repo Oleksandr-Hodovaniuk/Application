@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MyBookingModel } from '../../models/my-bookings.model';
 import { CommonModule } from '@angular/common';
 import { BookingService } from '../../services/booking.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-my-bookings',
@@ -16,7 +16,7 @@ export class MyBookingsComponent {
   showConfirmModal: boolean = false;
   selectedBookingId: number | null = null;
 
-  constructor(private bookingService: BookingService){}
+  constructor(private bookingService: BookingService, private router: Router){}
 
   ngOnInit() {
   this.bookingService.getAllBookings().subscribe({
@@ -67,9 +67,12 @@ export class MyBookingsComponent {
     }
   }
 
-  // When cancel.
   cancelDelete() {
     this.selectedBookingId = null;
     this.showConfirmModal = false;
+  }
+
+  goToEditBooking(id: number) {
+    this.router.navigate(['/bookings/edit', id]);
   }
 } 
