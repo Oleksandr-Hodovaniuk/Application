@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using CoWorking.Application.CommandsAndQueries.Bookings.Commands;
+using CoWorking.Application.DTOs.Booking;
+using CoWorking.Application.DTOs.Room;
 using CoWorking.Application.Exceptions;
 using CoWorking.Application.Interfaces.Repositories;
 using CoWorking.Core.Entities;
@@ -19,26 +21,31 @@ public class CreateBookingHandler : IRequestHandler<CreateBookingCommand>
 
     public async Task Handle(CreateBookingCommand request, CancellationToken cancellationToken)
     {
-        if (!await _repository.RoomExistsByIdAsync(request.dto.RoomId, cancellationToken))
-        {
-            throw new NotFoundException("Room with given id doesn't exist.");
-        }
+        _ = await _repository.RoomExistsByIdAsync(request.dto.RoomId, cancellationToken)
+            ? true
+            : throw new NotFoundException("Room with given id doesn't exist.");
 
-        if (await _repository.IsBookingOverlappingAsync(request.dto.Email,
-            request.dto.StartDateTime,
-            request.dto.EndDateTime,
-            cancellationToken))
+        var overlapDto = new BookingOverlappingCreateDTO
         {
-            throw new BusinessException($"{request.dto.Email} already have a booking that overlaps with this time.");
-        }
+            Email = request.dto.Email,
+            StartDateTime = request.dto.StartDateTime,
+            EndDateTime = request.dto.EndDateTime,
+        };
 
-        if (!await _repository.RoomAvailableAsync(request.dto.RoomId,
-            request.dto.StartDateTime,
-            request.dto.EndDateTime,
-            cancellationToken))
+        _ = await _repository.IsBookingOverlappingAsync(overlapDto, cancellationToken)
+            ? throw new BusinessException($"{request.dto.Email} already have a booking that overlaps with this time.")
+            : false;
+
+        var availableDto = new RoomAvailableCreateDTO
         {
-            throw new BusinessException("Unfortunately, there are no available rooms at this time.");
-        }
+            RoomId = request.dto.RoomId,
+            StartDateTime = request.dto.StartDateTime,
+            EndDateTime = request.dto.EndDateTime
+        };
+
+        _ = await _repository.RoomAvailableAsync(availableDto, cancellationToken)
+            ? true
+            : throw new BusinessException("Unfortunately, there are no available rooms at this time."); ;    
 
         var booking = _mapper.Map<Booking>(request.dto);
 

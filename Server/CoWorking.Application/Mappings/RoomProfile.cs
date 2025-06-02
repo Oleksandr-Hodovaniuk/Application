@@ -8,9 +8,11 @@ public class RoomProfile : Profile
 {
     public RoomProfile()
     {
-        CreateMap<Room, RoomDTO>()
-            .ForMember(dest => dest.Bookings, opt =>
-                opt.MapFrom(src => src.Bookings));
+        CreateMap<Room, RoomDTO>()          
+            .ForMember(dest => dest.Availability, opt =>
+            opt.MapFrom(src => src.Quantity - src.Bookings
+                .Where(b => b.StartDateTime <= DateTime.Now
+                && b.EndDateTime > DateTime.Now).Count()));
 
         CreateMap<Room, RoomCharacteristicsDTO>();
     }

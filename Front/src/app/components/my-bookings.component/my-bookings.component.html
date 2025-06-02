@@ -1,0 +1,149 @@
+<!-- Title -->
+<h2 class="text-2xl sm:text-3xl font-semibold text-gray-800 text-center mb-6">My bookings</h2>
+
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" *ngIf="bookings.length > 0; else noBookings">
+  <ul class="space-y-6">
+    <li *ngFor="let booking of bookings" class="flex flex-col sm:flex-row sm:items-start sm:justify-between p-4 rounded-lg shadow-lg bg-white">
+
+      <!-- Picture -->
+      <img
+        [src]="'http://localhost:5199/Pictures/' + booking.workspacePicture"
+        alt="Зображення простору"
+        class="w-full sm:w-[240px] h-auto max-h-[192px] object-cover rounded-xl mb-4 sm:mb-0"
+      />
+
+      <!-- Centre -->
+      <div class="flex flex-col flex-grow sm:ml-6">
+
+        <!-- Email -->
+        <div class="text-black mb-2 font-medium text-base sm:text-lg">
+          {{ booking.email }}
+        </div>
+
+        <!-- Workspace naem and capacity -->
+        <div class="font-semibold text-lg sm:text-xl md:text-2xl mb-2">
+          <span>{{ booking.workspaceName }}</span>
+          <span class="ml-1">
+            <ng-container *ngIf="booking.workspaceName === 'Open space' && booking.roomCapacity === 1; else peopleText">
+              1 desk
+            </ng-container>
+            <ng-template #peopleText>
+              for {{ booking.roomCapacity }} people
+            </ng-template>
+          </span>
+        </div>
+
+        <!-- Date -->
+        <div class="flex items-center gap-2 text-gray-600 text-sm mt-1">
+          <img src="http://localhost:5199/Icons/calendar.svg" alt="Дата" class="w-5 h-5 object-contain" />
+          <span class="text-black font-medium">{{ booking.startDateTime | date:'MMM.d.y' }} — {{ booking.endDateTime | date:'MMM.d.y' }}</span>
+        </div>
+
+        <!-- Time -->
+        <div class="flex items-center gap-2 text-gray-500 text-sm mt-1">
+          <img src="http://localhost:5199/Icons/clock.svg" alt="Час" class="w-5 h-5 object-contain" />
+          <span class="text-black font-medium">from {{ booking.startDateTime | date:'H:mm' }} — {{ booking.endDateTime | date:'H:mm' }}</span>
+        </div>
+      </div>
+
+      <!-- Icons -->
+      <div class="flex gap-3 mt-4 sm:mt-0 sm:ml-4">
+        <button title="Edit" 
+          [routerLink]="['/patch-booking', booking.id]"
+          class="hover:text-blue-600 transition-colors cursor-pointer">
+          <img src="http://localhost:5199/Icons/edit.svg" alt="Edit" class="w-6 h-6 object-contain" />
+        </button>
+        <button title="Delete" 
+          (click)="onDeleteClick(booking.id)"
+          class="hover:text-red-600 transition-colors cursor-pointer">
+          <img src="http://localhost:5199/Icons/trash.svg" alt="Delete" class="w-6 h-6 object-contain" />
+        </button>
+      </div>
+
+    </li>
+  </ul>
+</div>
+
+<!-- If bookings is empty -->
+<ng-template #noBookings>
+  <div class="flex items-center justify-center min-h-[70vh] px-4">
+    <div class="max-w-md w-full text-center bg-white rounded-lg shadow-xl/30 p-6 sm:p-8 ">
+      <img
+        src="http://localhost:5199/Icons/dandruff.png"
+        alt="No bookings"
+        class="mx-auto mb-6 w-28 h-28 object-contain opacity-70"
+      />
+      <p class="mb-4 text-lg sm:text-xl font-semibold text-lg sm:text-xl md:text-2xl">
+        You don't have any bookings yet
+      </p>
+      <p class="mb-6 text-gray-500 text-sm sm:text-base">
+        Start by choosing a coworking space
+      </p>
+      <button
+        routerLink="/workspaces"
+        class="px-6 py-2 bg-indigo-600 text-white font-semibold rounded-md hover:bg-blue-600 transition-colors text-base sm:text-lg cursor-pointer"
+      >
+        Select a workspace
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Confirm Delete Modal -->
+<div
+  *ngIf="showConfirmModal"
+  class="fixed inset-0 z-50 flex items-center justify-center px-4 sm:px-6"
+>
+  <!-- Backdrop -->
+  <div
+    class="absolute inset-0 bg-black/50 backdrop-blur-sm"
+    (click)="cancelDelete()"
+  ></div>
+
+  <!-- Modal Content -->
+  <div
+    class="relative z-10 bg-white p-3 sm:p-4 rounded-xl shadow-xl w-full max-w-xs sm:max-w-md text-center"
+  >
+    <!-- Top Icons Row -->
+    <div class="flex justify-between items-start mb-6">
+      <!-- Left Icon -->
+      <img
+        src="http://localhost:5199/Icons/big-trash.svg"
+        alt="Trash Icon"
+        class="w-15 h-15 object-contain"
+      />
+
+      <!-- Right Close Icon -->
+      <img
+        src="http://localhost:5199/Icons/x.svg"
+        alt="Close"
+        (click)="cancelDelete()"
+        class="w-8 h-8 object-contain opacity-70 cursor-pointer hover:opacity-100 transition"
+      />
+    </div>
+
+    <!-- Centered Text -->
+    <h3 class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">
+      Cancel your booking?
+    </h3>
+    <p class="mb-5 sm:mb-6 text-gray-600 text-sm sm:text-base">
+      This action cannot be undone
+    </p>
+
+    <!-- Full-width Buttons -->
+    <div class="flex flex-row gap-3">
+      <button
+        (click)="confirmDelete()"
+        class="w-full px-5 py-2 text-sm sm:text-base bg-red-800 text-white rounded-md hover:bg-red-500 transition cursor-pointer"
+      >
+        Delete
+      </button>
+      <button
+        (click)="cancelDelete()"
+        class="w-full px-5 py-2 text-sm sm:text-base bg-indigo-600 text-white rounded-md hover:bg-blue-600 transition cursor-pointer"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

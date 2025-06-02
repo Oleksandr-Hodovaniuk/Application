@@ -20,12 +20,8 @@ public class GetByIdBookingHandler : IRequestHandler<GetByIdBookingQuery, PatchB
 
     public async Task<PatchBookingDTO> Handle(GetByIdBookingQuery request, CancellationToken cancellationToken)
     {
-        var booking = await _repository.GetByIdAsync(request.id, cancellationToken);
-
-        if (booking == null)
-        {
-            throw new NotFoundException($"Booking with given id doesn't exist.");
-        }
+        var booking = await _repository.GetByIdAsync(request.id, cancellationToken)
+            ?? throw new NotFoundException($"Booking with given id doesn't exist.");
 
         var workspaces = await _repository.GetWorkspacesInfoAsync(cancellationToken);
 

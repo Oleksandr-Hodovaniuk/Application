@@ -14,7 +14,7 @@ public class WorkspaceProfile : Profile
             .ForMember(dest => dest.Icons,opt =>
                 opt.MapFrom(src => src.WorkspaceIcons.Select(wi => wi.Icon.Name)))
             .ForMember(dest => dest.Pictures,opt =>
-                opt.MapFrom(src => src.Pictures.Select(p => p.Url)))
+                opt.MapFrom(src => src.Pictures.Select(p => p.Name)))
             .ForMember(dest => dest.Rooms,opt =>
                 opt.MapFrom(src => src.Rooms));
 

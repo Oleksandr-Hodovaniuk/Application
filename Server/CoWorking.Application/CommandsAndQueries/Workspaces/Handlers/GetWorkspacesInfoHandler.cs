@@ -26,8 +26,6 @@ public class GetWorkspacesInfoHandler : IRequestHandler<GetWorkspacesInfoQuery, 
             return new List<DropDownWorkspaceDTO>();
         }
 
-        var rooms = workspaces.SelectMany(w => w.Rooms).ToList();
-
         return _mapper.Map<List<DropDownWorkspaceDTO>>(workspaces);
     }
 }

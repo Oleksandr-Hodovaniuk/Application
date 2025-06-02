@@ -27,7 +27,7 @@ public class WorkspacesController : ControllerBase
         return Ok(workspaces);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("dropdown")]
     public async Task<IActionResult> GetWorkpacesInfoAsync(CancellationToken cancellationToken)
     {
         var workspaces = await _mediator.Send(new GetWorkspacesInfoQuery(), cancellationToken);
