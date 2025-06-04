@@ -14,4 +14,17 @@ internal class CoworkingRepository(CoWorkingDbContext dbContext) : ICoworkingRep
             .AsSplitQuery()
             .ToListAsync(cancellationToken);
     }
+
+    public async Task<IEnumerable<Workspace>> GetAllWorkspacesByCoworkingIdAsync(int coworkingId, CancellationToken cancellationToken)
+    {
+        return await dbContext.Workspaces
+            .Include(w => w.Pictures)
+            .Include(w => w.Rooms)
+                .ThenInclude(r => r.Bookings)
+            .Include(w => w.WorkspaceIcons)
+                .ThenInclude(wi => wi.Icon)
+            .Where(w => w.CoworkingId == coworkingId)
+            .AsSplitQuery()
+            .ToListAsync(cancellationToken);
+    }
 }

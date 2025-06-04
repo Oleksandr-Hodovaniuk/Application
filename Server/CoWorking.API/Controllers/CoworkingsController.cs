@@ -29,4 +29,17 @@ public class CoworkingsController : ControllerBase
 
 		return Ok(coworkings);
 	}
+
+	[HttpGet("{coworkingId}")]
+	public async Task<IActionResult> GetAllWorkspacesByCoworkingidAsync(int coworkingId, CancellationToken cancellationToken)
+	{
+		var workspaces = await _mediator.Send(new GetAllWorkspacesByCoworkingIdQuery(coworkingId), cancellationToken);
+
+		if (!workspaces.Any())
+		{
+			return NoContent();
+		}
+
+		return Ok(workspaces);
+	}
 }
