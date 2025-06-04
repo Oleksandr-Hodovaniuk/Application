@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using CoWorking.Application.CommandsAndQueries.Coworkings.Queries;
 using CoWorking.Application.DTOs.Coworking;
 using CoWorking.Application.Interfaces.Repositories;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoWorking.API.Controllers;
@@ -9,19 +11,22 @@ namespace CoWorking.API.Controllers;
 [Route("api/coworkings")]
 public class CoworkingsController : ControllerBase
 {
-    private readonly ICoworkingRepository _repository;
-	private readonly IMapper _mapper;
-	public CoworkingsController(ICoworkingRepository repository, IMapper mapper)
+	private readonly IMediator _mediator;
+	public CoworkingsController(IMediator mediator)
 	{
-		_repository = repository;
-		_mapper = mapper;
+		_mediator = mediator;
 	}
 
 	[HttpGet]
 	public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken)
 	{
-		var coworkings = await _repository.GetAllAsync(cancellationToken);
+		var coworkings = await _mediator.Send(new GetAllCoworkingsQuery(), cancellationToken);
 
-		return Ok(_mapper.Map<IEnumerable<CoworkingDTO>>(coworkings));
+		if (!coworkings.Any())
+		{
+			return NoContent();
+		}
+
+		return Ok(coworkings);
 	}
 }
