@@ -15,8 +15,19 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
             await dbContext.Icons.AddRangeAsync(icons, cancellationToken);
             await dbContext.SaveChangesAsync(cancellationToken);
 
+
             var workspaces = GetWorkspaces();
-            await dbContext.Workspaces.AddRangeAsync(workspaces, cancellationToken);
+
+
+            var coworking = new Coworking()
+            {
+                Name = "WorkClub Pechersk",
+                Description = "Modern coworking in the heart of Pechersk with quiet rooms and coffee on tap.",
+                Addresses = new Address { City = "Kyiv", Street = "Yaroslaviv Val St", BuildingNumber = 123 },
+                Workspaces = workspaces
+            };
+
+            await dbContext.Coworkings.AddAsync(coworking, cancellationToken);
             await dbContext.SaveChangesAsync(cancellationToken);
 
             var workspacesIcons = new List<WorkspaceIcon>
@@ -35,10 +46,13 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
                 new WorkspaceIcon { WorkspaceId = workspaces[2].Id, IconId = icons[4].Id },
                 new WorkspaceIcon { WorkspaceId = workspaces[2].Id, IconId = icons[5].Id }
             };
+
             await dbContext.WorkspaceIcons.AddRangeAsync(workspacesIcons, cancellationToken);
             await dbContext.SaveChangesAsync(cancellationToken);
+
         }
     }
+
     private List<Icon> GetIcons()
     {
         return new List<Icon>

@@ -7,11 +7,28 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CoWorking.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class _1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Coworkings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    Addresses_City = table.Column<string>(type: "text", nullable: false),
+                    Addresses_Street = table.Column<string>(type: "text", nullable: false),
+                    Addresses_BuildingNumber = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Coworkings", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Icons",
                 columns: table => new
@@ -34,11 +51,18 @@ namespace CoWorking.Infrastructure.Migrations
                     Type = table.Column<string>(type: "text", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
-                    MaxBookingDuration = table.Column<int>(type: "integer", nullable: false)
+                    MaxBookingDuration = table.Column<int>(type: "integer", nullable: false),
+                    CoworkingId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Workspaces", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Workspaces_Coworkings_CoworkingId",
+                        column: x => x.CoworkingId,
+                        principalTable: "Coworkings",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -148,6 +172,11 @@ namespace CoWorking.Infrastructure.Migrations
                 name: "IX_WorkspaceIcons_IconId",
                 table: "WorkspaceIcons",
                 column: "IconId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Workspaces_CoworkingId",
+                table: "Workspaces",
+                column: "CoworkingId");
         }
 
         /// <inheritdoc />
@@ -170,6 +199,9 @@ namespace CoWorking.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Workspaces");
+
+            migrationBuilder.DropTable(
+                name: "Coworkings");
         }
     }
 }

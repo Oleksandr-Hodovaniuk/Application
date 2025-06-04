@@ -54,6 +54,27 @@ namespace CoWorking.Infrastructure.Migrations
                     b.ToTable("Bookings");
                 });
 
+            modelBuilder.Entity("CoWorking.Core.Entities.Coworking", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Coworkings");
+                });
+
             modelBuilder.Entity("CoWorking.Core.Entities.Icon", b =>
                 {
                     b.Property<int>("Id")
@@ -125,6 +146,9 @@ namespace CoWorking.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CoworkingId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
@@ -141,6 +165,8 @@ namespace CoWorking.Infrastructure.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CoworkingId");
 
                     b.ToTable("Workspaces");
                 });
@@ -171,6 +197,36 @@ namespace CoWorking.Infrastructure.Migrations
                     b.Navigation("Room");
                 });
 
+            modelBuilder.Entity("CoWorking.Core.Entities.Coworking", b =>
+                {
+                    b.OwnsOne("CoWorking.Core.Entities.Address", "Addresses", b1 =>
+                        {
+                            b1.Property<int>("CoworkingId")
+                                .HasColumnType("integer");
+
+                            b1.Property<int>("BuildingNumber")
+                                .HasColumnType("integer");
+
+                            b1.Property<string>("City")
+                                .IsRequired()
+                                .HasColumnType("text");
+
+                            b1.Property<string>("Street")
+                                .IsRequired()
+                                .HasColumnType("text");
+
+                            b1.HasKey("CoworkingId");
+
+                            b1.ToTable("Coworkings");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CoworkingId");
+                        });
+
+                    b.Navigation("Addresses")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("CoWorking.Core.Entities.Picture", b =>
                 {
                     b.HasOne("CoWorking.Core.Entities.Workspace", "Workspace")
@@ -192,6 +248,17 @@ namespace CoWorking.Infrastructure.Migrations
                     b.Navigation("Workspace");
                 });
 
+            modelBuilder.Entity("CoWorking.Core.Entities.Workspace", b =>
+                {
+                    b.HasOne("CoWorking.Core.Entities.Coworking", "Coworking")
+                        .WithMany("Workspaces")
+                        .HasForeignKey("CoworkingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Coworking");
+                });
+
             modelBuilder.Entity("CoWorking.Core.Entities.WorkspaceIcon", b =>
                 {
                     b.HasOne("CoWorking.Core.Entities.Icon", "Icon")
@@ -209,6 +276,11 @@ namespace CoWorking.Infrastructure.Migrations
                     b.Navigation("Icon");
 
                     b.Navigation("Workspace");
+                });
+
+            modelBuilder.Entity("CoWorking.Core.Entities.Coworking", b =>
+                {
+                    b.Navigation("Workspaces");
                 });
 
             modelBuilder.Entity("CoWorking.Core.Entities.Icon", b =>
