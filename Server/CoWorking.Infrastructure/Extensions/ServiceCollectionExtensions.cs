@@ -22,6 +22,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ISeeder, DefaultSeeder>();
 
         // Registration of repositories.
+        services.AddScoped<ICoworkingRepository, CoworkingRepository>();
         services.AddScoped<IWorkspaceRepository, WorkspaceRepository>();
         services.AddScoped<IBookingRepository, BookingRepository>();
     }

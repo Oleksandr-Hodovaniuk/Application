@@ -12,5 +12,8 @@ public interface IGenericRepository<T> where T : class
     /// <summary>
     /// Returns all workspaces with the given ID including rooms.
     /// </summary>
-    Task<IEnumerable<Workspace>> GetWorkspacesInfoAsync(CancellationToken cancellationToken);
+    Task<IEnumerable<Workspace>> GetWorkspacesInfoAsync(CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
 }
