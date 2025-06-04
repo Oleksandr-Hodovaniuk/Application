@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CoWorking.Infrastructure.Migrations
 {
     [DbContext(typeof(CoWorkingDbContext))]
-    [Migration("20250604095702_1")]
+    [Migration("20250604120744_1")]
     partial class _1
     {
         /// <inheritdoc />
@@ -64,6 +64,10 @@ namespace CoWorking.Infrastructure.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CoworkingPicture")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Description")
                         .IsRequired()

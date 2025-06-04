@@ -16,15 +16,16 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
             await dbContext.SaveChangesAsync(cancellationToken);
 
 
-            var workspaces = GetWorkspaces();
+            var workspaces_1 = GetWorkspaces_1();
 
 
             var coworking = new Coworking()
-            {
+            {   
+                CoworkingPicture = "coworking-1.png",
                 Name = "WorkClub Pechersk",
                 Description = "Modern coworking in the heart of Pechersk with quiet rooms and coffee on tap.",
                 Addresses = new Address { City = "Kyiv", Street = "Yaroslaviv Val St", BuildingNumber = 123 },
-                Workspaces = workspaces
+                Workspaces = workspaces_1
             };
 
             await dbContext.Coworkings.AddAsync(coworking, cancellationToken);
@@ -32,19 +33,19 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
 
             var workspacesIcons = new List<WorkspaceIcon>
             {
-                new WorkspaceIcon { WorkspaceId = workspaces[0].Id, IconId = icons[0].Id },
-                new WorkspaceIcon { WorkspaceId = workspaces[0].Id, IconId = icons[1].Id },
-                new WorkspaceIcon { WorkspaceId = workspaces[0].Id, IconId = icons[2].Id },
-                new WorkspaceIcon { WorkspaceId = workspaces[0].Id, IconId = icons[3].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_1[0].Id, IconId = icons[0].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_1[0].Id, IconId = icons[1].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_1[0].Id, IconId = icons[2].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_1[0].Id, IconId = icons[3].Id },
 
-                new WorkspaceIcon { WorkspaceId = workspaces[1].Id, IconId = icons[0].Id },
-                new WorkspaceIcon { WorkspaceId = workspaces[1].Id, IconId = icons[2].Id },
-                new WorkspaceIcon { WorkspaceId = workspaces[1].Id, IconId = icons[4].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_1[1].Id, IconId = icons[0].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_1[1].Id, IconId = icons[2].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_1[1].Id, IconId = icons[4].Id },
 
-                new WorkspaceIcon { WorkspaceId = workspaces[2].Id, IconId = icons[0].Id },
-                new WorkspaceIcon { WorkspaceId = workspaces[2].Id, IconId = icons[2].Id },
-                new WorkspaceIcon { WorkspaceId = workspaces[2].Id, IconId = icons[4].Id },
-                new WorkspaceIcon { WorkspaceId = workspaces[2].Id, IconId = icons[5].Id }
+                new WorkspaceIcon { WorkspaceId = workspaces_1[2].Id, IconId = icons[0].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_1[2].Id, IconId = icons[2].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_1[2].Id, IconId = icons[4].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_1[2].Id, IconId = icons[5].Id }
             };
 
             await dbContext.WorkspaceIcons.AddRangeAsync(workspacesIcons, cancellationToken);
@@ -77,7 +78,7 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
             new Icon { Name = "big-trash.svg"},
         };
     }
-    private List<Workspace> GetWorkspaces()
+    private List<Workspace> GetWorkspaces_1()
     {
         return new List<Workspace>
         {

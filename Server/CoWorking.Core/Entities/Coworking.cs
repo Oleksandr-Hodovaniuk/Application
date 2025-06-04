@@ -3,6 +3,7 @@
 public class Coworking
 {
     public int Id { get; set; }
+    public string CoworkingPicture { get; set; } = default!;
     public string Name { get; set; } = default!;
     public string Description { get; set; } = default!;
     public Address Addresses { get; set; } = default!;
