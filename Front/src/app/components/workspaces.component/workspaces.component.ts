@@ -3,6 +3,7 @@ import { WorkspaceModel } from '../../models/workspace.model';
 import { WorkspaceService } from '../../services/workspace.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-workspaces.component',
@@ -14,14 +15,18 @@ export class WorkspacesComponent {
   // Array to hold all workspaces retrieved from the server
   workspaces: WorkspaceModel[] = [];
 
-  constructor(private workspaceService: WorkspaceService){}
-
   // Array to track selected image index for each workspace (used in image gallery)
   selectedPictureIndices: number[] = [];
 
+  coworkingId!: number;
+
+    constructor(private workspaceService: WorkspaceService, private route: ActivatedRoute){}
+
   // Lifecycle hook that runs after component initialization
   ngOnInit(): void {
-    this.workspaceService.getAllWorkspaces().subscribe(workspaces => {
+    this.coworkingId = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.workspaceService.getAllWorkspaces(this.coworkingId).subscribe(workspaces => {
       this.workspaces = workspaces;
       this.selectedPictureIndices = this.workspaces.map(() => 0);
     });

@@ -43,7 +43,7 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
                     CoworkingPicture = "coworking-3.png",
                     Name = "TechNest Olimpiiska",
                     Description = "A high-tech space near Olimpiiska metro, perfect for team sprints and solo focus.",
-                    Addresses = new Address { City = "Kyiv", Street = "Velyka Vasylkivska St,", BuildingNumber = 45 },
+                    Addresses = new Address { City = "Kyiv", Street = "Velyka Vasylkivska St", BuildingNumber = 45 },
                     Workspaces= workspaces_3
                 }
             };
@@ -415,9 +415,9 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
         return new List<Picture>
         {
             new Picture { Name = "meeting-room-9.png" },
-            new Picture { Name = "private-room-10.png" },
-            new Picture { Name = "private-room-11.png" },
-            new Picture { Name = "private-room-12.png" }
+            new Picture { Name = "meeting-room-10.png" },
+            new Picture { Name = "meeting-room-11.png" },
+            new Picture { Name = "meeting-room-12.png" }
         };
     }
     private List<Room> GetRooms_4()

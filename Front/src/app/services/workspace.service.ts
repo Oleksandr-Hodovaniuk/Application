@@ -7,11 +7,11 @@ import { WorkspaceModel } from '../models/workspace.model';
   providedIn: 'root'
 })
 export class WorkspaceService {
-  private apiUrl = 'http://localhost:5199/api/workspaces';
+  private apiUrl = 'http://localhost:5199/api';
 
   constructor(private http: HttpClient) {}
 
-  getAllWorkspaces(): Observable<WorkspaceModel[]> {
-    return this.http.get<WorkspaceModel[]>(this.apiUrl);
-  }
+  getAllWorkspaces(coworkingId: number): Observable<WorkspaceModel[]> {
+  return this.http.get<WorkspaceModel[]>(`${this.apiUrl}/coworkings/${coworkingId}`);
+}
 }
