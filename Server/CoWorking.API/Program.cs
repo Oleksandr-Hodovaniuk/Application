@@ -14,7 +14,7 @@ builder.Services.AddPresentation();
 builder.Services.AddInfrastructure(builder.Configuration);
 
 // Register Application services to the container.
-builder.Services.AddApplication();
+builder.Services.AddApplication(builder.Configuration);
 
 var app = builder.Build();
 

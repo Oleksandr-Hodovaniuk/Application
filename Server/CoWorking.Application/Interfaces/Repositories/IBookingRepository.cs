@@ -16,6 +16,10 @@ public interface IBookingRepository : IGenericRepository<Booking>
     /// </summary>
     Task<Booking?> GetByIdAsync(int id, CancellationToken cancellationToken);
     /// <summary>
+    /// Returns all bookings including rooms, workspaces and coworkings.
+    /// </summary>
+    Task<IEnumerable<Booking>> GetAllForAiAsync(CancellationToken cancellationToken);
+    /// <summary>
     /// Updates the booking with the given entity.
     /// </summary>
     Task UpdateAsync(Booking entity, CancellationToken cancellationToken);
