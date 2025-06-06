@@ -1,0 +1,39 @@
+User question: "{question}"
+
+Here is a list of current bookings in JSON format:
+{bookings_json}
+
+Please analyze the question and answer it. If question is about bookings, your response must always be in the following JSON format:
+
+{
+  "message": "A short, clear answer to the user's question.",
+  "bookings": [
+    {
+      "name": "string",
+      "email": "string",
+      "coworking": "string",
+      "workspace": "string",
+      "roomCapacity": number,
+      "startDateTime": "ISO 8601 date string",
+      "endDateTime": "ISO 8601 date string"
+    }
+  ]
+}
+
+If the question does not contain any of these keywords: "booking", "reservation", "room", "workspace", respond with:
+
+{
+  "message": "Please ask me something about bookings.",
+  "bookings": []
+}
+
+If there are no matching bookings, return:
+{
+  "message": "A short answer explaining no bookings found.",
+  "bookings": []
+}
+
+
+
+
+DO NOT include any extra explanation or text outside this JSON.

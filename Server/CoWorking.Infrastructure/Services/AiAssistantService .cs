@@ -1,4 +1,5 @@
 ﻿using CoWorking.Application.DTOs.AiAssistant;
+using CoWorking.Application.Exceptions;
 using CoWorking.Application.Interfaces.Repositories;
 using CoWorking.Application.Interfaces.Services;
 using CoWorking.Application.Models;
@@ -20,13 +21,25 @@ public class AiAssistantService : IAiAssistantService
         _httpClient = httpClient;
     }
 
-    public async Task<string> AskAsync(string question, IEnumerable<AiBookingDTO> bookings, CancellationToken cancellationToken)
+    public async Task<AiAssistantResponseDTO> AskAsync(string question, IEnumerable<AiBookingDTO> bookings, CancellationToken cancellationToken)
     {
-        var systemPrompt = $"You are a helpful assistant that answers questions about bookings. Local time is: {DateTime.Now}";
+        // Get system prompt.
+        var baseDir = AppContext.BaseDirectory;
+        var serverRoot = Path.GetFullPath(Path.Combine(baseDir, "..", "..", "..", ".."));
+        var filePath = Path.Combine(serverRoot, "CoWorking.Infrastructure", "Resources", "SystemPrompt.txt");
 
-        var userPrompt = $"User question: \"{question}\". Bookings: \n" +
-            JsonSerializer.Serialize(bookings, new JsonSerializerOptions { WriteIndented = true});
+        var systemTemplate = await File.ReadAllTextAsync(filePath);
+        var systemPrompt = systemTemplate.Replace("{CurrentTime}", DateTime.Now.ToString());
 
+        // Get sser prompt.
+        filePath = Path.Combine(serverRoot, "CoWorking.Infrastructure", "Resources", "UserPrompt.txt");
+
+        var userTemplate = await File.ReadAllTextAsync(filePath);
+        var userPrompt = userTemplate
+            .Replace("{question}", question)
+            .Replace("{bookings_json}", JsonSerializer.Serialize(bookings, new JsonSerializerOptions { WriteIndented = true }));
+
+        // Configure request.
         var requestContent = new
         {
             model = _settings.Model,
@@ -41,16 +54,42 @@ public class AiAssistantService : IAiAssistantService
 
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _settings.ApiKey);
 
+        // Get response.
         var response = await _httpClient.PostAsync(_settings.Endpoint, content, cancellationToken);
 
         if (!response.IsSuccessStatusCode)
         {
-            return "Sorry, I couldn't generate an answer.";
+            throw new BusinessException("AI response could not be parsed.");
         }
 
+        // Read and parse.
         using var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
-        using var doc = await JsonDocument.ParseAsync(stream, cancellationToken: cancellationToken);
+        using var document = await JsonDocument.ParseAsync(stream, cancellationToken: cancellationToken);
 
-        return doc.RootElement.GetProperty("choices")[0].GetProperty("message").GetProperty("content").ToString();
+        // Get the necessary information.
+        var rawContent = document.RootElement
+            .GetProperty("choices")[0]
+            .GetProperty("message")
+            .GetProperty("content")
+            .GetString();
+
+        if (string.IsNullOrWhiteSpace(rawContent))
+        {
+            throw new BusinessException("AI did not return any content.");
+        }
+
+        // Deserializing JSON into the object.
+        var aiResponse = JsonSerializer.Deserialize<AiAssistantResponseDTO>
+        (
+            rawContent,
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+        );
+
+        if (aiResponse == null)
+        {
+            throw new BusinessException("AI response could not be parsed.");
+        }
+
+        return aiResponse;
     }
 }

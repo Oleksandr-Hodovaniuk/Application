@@ -7,7 +7,7 @@ using MediatR;
 
 namespace CoWorking.Application.CommandsAndQueries.AiAssistant.Handlers;
 
-public class GetAnswerHandler : IRequestHandler<GetAnswerQuery, string>
+public class GetAnswerHandler : IRequestHandler<GetAnswerQuery, AiAssistantResponseDTO>
 {
     private readonly IBookingRepository _repository;
     private readonly IAiAssistantService _service;
@@ -19,7 +19,7 @@ public class GetAnswerHandler : IRequestHandler<GetAnswerQuery, string>
         _mapper = mapper;
     }
 
-    public async Task<string> Handle(GetAnswerQuery request, CancellationToken cancellationToken)
+    public async Task<AiAssistantResponseDTO> Handle(GetAnswerQuery request, CancellationToken cancellationToken)
     {
         var bookings = await _repository.GetAllForAiAsync(cancellationToken);
 
