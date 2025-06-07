@@ -9,7 +9,7 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
 {
     public async Task SeedAsync(CancellationToken cancellationToken)
     {
-        if (!await dbContext.Workspaces.AnyAsync(cancellationToken))
+        if (!await dbContext.Coworkings.AnyAsync(cancellationToken))
         {
             var icons = GetIcons();
             await dbContext.Icons.AddRangeAsync(icons, cancellationToken);
