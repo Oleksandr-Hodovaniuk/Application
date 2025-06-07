@@ -30,7 +30,7 @@ public class CoworkingsController : ControllerBase
 		return Ok(coworkings);
 	}
 
-	[HttpGet("{coworkingId}")]
+	[HttpGet("{coworkingId}/workspaces")]
 	public async Task<IActionResult> GetAllWorkspacesByCoworkingidAsync(int coworkingId, CancellationToken cancellationToken)
 	{
 		var workspaces = await _mediator.Send(new GetAllWorkspacesByCoworkingIdQuery(coworkingId), cancellationToken);

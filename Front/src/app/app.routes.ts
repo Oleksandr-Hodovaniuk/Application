@@ -12,5 +12,5 @@ export const routes: Routes = [
     { path: 'create-booking', component: CreateBookingComponent },
     { path: 'patch-booking/:id', component: PatchBookingComponent },
     { path: 'coworkings', component: CoworkingComponent},
-    { path: 'coworkings/:id', component: WorkspacesComponent}
+    { path: 'coworkings/:id/workspaces', component: WorkspacesComponent}
 ];

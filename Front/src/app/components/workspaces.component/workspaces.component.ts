@@ -26,7 +26,7 @@ export class WorkspacesComponent {
   ngOnInit(): void {
     this.coworkingId = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.workspaceService.getAllWorkspaces(this.coworkingId).subscribe(workspaces => {
+    this.workspaceService.getAllWorkspacesByCoworkingId(this.coworkingId).subscribe(workspaces => {
       this.workspaces = workspaces;
       this.selectedPictureIndices = this.workspaces.map(() => 0);
     });

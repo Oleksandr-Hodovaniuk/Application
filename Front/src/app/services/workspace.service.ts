@@ -6,12 +6,12 @@ import { WorkspaceModel } from '../models/workspace.model';
 @Injectable({
   providedIn: 'root'
 })
-export class WorkspaceService {
-  private apiUrl = 'http://localhost:5199/api';
+  export class WorkspaceService {
+    private apiUrl = 'http://localhost:5199/api';
 
-  constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) {}
 
-  getAllWorkspaces(coworkingId: number): Observable<WorkspaceModel[]> {
-  return this.http.get<WorkspaceModel[]>(`${this.apiUrl}/coworkings/${coworkingId}`);
-}
+    getAllWorkspacesByCoworkingId(coworkingId: number): Observable<WorkspaceModel[]> {
+    return this.http.get<WorkspaceModel[]>(`${this.apiUrl}/coworkings/${coworkingId}/workspaces`);
+  }
 }

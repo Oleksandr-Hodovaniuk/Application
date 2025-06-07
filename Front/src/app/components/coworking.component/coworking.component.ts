@@ -27,7 +27,7 @@ export class CoworkingComponent implements OnInit {
   }
 
   onViewDetails(coworkingId: number): void {
-    this.router.navigate(['/coworkings', coworkingId]);
+    this.router.navigate(['/coworkings', coworkingId, 'workspaces']);
   }
   
   onRefresh(): void {
