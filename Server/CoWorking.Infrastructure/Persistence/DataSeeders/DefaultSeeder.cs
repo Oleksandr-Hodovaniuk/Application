@@ -9,36 +9,94 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
 {
     public async Task SeedAsync(CancellationToken cancellationToken)
     {
-        if (!await dbContext.Workspaces.AnyAsync(cancellationToken))
+        if (!await dbContext.Coworkings.AnyAsync(cancellationToken))
         {
             var icons = GetIcons();
             await dbContext.Icons.AddRangeAsync(icons, cancellationToken);
             await dbContext.SaveChangesAsync(cancellationToken);
 
-            var workspaces = GetWorkspaces();
-            await dbContext.Workspaces.AddRangeAsync(workspaces, cancellationToken);
+            var workspaces_1 = GetWorkspaces_1();
+            var workspaces_2 = GetWorkspaces_2();
+            var workspaces_3 = GetWorkspaces_3();   
+
+            var coworkings = new List<Coworking> 
+            {
+                new Coworking()
+                {
+                    CoworkingPicture = "coworking-1.png",
+                    Name = "WorkClub Pechersk",
+                    Description = "Modern coworking in the heart of Pechersk with quiet rooms and coffee on tap.",
+                    Addresses = new Address { City = "Kyiv", Street = "Yaroslaviv Val St", BuildingNumber = 123 },
+                    Workspaces = workspaces_1
+                },
+                new Coworking()
+                {
+                    CoworkingPicture = "coworking-2.png",
+                    Name = "Creative Hub Lvivska",
+                    Description = "A compact, design-focused space with open desks and strong community vibes.",
+                    Addresses = new Address { City = "Kyiv", Street = "Lvivska Square", BuildingNumber = 12 },
+                    Workspaces = workspaces_2
+                },
+                new Coworking()
+                {
+                    CoworkingPicture = "coworking-3.png",
+                    Name = "TechNest Olimpiiska",
+                    Description = "A high-tech space near Olimpiiska metro, perfect for team sprints and solo focus.",
+                    Addresses = new Address { City = "Kyiv", Street = "Velyka Vasylkivska St", BuildingNumber = 45 },
+                    Workspaces= workspaces_3
+                }
+            };
+
+            await dbContext.Coworkings.AddRangeAsync(coworkings, cancellationToken);
             await dbContext.SaveChangesAsync(cancellationToken);
 
             var workspacesIcons = new List<WorkspaceIcon>
             {
-                new WorkspaceIcon { WorkspaceId = workspaces[0].Id, IconId = icons[0].Id },
-                new WorkspaceIcon { WorkspaceId = workspaces[0].Id, IconId = icons[1].Id },
-                new WorkspaceIcon { WorkspaceId = workspaces[0].Id, IconId = icons[2].Id },
-                new WorkspaceIcon { WorkspaceId = workspaces[0].Id, IconId = icons[3].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_1[0].Id, IconId = icons[0].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_1[0].Id, IconId = icons[1].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_1[0].Id, IconId = icons[2].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_1[0].Id, IconId = icons[3].Id },
 
-                new WorkspaceIcon { WorkspaceId = workspaces[1].Id, IconId = icons[0].Id },
-                new WorkspaceIcon { WorkspaceId = workspaces[1].Id, IconId = icons[2].Id },
-                new WorkspaceIcon { WorkspaceId = workspaces[1].Id, IconId = icons[4].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_1[1].Id, IconId = icons[0].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_1[1].Id, IconId = icons[2].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_1[1].Id, IconId = icons[4].Id },
 
-                new WorkspaceIcon { WorkspaceId = workspaces[2].Id, IconId = icons[0].Id },
-                new WorkspaceIcon { WorkspaceId = workspaces[2].Id, IconId = icons[2].Id },
-                new WorkspaceIcon { WorkspaceId = workspaces[2].Id, IconId = icons[4].Id },
-                new WorkspaceIcon { WorkspaceId = workspaces[2].Id, IconId = icons[5].Id }
+                new WorkspaceIcon { WorkspaceId = workspaces_1[2].Id, IconId = icons[0].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_1[2].Id, IconId = icons[2].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_1[2].Id, IconId = icons[4].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_1[2].Id, IconId = icons[5].Id },
+
+                new WorkspaceIcon { WorkspaceId = workspaces_2[0].Id, IconId = icons[0].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_2[0].Id, IconId = icons[1].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_2[0].Id, IconId = icons[2].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_2[0].Id, IconId = icons[3].Id },
+
+                new WorkspaceIcon { WorkspaceId = workspaces_2[1].Id, IconId = icons[0].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_2[1].Id, IconId = icons[2].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_2[1].Id, IconId = icons[4].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_2[1].Id, IconId = icons[5].Id },
+
+                new WorkspaceIcon { WorkspaceId = workspaces_3[0].Id, IconId = icons[0].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_3[0].Id, IconId = icons[1].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_3[0].Id, IconId = icons[2].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_3[0].Id, IconId = icons[3].Id },
+
+                new WorkspaceIcon { WorkspaceId = workspaces_3[1].Id, IconId = icons[0].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_3[1].Id, IconId = icons[2].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_3[1].Id, IconId = icons[4].Id },
+
+                new WorkspaceIcon { WorkspaceId = workspaces_3[2].Id, IconId = icons[0].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_3[2].Id, IconId = icons[2].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_3[2].Id, IconId = icons[4].Id },
+                new WorkspaceIcon { WorkspaceId = workspaces_3[2].Id, IconId = icons[5].Id }
             };
+
             await dbContext.WorkspaceIcons.AddRangeAsync(workspacesIcons, cancellationToken);
             await dbContext.SaveChangesAsync(cancellationToken);
         }
     }
+
+    // icons
     private List<Icon> GetIcons()
     {
         return new List<Icon>
@@ -63,7 +121,9 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
             new Icon { Name = "big-trash.svg"},
         };
     }
-    private List<Workspace> GetWorkspaces()
+
+    // Workspaces.
+    private List<Workspace> GetWorkspaces_1()
     {
         return new List<Workspace>
         {
@@ -101,6 +161,71 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
             }
         };
     }
+    private List<Workspace> GetWorkspaces_2()
+    {
+        return new List<Workspace>
+        {
+            new Workspace {
+                Type = WorkspaceType.OpenSpace,
+                Name = "Open space",
+                Description = "An energetic open workspace ideal for freelancers" +
+                " and small teams who thrive in a dynamic, community-driven" +
+                " environment. Pick any free desk and enjoy the freedom to" +
+                " work your way.",
+                MaxBookingDuration = 30,
+                Pictures = GetPictures_4(),
+                Rooms = GetRooms_4()
+            },
+            new Workspace {
+                Type = WorkspaceType.MeetingRoom,
+                Name = "Meeting rooms",
+                Description = "The perfect space for focused meetings, creative workshops," +
+                " or impactful client presentations. Fully equipped with displays," +
+                " whiteboards, and comfy chairs to help ideas flow and decisions happen.",
+                MaxBookingDuration = 1,
+                Pictures = GetPictures_5(),
+                Rooms = GetRooms_5()
+            }
+        };
+    }
+    private List<Workspace> GetWorkspaces_3()
+    {
+        return new List<Workspace>
+        {
+            new Workspace {
+                Type = WorkspaceType.OpenSpace,
+                Name = "Open space",
+                Description = "A dynamic open space made for creators and" +
+                " small teams. Pick your spot, plug in, and get going — surrounded" +
+                " by like-minded professionals.",
+                MaxBookingDuration = 30,
+                Pictures = GetPictures_6(),
+                Rooms = GetRooms_6()
+            },
+            new Workspace {
+                Type = WorkspaceType.PrivateRoom,
+                Name = "Private rooms",
+                Description = "Perfect for deep focus, video conferencing, or quick" +
+                " team syncs. These enclosed rooms provide full privacy and come" +
+                " in various sizes to suit your needs.",
+                MaxBookingDuration = 30,
+                Pictures = GetPictures_7(),
+                Rooms = GetRooms_7()
+            },
+            new Workspace {
+                Type = WorkspaceType.MeetingRoom,
+                Name = "Meeting rooms",
+                Description = "Created for efficient meetings, workshops, and client" +
+                " presentations. These rooms are equipped with displays, whiteboards," +
+                " and ergonomic seating to ensure smooth and productive sessions.",
+                MaxBookingDuration = 1,
+                Pictures = GetPictures_8(),
+                Rooms = GetRooms_8()
+            }
+        };
+    }
+
+    // Pictures.
     private List<Picture> GetPictures_1()
     {
         return new List<Picture>
@@ -131,6 +256,58 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
             new Picture { Name = "meeting-room-4.png" }
         };
     }
+    private List<Picture> GetPictures_4()
+    {
+        return new List<Picture>
+        {
+            new Picture { Name = "open-space-5.png" },
+            new Picture { Name = "open-space-6.png" },
+            new Picture { Name = "open-space-7.png" },
+            new Picture { Name = "open-space-8.png" }
+        };
+    }
+    private List<Picture> GetPictures_5()
+    {
+        return new List<Picture>
+        {
+            new Picture { Name = "meeting-room-5.png" },
+            new Picture { Name = "meeting-room-6.png" },
+            new Picture { Name = "meeting-room-7.png" },
+            new Picture { Name = "meeting-room-8.png" }
+        };
+    }
+    private List<Picture> GetPictures_6()
+    {
+        return new List<Picture>
+        {
+            new Picture { Name = "open-space-9.png" },
+            new Picture { Name = "open-space-10.png" },
+            new Picture { Name = "open-space-11.png" },
+            new Picture { Name = "open-space-12.png" }
+        };
+    }
+    private List<Picture> GetPictures_7()
+    {
+        return new List<Picture>
+        {
+            new Picture { Name = "private-room-5.png" },
+            new Picture { Name = "private-room-6.png" },
+            new Picture { Name = "private-room-7.png" },
+            new Picture { Name = "private-room-8.png" }
+        };
+    }
+    private List<Picture> GetPictures_8()
+    {
+        return new List<Picture>
+        {
+            new Picture { Name = "meeting-room-9.png" },
+            new Picture { Name = "meeting-room-10.png" },
+            new Picture { Name = "meeting-room-11.png" },
+            new Picture { Name = "meeting-room-12.png" }
+        };
+    }
+
+    // Rooms
     private List<Room> GetRooms_1()
     {
         return new List<Room>
@@ -156,6 +333,46 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
             new Room { Capacity = 20, Quantity = 1, Bookings = GetBooking_7() }
         };
     }
+    private List<Room> GetRooms_4()
+    {
+        return new List<Room>
+        {
+            new Room { Capacity = 1, Quantity = 15, Bookings = GetBooking_9() }
+        };
+    }
+    private List<Room> GetRooms_5()
+    {
+        return new List<Room>
+        {
+            new Room { Capacity = 20, Quantity = 1, Bookings = GetBooking_8() }
+        };
+    }
+    private List<Room> GetRooms_6()
+    {
+        return new List<Room>
+        {
+            new Room { Capacity = 1, Quantity = 40, Bookings = GetBooking_10() }
+        };
+    }
+    private List<Room> GetRooms_7()
+    {
+        return new List<Room>
+        {
+            new Room { Capacity = 1, Quantity = 10, Bookings = GetBooking_13() },
+            new Room { Capacity = 5, Quantity = 5, Bookings = GetBooking_12() },
+            new Room { Capacity = 8, Quantity = 3, Bookings = GetBooking_15() }
+        };
+    }
+    private List<Room> GetRooms_8()
+    {
+        return new List<Room>
+        {
+            new Room { Capacity = 20, Quantity = 1, Bookings = GetBooking_11() },
+            new Room { Capacity = 10, Quantity = 5, Bookings = GetBooking_14() }
+        };
+    }
+
+    // Bookings.
     private List<Booking> GetBooking_1()
     {
         return new List<Booking>
@@ -189,7 +406,7 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
             new Booking
             {
                 Name = "Lucas Wright",
-                Email = "noah.mitchell@example.com",
+                Email = "lucas.wright@example.com",
                 StartDateTime = DateTime.Now.AddHours(1),
                 EndDateTime = DateTime.Now.AddHours(3),
             }
@@ -246,6 +463,110 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
                 EndDateTime = DateTime.Now.AddHours(2),
             }
         };
+    }
+    private List<Booking> GetBooking_8()
+    {
+        return new List<Booking>
+    {
+        new Booking
+        {
+            Name = "Alice Johnson",
+            Email = "alice.johnson@example.com",
+            StartDateTime = DateTime.Now.AddHours(3),
+            EndDateTime = DateTime.Now.AddHours(4),
+        }
+    };
+    }
+    private List<Booking> GetBooking_9()
+    {
+        return new List<Booking>
+    {
+        new Booking
+        {
+            Name = "Robert Smith",
+            Email = "robert.smith@example.com",
+            StartDateTime = DateTime.Now.AddDays(1).AddHours(9),
+            EndDateTime = DateTime.Now.AddDays(1).AddHours(10),
+        }
+    };
+    }
+    private List<Booking> GetBooking_10()
+    {
+        return new List<Booking>
+    {
+        new Booking
+        {
+            Name = "Emma Davis",
+            Email = "emma.davis@example.com",
+            StartDateTime = DateTime.Now.AddDays(2).AddHours(14),
+            EndDateTime = DateTime.Now.AddDays(2).AddHours(15),
+        }
+    };
+    }
+    private List<Booking> GetBooking_11()
+    {
+        return new List<Booking>
+    {
+        new Booking
+        {
+            Name = "Michael Brown",
+            Email = "michael.brown@example.com",
+            StartDateTime = DateTime.Now.AddHours(1),
+            EndDateTime = DateTime.Now.AddHours(3),
+        }
+    };
+    }
+    private List<Booking> GetBooking_12()
+    {
+        return new List<Booking>
+    {
+        new Booking
+        {
+            Name = "Sophia Wilson",
+            Email = "sophia.wilson@example.com",
+            StartDateTime = DateTime.Now.AddDays(1).AddHours(8),
+            EndDateTime = DateTime.Now.AddDays(1).AddHours(9),
+        }
+    };
+    }
+    private List<Booking> GetBooking_13()
+    {
+        return new List<Booking>
+    {
+        new Booking
+        {
+            Name = "Daniel Martinez",
+            Email = "daniel.martinez@example.com",
+            StartDateTime = DateTime.Now.AddDays(3).AddHours(10),
+            EndDateTime = DateTime.Now.AddDays(3).AddHours(12),
+        }
+    };
+    }
+    private List<Booking> GetBooking_14()
+    {
+        return new List<Booking>
+    {
+        new Booking
+        {
+            Name = "Olivia Garcia",
+            Email = "olivia.garcia@example.com",
+            StartDateTime = DateTime.Now.AddHours(5),
+            EndDateTime = DateTime.Now.AddHours(6),
+        }
+    };
+    }
+    private List<Booking> GetBooking_15()
+    {
+        return new List<Booking>
+    {
+        new Booking
+        {
+            Name = "William Lee",
+            Email = "william.lee@example.com",
+            StartDateTime = DateTime.Now.AddDays(4).AddHours(16),
+            EndDateTime = DateTime.Now.AddDays(4).AddHours(17),
+        }
+    };
     }
 }
 

@@ -12,4 +12,6 @@ public class Workspace
     public List<WorkspaceIcon> WorkspaceIcons { get; set; } = new();
     public List<Picture> Pictures { get; set; } = new();
     public List<Room> Rooms { get; set; } = new();
+    public int CoworkingId { get; set; }
+    public Coworking Coworking { get; set; } = default!;
 }

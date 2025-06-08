@@ -34,6 +34,17 @@ internal class BookingRepository(CoWorkingDbContext dbContext) : IBookingReposit
             .AsSplitQuery()
             .ToListAsync(cancellationToken);
     }
+
+    public async Task<IEnumerable<Booking>> GetAllForAiAsync(CancellationToken cancellationToken)
+    {
+        return await dbContext.Bookings
+            .Include(b => b.Room)
+                .ThenInclude(r => r.Workspace)
+                    .ThenInclude(w => w.Coworking)
+            .AsSplitQuery()
+            .ToListAsync(cancellationToken);
+    }
+
     public async Task UpdateAsync(Booking entity, CancellationToken cancellationToken)
     {
         dbContext.Bookings.Update(entity);
