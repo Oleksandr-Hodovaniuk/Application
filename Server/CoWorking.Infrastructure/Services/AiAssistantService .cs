@@ -4,6 +4,7 @@ using CoWorking.Application.Interfaces.Repositories;
 using CoWorking.Application.Interfaces.Services;
 using CoWorking.Application.Models;
 using Microsoft.Extensions.Options;
+using System.Collections.Generic;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
@@ -23,19 +24,14 @@ public class AiAssistantService : IAiAssistantService
 
     public async Task<AiAssistantResponseDTO> AskAsync(string question, IEnumerable<AiBookingDTO> bookings, CancellationToken cancellationToken)
     {
-        // Get system prompt.
+        // Get ai prompt.
         var baseDir = AppContext.BaseDirectory;
         var serverRoot = Path.GetFullPath(Path.Combine(baseDir, "..", "..", "..", ".."));
-        var filePath = Path.Combine(serverRoot, "CoWorking.Infrastructure", "Resources", "SystemPrompt.txt");
-
-        var systemTemplate = await File.ReadAllTextAsync(filePath);
-        var systemPrompt = systemTemplate.Replace("{CurrentTime}", DateTime.Now.ToString());
-
-        // Get sser prompt.
-        filePath = Path.Combine(serverRoot, "CoWorking.Infrastructure", "Resources", "UserPrompt.txt");
+        var filePath = Path.Combine(serverRoot, "CoWorking.Infrastructure", "Resources", "AiAssistantPrompt.txt");
 
         var userTemplate = await File.ReadAllTextAsync(filePath);
         var userPrompt = userTemplate
+            .Replace("{CurrentTime}", DateTime.Now.ToString())
             .Replace("{question}", question)
             .Replace("{bookings_json}", JsonSerializer.Serialize(bookings, new JsonSerializerOptions { WriteIndented = true }));
 
@@ -45,7 +41,6 @@ public class AiAssistantService : IAiAssistantService
             model = _settings.Model,
             messages = new[]
             {
-                new { role = "system", content = systemPrompt },
                 new { role = "user",  content = userPrompt }
             }
         };
@@ -78,10 +73,18 @@ public class AiAssistantService : IAiAssistantService
             throw new BusinessException("AI did not return any content.");
         }
 
-        // Deserializing JSON into the object.
+        // Extracts the valid JSON.
+        var jsonPart = ExtractFirstJsonBlock(rawContent);
+
+        if (jsonPart == null)
+        {
+            throw new BusinessException("Could not extract valid JSON from AI response.");
+        }
+
+        // Deserialize JSON into the object.
         var aiResponse = JsonSerializer.Deserialize<AiAssistantResponseDTO>
         (
-            rawContent,
+            jsonPart,
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
         );
 
@@ -91,5 +94,26 @@ public class AiAssistantService : IAiAssistantService
         }
 
         return aiResponse;
+    }
+    
+    // Extracts the first valid JSON object substring from the input text, correctly handling nested curly braces.
+    string ExtractFirstJsonBlock(string input)
+    {
+        int start = input.IndexOf('{');
+        if (start == -1) return null!;
+
+        int depth = 0;
+        for (int i = start; i < input.Length; i++)
+        {
+            if (input[i] == '{') depth++;
+            else if (input[i] == '}') depth--;
+
+            if (depth == 0)
+            {
+                return input.Substring(start, i - start + 1);
+            }
+        }
+
+        return null!;
     }
 }

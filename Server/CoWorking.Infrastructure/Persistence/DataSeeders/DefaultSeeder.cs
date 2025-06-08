@@ -406,7 +406,7 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
             new Booking
             {
                 Name = "Lucas Wright",
-                Email = "noah.mitchell@example.com",
+                Email = "lucas.wright@example.com",
                 StartDateTime = DateTime.Now.AddHours(1),
                 EndDateTime = DateTime.Now.AddHours(3),
             }
@@ -511,8 +511,8 @@ internal class DefaultSeeder(CoWorkingDbContext dbContext) : ISeeder
         {
             Name = "Michael Brown",
             Email = "michael.brown@example.com",
-            StartDateTime = DateTime.Now.AddHours(3),
-            EndDateTime = DateTime.Now.AddHours(1),
+            StartDateTime = DateTime.Now.AddHours(1),
+            EndDateTime = DateTime.Now.AddHours(3),
         }
     };
     }
