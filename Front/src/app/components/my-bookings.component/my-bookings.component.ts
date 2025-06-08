@@ -3,10 +3,11 @@ import { MyBookingModel } from '../../models/my-bookings.model';
 import { CommonModule } from '@angular/common';
 import { BookingService } from '../../services/booking.service';
 import { Router, RouterLink } from '@angular/router';
+import { AiAssistantComponent } from "../ai-assistant.component/ai-assistant.component";
 
 @Component({
   selector: 'app-my-bookings',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, AiAssistantComponent],
   templateUrl: './my-bookings.component.html',
   styleUrl: './my-bookings.component.css'
 })
