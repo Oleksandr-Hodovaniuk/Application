@@ -7,6 +7,7 @@ namespace CoWorking.Infrastructure.Persistence;
 internal class CoWorkingDbContext(DbContextOptions<CoWorkingDbContext> options) 
     : DbContext(options)
 {
+    internal DbSet<Coworking> Coworkings { get; set; }
     internal DbSet<Icon> Icons { get; set; }
     internal DbSet<Workspace> Workspaces { get; set; }
     internal DbSet<WorkspaceIcon> WorkspaceIcons { get; set; }
@@ -19,6 +20,7 @@ internal class CoWorkingDbContext(DbContextOptions<CoWorkingDbContext> options)
         base.OnModelCreating(modelBuilder);
 
         // Entity configurations.
+        modelBuilder.ApplyConfiguration(new CoworkingConfiguration());
         modelBuilder.ApplyConfiguration(new WorkspaceConfiguration());
         modelBuilder.ApplyConfiguration(new WorkspaceIconConfiguration());
         modelBuilder.ApplyConfiguration(new RoomConfiguration());
